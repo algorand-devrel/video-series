@@ -1,0 +1,52 @@
+{
+    "hints": {
+        "get_app_state_val": {
+            "read_only": true
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDgKaW50Y2Jsb2NrIDAgMQpieXRlY2Jsb2NrIDB4NjQ2NTYzNmM2MTcyNjU2NDVmNjE3MDcwNWY3NjYxNmM3NTY1CnR4biBOdW1BcHBBcmdzCmludGNfMCAvLyAwCj09CmJueiBtYWluX2w2CnR4bmEgQXBwbGljYXRpb25BcmdzIDAKcHVzaGJ5dGVzIDB4MjlkOTQ3MGYgLy8gInNldF9hcHBfc3RhdGVfdmFsKHN0cmluZyl2b2lkIgo9PQpibnogbWFpbl9sNQp0eG5hIEFwcGxpY2F0aW9uQXJncyAwCnB1c2hieXRlcyAweGY0YzIyNTY2IC8vICJnZXRfYXBwX3N0YXRlX3ZhbCgpc3RyaW5nIgo9PQpibnogbWFpbl9sNAplcnIKbWFpbl9sNDoKdHhuIE9uQ29tcGxldGlvbgppbnRjXzAgLy8gTm9PcAo9PQp0eG4gQXBwbGljYXRpb25JRAppbnRjXzAgLy8gMAohPQomJgphc3NlcnQKY2FsbHN1YiBnZXRhcHBzdGF0ZXZhbF8yCnN0b3JlIDIKcHVzaGJ5dGVzIDB4MTUxZjdjNzUgLy8gMHgxNTFmN2M3NQpsb2FkIDIKY29uY2F0CmxvZwppbnRjXzEgLy8gMQpyZXR1cm4KbWFpbl9sNToKdHhuIE9uQ29tcGxldGlvbgppbnRjXzAgLy8gTm9PcAo9PQp0eG4gQXBwbGljYXRpb25JRAppbnRjXzAgLy8gMAohPQomJgphc3NlcnQKdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQpjYWxsc3ViIHNldGFwcHN0YXRldmFsXzEKaW50Y18xIC8vIDEKcmV0dXJuCm1haW5fbDY6CnR4biBPbkNvbXBsZXRpb24KaW50Y18wIC8vIE5vT3AKPT0KYm56IG1haW5fbDgKZXJyCm1haW5fbDg6CnR4biBBcHBsaWNhdGlvbklECmludGNfMCAvLyAwCj09CmFzc2VydApjYWxsc3ViIGNyZWF0ZV8wCmludGNfMSAvLyAxCnJldHVybgoKLy8gY3JlYXRlCmNyZWF0ZV8wOgppbnRjXzAgLy8gMApieXRlY18wIC8vICJkZWNsYXJlZF9hcHBfdmFsdWUiCmFwcF9nbG9iYWxfZ2V0X2V4CnN0b3JlIDEKc3RvcmUgMApsb2FkIDEKIQphc3NlcnQKYnl0ZWNfMCAvLyAiZGVjbGFyZWRfYXBwX3ZhbHVlIgpwdXNoYnl0ZXMgMHg0MTIwNjQ2NTYzNmM2MTcyNjU2NDIwNzM3NDYxNzQ2NTIwNzY2MTZjNzU2NTIwNzQ2ODYxNzQyMDY5NzMyMDcwNzI2Zjc0NjU2Mzc0NjU2NDIwNzc2OTc0NjgyMDc0Njg2NTIwNjA3Mzc0NjE3NDY5NjM2MDIwNjY2YzYxNjcgLy8gIkEgZGVjbGFyZWQgc3RhdGUgdmFsdWUgdGhhdCBpcyBwcm90ZWN0ZWQgd2l0aCB0aGUgYHN0YXRpY2AgZmxhZyIKYXBwX2dsb2JhbF9wdXQKcmV0c3ViCgovLyBzZXRfYXBwX3N0YXRlX3ZhbApzZXRhcHBzdGF0ZXZhbF8xOgpzdG9yZSA0CmludGNfMCAvLyAwCmJ5dGVjXzAgLy8gImRlY2xhcmVkX2FwcF92YWx1ZSIKYXBwX2dsb2JhbF9nZXRfZXgKc3RvcmUgNgpzdG9yZSA1CmxvYWQgNgohCmFzc2VydApieXRlY18wIC8vICJkZWNsYXJlZF9hcHBfdmFsdWUiCmxvYWQgNApleHRyYWN0IDIgMAphcHBfZ2xvYmFsX3B1dApyZXRzdWIKCi8vIGdldF9hcHBfc3RhdGVfdmFsCmdldGFwcHN0YXRldmFsXzI6CmJ5dGVjXzAgLy8gImRlY2xhcmVkX2FwcF92YWx1ZSIKYXBwX2dsb2JhbF9nZXQKc3RvcmUgMwpsb2FkIDMKbGVuCml0b2IKZXh0cmFjdCA2IDAKbG9hZCAzCmNvbmNhdApzdG9yZSAzCmxvYWQgMwpyZXRzdWI=",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDgKcHVzaGludCAwIC8vIDAKcmV0dXJu"
+    },
+    "schema": {
+        "local": {
+            "declared": {},
+            "reserved": {}
+        },
+        "global": {
+            "declared": {
+                "declared_app_value": {
+                    "type": "bytes",
+                    "key": "declared_app_value",
+                    "descr": "A static declared variable, only protected on application level and not protected at protocol level."
+                }
+            },
+            "reserved": {}
+        }
+    },
+    "contract": {
+        "name": "AppState",
+        "methods": [
+            {
+                "name": "set_app_state_val",
+                "args": [
+                    {
+                        "type": "string",
+                        "name": "v"
+                    }
+                ],
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "get_app_state_val",
+                "args": [],
+                "returns": {
+                    "type": "string"
+                }
+            }
+        ],
+        "networks": {}
+    }
+}

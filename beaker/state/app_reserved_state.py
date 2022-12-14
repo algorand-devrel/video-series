@@ -11,9 +11,7 @@ from pyteal import abi, TealType
 
 class ReservedAppState(Application):
 
-    reserved_app_value: Final[
-        ReservedApplicationStateValue
-    ] = ReservedApplicationStateValue(
+    reserved_app_value: Final[ReservedApplicationStateValue] = ReservedApplicationStateValue(
         stack_type=TealType.bytes,
         max_keys=32,
         descr="A reserved app state variable, with 32 possible keys",

@@ -1,5 +1,5 @@
 from typing import Final
-from beaker import Application, external, sandbox, client
+from beaker import Application, external, create, sandbox, client
 from pyteal import abi, Int
 
 from beaker.state import ApplicationStateBlob
@@ -8,15 +8,19 @@ from beaker.state import ApplicationStateBlob
 class AppBlobState(Application):
 
     application_blob: Final[ApplicationStateBlob] = ApplicationStateBlob(
-        keys=16,
+        keys=2,
     )
+
+    @create
+    def create(self):
+        return self.initialize_application_state()
 
     @external
     def write_app_blob(self, start: abi.Uint64, v: abi.String):
         return self.application_blob.write(start.get(), v.get())
 
     @external
-    def read_app_blob(self, *, output: abi.DynamicBytes):
+    def read_app_blob(self, *, output: abi.String):
         return output.set(
             self.application_blob.read(
                 Int(0), self.application_blob.blob.max_bytes - Int(1)

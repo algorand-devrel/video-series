@@ -16,7 +16,7 @@ class AppState(Application):
         default=Bytes(
             "A declared state value that is protected with the `static` flag"
         ),
-        descr="A static declared variable, nothing at the protocol level protects it, only the methods defined on ApplicationState do",
+        descr="A static declared variable, only protected on application level and not protected at protocol level.",
         static=True,
     )
 
@@ -56,3 +56,4 @@ def demo():
 
 if __name__ == "__main__":
     demo()
+    AppState().dump("./artifacts")

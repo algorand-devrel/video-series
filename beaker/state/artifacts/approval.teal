@@ -1,0 +1,107 @@
+#pragma version 8
+intcblock 0 1
+bytecblock 0x6465636c617265645f6170705f76616c7565
+txn NumAppArgs
+intc_0 // 0
+==
+bnz main_l6
+txna ApplicationArgs 0
+pushbytes 0x29d9470f // "set_app_state_val(string)void"
+==
+bnz main_l5
+txna ApplicationArgs 0
+pushbytes 0xf4c22566 // "get_app_state_val()string"
+==
+bnz main_l4
+err
+main_l4:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub getappstateval_2
+store 2
+pushbytes 0x151f7c75 // 0x151f7c75
+load 2
+concat
+log
+intc_1 // 1
+return
+main_l5:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+callsub setappstateval_1
+intc_1 // 1
+return
+main_l6:
+txn OnCompletion
+intc_0 // NoOp
+==
+bnz main_l8
+err
+main_l8:
+txn ApplicationID
+intc_0 // 0
+==
+assert
+callsub create_0
+intc_1 // 1
+return
+
+// create
+create_0:
+intc_0 // 0
+bytec_0 // "declared_app_value"
+app_global_get_ex
+store 1
+store 0
+load 1
+!
+assert
+bytec_0 // "declared_app_value"
+pushbytes 0x41206465636c617265642073746174652076616c756520746861742069732070726f74656374656420776974682074686520607374617469636020666c6167 // "A declared state value that is protected with the `static` flag"
+app_global_put
+retsub
+
+// set_app_state_val
+setappstateval_1:
+store 4
+intc_0 // 0
+bytec_0 // "declared_app_value"
+app_global_get_ex
+store 6
+store 5
+load 6
+!
+assert
+bytec_0 // "declared_app_value"
+load 4
+extract 2 0
+app_global_put
+retsub
+
+// get_app_state_val
+getappstateval_2:
+bytec_0 // "declared_app_value"
+app_global_get
+store 3
+load 3
+len
+itob
+extract 6 0
+load 3
+concat
+store 3
+load 3
+retsub
