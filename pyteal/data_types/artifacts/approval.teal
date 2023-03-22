@@ -1,0 +1,79 @@
+#pragma version 6
+txn NumAppArgs
+int 0
+==
+bnz main_l6
+txna ApplicationArgs 0
+method "store_in_bytes(uint64)void"
+==
+bnz main_l5
+txna ApplicationArgs 0
+method "read_in_int()uint64"
+==
+bnz main_l4
+err
+main_l4:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+callsub readinint_1
+store 1
+byte 0x151f7c75
+load 1
+itob
+concat
+log
+int 1
+return
+main_l5:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+btoi
+store 0
+load 0
+callsub storeinbytes_0
+int 1
+return
+main_l6:
+txn OnCompletion
+int NoOp
+==
+bnz main_l8
+err
+main_l8:
+txn ApplicationID
+int 0
+==
+assert
+int 1
+return
+
+// store_in_bytes
+storeinbytes_0:
+store 3
+byte "num_in_bytes"
+load 3
+itob
+app_global_put
+retsub
+
+// read_in_int
+readinint_1:
+byte "num_in_bytes"
+app_global_get
+btoi
+store 2
+load 2
+retsub

@@ -45,24 +45,36 @@ def demo():
     acct1 = accounts.pop()
     acct2 = accounts.pop()
 
-    app_client1 = client.ApplicationClient(client=algod_client, app=UserCounter(), signer=acct1.signer)
+    counter_app = UserCounter()
 
-    app_client1.create()
+    app_client1 = client.ApplicationClient(
+        client=algod_client, 
+        app=counter_app, 
+        signer=acct1.signer
+    )
+
+    app_id, address, txid = app_client1.create()
+    print("App ID: ", app_id)
     print(f"app state: {app_client1.get_application_state()} \n")
 
     app_client1.fund(1 * consts.algo)
     print(f"app account state: {app_client1.get_application_account_info()} \n")
 
     app_client1.opt_in(username="Chris")
+    print("Chris opted in \n")
 
     app_client2 = app_client1.prepare(signer=acct2.signer)
 
     app_client2.opt_in(username="Ben")
+    print("Ben opted in \n")
 
-    app_client1.call(UserCounter().increment)
+    app_client1.call(counter_app.increment)
+    print("Chris incremented his counter. \n")
 
-    app_client2.call(UserCounter().increment)
-    app_client2.call(UserCounter().increment)
+    app_client2.call(counter_app.increment)
+    print("Ben incremented his counter. \n")
+    app_client2.call(counter_app.increment)
+    print("Ben incremented his counter. \n")
 
     print(f"account 1 account state: {app_client1.get_account_state()} \n")    
     print(f"account 2 account state: {app_client2.get_account_state()} \n")  

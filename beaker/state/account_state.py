@@ -9,14 +9,12 @@ from beaker import (
 )
 from pyteal import abi, TealType, Int, Txn
 
-
-
 class AccountState(Application):
 
-    declared_account_value: Final[AccountStateValue] = AccountStateValue(
+    count: Final[AccountStateValue] = AccountStateValue(
         stack_type=TealType.uint64,
         default=Int(1),
-        descr="An int stored for each account that opts in",
+        descr="A counter that keeps track of counts.",
     )
 
     @opt_in
@@ -24,16 +22,12 @@ class AccountState(Application):
         return self.initialize_account_state()
 
     @external
-    def set_account_state(self, v: abi.Uint64):
-        return self.declared_account_value[Txn.sender()].set(v.get())
-
-    @external
     def incr_account_state(self, v: abi.Uint64):
-        return self.declared_account_value.increment(v.get())
+        return self.count.increment(v.get())
 
     @external(read_only=True)
     def get_account_state(self, *, output: abi.Uint64):
-        return output.set(self.declared_account_value[Txn.sender()])
+        return output.set(self.count[Txn.sender()])
 
 
 def demo():
@@ -57,10 +51,6 @@ def demo():
 
     result2 = app_client.call(app.get_account_state)
     print("2nd Account State: ", result2.return_value)
-
-    app_client.call(app.set_account_state, v = 10)
-    result3 = app_client.call(app.get_account_state)
-    print("3rd Account State: ", result3.return_value)
 
 
 if __name__ == "__main__":

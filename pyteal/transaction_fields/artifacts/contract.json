@@ -1,0 +1,25 @@
+{
+  "name": "Simple RSVP App",
+  "methods": [
+    {
+      "name": "pay",
+      "args": [
+        {
+          "type": "pay",
+          "name": "pay"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "check_paid",
+      "args": [],
+      "returns": {
+        "type": "string"
+      }
+    }
+  ],
+  "networks": {}
+}

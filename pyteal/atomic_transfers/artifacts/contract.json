@@ -1,0 +1,38 @@
+{
+  "name": "Atomic Transfers Example",
+  "methods": [
+    {
+      "name": "abi_multiple_pay",
+      "args": [
+        {
+          "type": "pay",
+          "name": "a"
+        },
+        {
+          "type": "pay",
+          "name": "b"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "multiple_pay",
+      "args": [
+        {
+          "type": "pay",
+          "name": "a"
+        },
+        {
+          "type": "pay",
+          "name": "b"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    }
+  ],
+  "networks": {}
+}

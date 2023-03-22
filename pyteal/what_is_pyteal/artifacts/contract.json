@@ -1,0 +1,20 @@
+{
+  "name": "Simple Counter",
+  "methods": [
+    {
+      "name": "increment",
+      "args": [],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "read_count",
+      "args": [],
+      "returns": {
+        "type": "uint64"
+      }
+    }
+  ],
+  "networks": {}
+}

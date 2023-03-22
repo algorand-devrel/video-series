@@ -1,0 +1,150 @@
+#pragma version 8
+txn NumAppArgs
+int 0
+==
+bnz main_l8
+txna ApplicationArgs 0
+method "pay(account)address"
+==
+bnz main_l7
+txna ApplicationArgs 0
+method "fund(pay)void"
+==
+bnz main_l6
+txna ApplicationArgs 0
+method "get_funder()address"
+==
+bnz main_l5
+err
+main_l5:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+callsub getfunder_2
+store 3
+byte 0x151f7c75
+load 3
+concat
+log
+int 1
+return
+main_l6:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txn GroupIndex
+int 1
+-
+store 2
+load 2
+gtxns TypeEnum
+int pay
+==
+assert
+load 2
+callsub fund_1
+int 1
+return
+main_l7:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+int 0
+getbyte
+store 0
+load 0
+callsub pay_0
+store 1
+byte 0x151f7c75
+load 1
+concat
+log
+int 1
+return
+main_l8:
+txn OnCompletion
+int NoOp
+==
+bnz main_l10
+err
+main_l10:
+txn ApplicationID
+int 0
+==
+assert
+int 1
+return
+
+// pay
+pay_0:
+proto 1 1
+byte ""
+itxn_begin
+int pay
+itxn_field TypeEnum
+int 1000000
+itxn_field Amount
+frame_dig -1
+txnas Accounts
+itxn_field Receiver
+itxn_submit
+frame_dig -1
+txnas Accounts
+frame_bury 0
+frame_dig 0
+len
+int 32
+==
+assert
+retsub
+
+// fund
+fund_1:
+proto 1 0
+frame_dig -1
+gtxns Receiver
+global CurrentApplicationAddress
+==
+assert
+frame_dig -1
+gtxns Amount
+int 1000000
+int 2
+*
+>=
+assert
+byte "funder"
+frame_dig -1
+gtxns Sender
+app_global_put
+retsub
+
+// get_funder
+getfunder_2:
+proto 0 1
+byte ""
+byte "funder"
+app_global_get
+frame_bury 0
+frame_dig 0
+len
+int 32
+==
+assert
+retsub

@@ -1,0 +1,25 @@
+{
+  "name": "datatype-example",
+  "methods": [
+    {
+      "name": "store_in_bytes",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "number"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "read_in_int",
+      "args": [],
+      "returns": {
+        "type": "uint64"
+      }
+    }
+  ],
+  "networks": {}
+}

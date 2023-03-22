@@ -1,6 +1,6 @@
 #pragma version 8
 intcblock 0 1
-bytecblock 0x6465636c617265645f6170705f76616c7565
+bytecblock 0x6d795f6465736372697074696f6e
 txn NumAppArgs
 intc_0 // 0
 ==
@@ -62,15 +62,15 @@ return
 // create
 create_0:
 intc_0 // 0
-bytec_0 // "declared_app_value"
+bytec_0 // "my_description"
 app_global_get_ex
 store 1
 store 0
 load 1
 !
 assert
-bytec_0 // "declared_app_value"
-pushbytes 0x41206465636c617265642073746174652076616c756520746861742069732070726f74656374656420776974682074686520607374617469636020666c6167 // "A declared state value that is protected with the `static` flag"
+bytec_0 // "my_description"
+pushbytes 0x436872697320697320746865206265737421 // "Chris is the best!"
 app_global_put
 retsub
 
@@ -78,14 +78,14 @@ retsub
 setappstateval_1:
 store 4
 intc_0 // 0
-bytec_0 // "declared_app_value"
+bytec_0 // "my_description"
 app_global_get_ex
 store 6
 store 5
 load 6
 !
 assert
-bytec_0 // "declared_app_value"
+bytec_0 // "my_description"
 load 4
 extract 2 0
 app_global_put
@@ -93,7 +93,7 @@ retsub
 
 // get_app_state_val
 getappstateval_2:
-bytec_0 // "declared_app_value"
+bytec_0 // "my_description"
 app_global_get
 store 3
 load 3

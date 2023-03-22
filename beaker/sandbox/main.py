@@ -24,4 +24,5 @@ def demo():
     print("Block 1 information using the indexer client: \n")
     print(json.dumps(block_info, indent=2))
 
-demo()
+if __name__ == "__main__":
+    demo()

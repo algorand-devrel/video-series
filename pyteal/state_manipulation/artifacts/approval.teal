@@ -1,0 +1,212 @@
+#pragma version 6
+txn NumAppArgs
+int 0
+==
+bnz main_l14
+txna ApplicationArgs 0
+method "writeGlobal(string)void"
+==
+bnz main_l13
+txna ApplicationArgs 0
+method "readGlobal()string"
+==
+bnz main_l12
+txna ApplicationArgs 0
+method "deleteGlobal()void"
+==
+bnz main_l11
+txna ApplicationArgs 0
+method "writeLocal(string)void"
+==
+bnz main_l10
+txna ApplicationArgs 0
+method "readLocal()string"
+==
+bnz main_l9
+txna ApplicationArgs 0
+method "deleteLocal()void"
+==
+bnz main_l8
+err
+main_l8:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+callsub deleteLocal_5
+int 1
+return
+main_l9:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+callsub readLocal_4
+store 4
+byte 0x151f7c75
+load 4
+concat
+log
+int 1
+return
+main_l10:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+store 3
+load 3
+callsub writeLocal_3
+int 1
+return
+main_l11:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+callsub deleteGlobal_2
+int 1
+return
+main_l12:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+callsub readGlobal_1
+store 1
+byte 0x151f7c75
+load 1
+concat
+log
+int 1
+return
+main_l13:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+store 0
+load 0
+callsub writeGlobal_0
+int 1
+return
+main_l14:
+txn OnCompletion
+int NoOp
+==
+bnz main_l20
+txn OnCompletion
+int OptIn
+==
+bnz main_l19
+txn OnCompletion
+int CloseOut
+==
+bnz main_l18
+err
+main_l18:
+int 1
+return
+main_l19:
+txn ApplicationID
+int 0
+!=
+assert
+int 1
+return
+main_l20:
+txn ApplicationID
+int 0
+==
+assert
+int 1
+return
+
+// writeGlobal
+writeGlobal_0:
+store 6
+byte "quote"
+load 6
+extract 2 0
+app_global_put
+retsub
+
+// readGlobal
+readGlobal_1:
+byte "quote"
+app_global_get
+store 2
+load 2
+len
+itob
+extract 6 0
+load 2
+concat
+store 2
+load 2
+retsub
+
+// deleteGlobal
+deleteGlobal_2:
+byte "quote"
+app_global_del
+retsub
+
+// writeLocal
+writeLocal_3:
+store 7
+txn Sender
+byte "name"
+load 7
+extract 2 0
+app_local_put
+retsub
+
+// readLocal
+readLocal_4:
+txn Sender
+byte "name"
+app_local_get
+store 5
+load 5
+len
+itob
+extract 6 0
+load 5
+concat
+store 5
+load 5
+retsub
+
+// deleteLocal
+deleteLocal_5:
+txn Sender
+byte "name"
+app_local_del
+retsub

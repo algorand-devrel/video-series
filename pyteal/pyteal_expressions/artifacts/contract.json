@@ -1,0 +1,13 @@
+{
+  "name": "pyteal-expression-example",
+  "methods": [
+    {
+      "name": "create_count",
+      "args": [],
+      "returns": {
+        "type": "void"
+      }
+    }
+  ],
+  "networks": {}
+}

@@ -1,0 +1,80 @@
+#pragma version 6
+txn NumAppArgs
+int 0
+==
+bnz main_l6
+txna ApplicationArgs 0
+method "increment()void"
+==
+bnz main_l5
+txna ApplicationArgs 0
+method "read_count()uint64"
+==
+bnz main_l4
+err
+main_l4:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+callsub readcount_1
+store 0
+byte 0x151f7c75
+load 0
+itob
+concat
+log
+int 1
+return
+main_l5:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+callsub increment_0
+int 1
+return
+main_l6:
+txn OnCompletion
+int NoOp
+==
+bnz main_l8
+err
+main_l8:
+txn ApplicationID
+int 0
+==
+assert
+byte "Count"
+int 0
+app_global_put
+int 1
+return
+
+// increment
+increment_0:
+byte "Count"
+app_global_get
+store 2
+byte "Count"
+load 2
+int 1
++
+app_global_put
+retsub
+
+// read_count
+readcount_1:
+byte "Count"
+app_global_get
+store 1
+load 1
+retsub

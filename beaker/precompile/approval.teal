@@ -1,0 +1,70 @@
+#pragma version 8
+intcblock 0 1
+bytecblock 0x6c696b6573 0x6e616d65
+txna ApplicationArgs 0
+pushbytes 0x20df3a54 // "create(string)void"
+==
+bnz main_l4
+txna ApplicationArgs 0
+pushbytes 0xfe9bee5e // "increment_likes()uint64"
+==
+bnz main_l3
+err
+main_l3:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub incrementlikes_1
+store 0
+pushbytes 0x151f7c75 // 0x151f7c75
+load 0
+itob
+concat
+log
+intc_1 // 1
+return
+main_l4:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+==
+&&
+assert
+txna ApplicationArgs 1
+callsub create_0
+intc_1 // 1
+return
+
+// create
+create_0:
+store 1
+bytec_1 // "name"
+load 1
+extract 2 0
+app_global_put
+bytec_1 // "name"
+pushbytes 0x // ""
+app_global_put
+bytec_0 // "likes"
+intc_0 // 0
+app_global_put
+retsub
+
+// increment_likes
+incrementlikes_1:
+bytec_0 // "likes"
+bytec_0 // "likes"
+app_global_get
+intc_1 // 1
++
+app_global_put
+bytec_0 // "likes"
+app_global_get
+retsub

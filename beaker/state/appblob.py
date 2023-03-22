@@ -5,7 +5,7 @@ from pyteal import abi, Int
 from beaker.state import ApplicationStateBlob
 
 
-class AppBlobState(Application):
+class AppStateBlob(Application):
 
     application_blob: Final[ApplicationStateBlob] = ApplicationStateBlob(
         keys=2,
@@ -29,7 +29,7 @@ class AppBlobState(Application):
 
 
 def demo():
-    app = AppBlobState()
+    app = AppStateBlob()
 
     account = sandbox.get_accounts().pop()
     algod_client = sandbox.get_algod_client()

@@ -11,12 +11,11 @@ from pyteal import abi, TealType, Bytes
 
 class AppState(Application):
 
-    declared_app_value: Final[ApplicationStateValue] = ApplicationStateValue(
+    my_description: Final[ApplicationStateValue] = ApplicationStateValue(
         stack_type=TealType.bytes,
         default=Bytes(
-            "A declared state value that is protected with the `static` flag"
+            "Chris is the best!"
         ),
-        descr="A static declared variable, only protected on application level and not protected at protocol level.",
         static=True,
     )
 
@@ -26,11 +25,11 @@ class AppState(Application):
 
     @external
     def set_app_state_val(self, v: abi.String):
-        return self.declared_app_value.set(v.get())
+        return self.my_description.set(v.get())
 
     @external(read_only=True)
     def get_app_state_val(self, *, output: abi.String):
-        return output.set(self.declared_app_value)
+        return output.set(self.my_description)
 
 
 def demo():
@@ -46,7 +45,7 @@ def demo():
     print("App ID: ", app_id)
 
     try:
-        app_client.call(app.set_app_state_val, v="Chris is the best!")
+        app_client.call(app.set_app_state_val, v="Chris is the worst!")
     except:
         print("Failed as expected since this state is static")
     

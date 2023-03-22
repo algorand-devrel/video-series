@@ -1,0 +1,37 @@
+{
+  "name": "abi-type-example",
+  "methods": [
+    {
+      "name": "pay",
+      "args": [
+        {
+          "type": "account",
+          "name": "receiver"
+        }
+      ],
+      "returns": {
+        "type": "address"
+      }
+    },
+    {
+      "name": "fund",
+      "args": [
+        {
+          "type": "pay",
+          "name": "payment"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "get_funder",
+      "args": [],
+      "returns": {
+        "type": "address"
+      }
+    }
+  ],
+  "networks": {}
+}

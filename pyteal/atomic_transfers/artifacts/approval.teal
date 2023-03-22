@@ -1,0 +1,139 @@
+#pragma version 8
+txn NumAppArgs
+int 0
+==
+bnz main_l6
+txna ApplicationArgs 0
+method "abi_multiple_pay(pay,pay)void"
+==
+bnz main_l5
+txna ApplicationArgs 0
+method "multiple_pay(pay,pay)void"
+==
+bnz main_l4
+err
+main_l4:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txn GroupIndex
+int 2
+-
+store 2
+load 2
+gtxns TypeEnum
+int pay
+==
+assert
+txn GroupIndex
+int 1
+-
+store 3
+load 3
+gtxns TypeEnum
+int pay
+==
+assert
+load 2
+load 3
+callsub multiplepay_1
+int 1
+return
+main_l5:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txn GroupIndex
+int 2
+-
+store 0
+load 0
+gtxns TypeEnum
+int pay
+==
+assert
+txn GroupIndex
+int 1
+-
+store 1
+load 1
+gtxns TypeEnum
+int pay
+==
+assert
+load 0
+load 1
+callsub abimultiplepay_0
+int 1
+return
+main_l6:
+txn OnCompletion
+int NoOp
+==
+bnz main_l8
+err
+main_l8:
+txn ApplicationID
+int 0
+==
+assert
+int 1
+return
+
+// abi_multiple_pay
+abimultiplepay_0:
+proto 2 0
+frame_dig -2
+gtxns Receiver
+global CurrentApplicationAddress
+==
+assert
+frame_dig -1
+gtxns Receiver
+global CurrentApplicationAddress
+==
+assert
+frame_dig -2
+gtxns Amount
+int 100000
+==
+assert
+frame_dig -1
+gtxns Amount
+int 200000
+==
+assert
+int 1
+return
+
+// multiple_pay
+multiplepay_1:
+proto 2 0
+gtxn 0 Receiver
+global CurrentApplicationAddress
+==
+assert
+gtxn 1 Receiver
+global CurrentApplicationAddress
+==
+assert
+gtxn 0 Amount
+int 100000
+==
+assert
+gtxn 1 Amount
+int 200000
+==
+assert
+int 1
+return

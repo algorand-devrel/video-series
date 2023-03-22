@@ -1,0 +1,26 @@
+{
+  "name": "subroutine example",
+  "methods": [
+    {
+      "name": "call_internal",
+      "args": [
+        {
+          "type": "string",
+          "name": "action"
+        },
+        {
+          "type": "uint64",
+          "name": "a"
+        },
+        {
+          "type": "uint64",
+          "name": "b"
+        }
+      ],
+      "returns": {
+        "type": "uint64"
+      }
+    }
+  ],
+  "networks": {}
+}

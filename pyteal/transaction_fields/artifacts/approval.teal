@@ -1,0 +1,131 @@
+#pragma version 8
+txn NumAppArgs
+int 0
+==
+bnz main_l6
+txna ApplicationArgs 0
+method "pay(pay)void"
+==
+bnz main_l5
+txna ApplicationArgs 0
+method "check_paid()string"
+==
+bnz main_l4
+err
+main_l4:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+callsub checkpaid_1
+store 1
+byte 0x151f7c75
+load 1
+concat
+log
+int 1
+return
+main_l5:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txn GroupIndex
+int 1
+-
+store 0
+load 0
+gtxns TypeEnum
+int pay
+==
+assert
+load 0
+callsub pay_0
+int 1
+return
+main_l6:
+txn OnCompletion
+int NoOp
+==
+bnz main_l12
+txn OnCompletion
+int OptIn
+==
+bnz main_l11
+txn OnCompletion
+int CloseOut
+==
+bnz main_l10
+err
+main_l10:
+int 1
+return
+main_l11:
+txn ApplicationID
+int 0
+!=
+assert
+int 1
+return
+main_l12:
+txn ApplicationID
+int 0
+==
+assert
+int 1
+return
+
+// pay
+pay_0:
+proto 1 0
+txn Sender
+global CurrentApplicationID
+app_opted_in
+assert
+frame_dig -1
+gtxns Amount
+int 1000000
+==
+assert
+frame_dig -1
+gtxns Receiver
+global CurrentApplicationAddress
+==
+assert
+txn Sender
+byte "paid"
+byte "True"
+app_local_put
+int 1
+return
+
+// check_paid
+checkpaid_1:
+proto 0 1
+byte ""
+txn Sender
+byte "paid"
+app_local_get
+byte "True"
+==
+assert
+txn Sender
+byte "paid"
+app_local_get
+frame_bury 0
+frame_dig 0
+len
+itob
+extract 6 0
+frame_dig 0
+concat
+frame_bury 0
+retsub

@@ -1,0 +1,58 @@
+{
+  "name": "state manipulation",
+  "methods": [
+    {
+      "name": "writeGlobal",
+      "args": [
+        {
+          "type": "string",
+          "name": "quote"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "readGlobal",
+      "args": [],
+      "returns": {
+        "type": "string"
+      }
+    },
+    {
+      "name": "deleteGlobal",
+      "args": [],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "writeLocal",
+      "args": [
+        {
+          "type": "string",
+          "name": "name"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "readLocal",
+      "args": [],
+      "returns": {
+        "type": "string"
+      }
+    },
+    {
+      "name": "deleteLocal",
+      "args": [],
+      "returns": {
+        "type": "void"
+      }
+    }
+  ],
+  "networks": {}
+}
