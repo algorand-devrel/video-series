@@ -1,2 +1,2 @@
-# beaker-video-series
-Sample codes used in the beaker video series
+video-series
+Sample codes used in the Algorand Developers video series
