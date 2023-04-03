@@ -2,9 +2,7 @@ import json
 import base64
 from algosdk.v2client import algod
 from algosdk import account, mnemonic
-from algosdk.future.transaction import AssetConfigTxn, AssetTransferTxn, AssetFreezeTxn
-from algosdk.future.transaction import *
-
+from algosdk.transaction import *
 
 # Shown for demonstration purposes. NEVER reveal secret mnemonics in practice.
 # Change these values with your mnemonics
@@ -22,9 +20,23 @@ mnemonic3 = "wrap emotion donor biology vivid bamboo tree snake bomb antenna mut
 # an accounts dict.
 accounts = {}
 counter = 1
+
+private_key_1 = mnemonic.to_private_key(mnemonic1)
+account_1 = account.address_from_private_key(private_key=private_key_1)
+
+private_key_2 = mnemonic.to_private_key(mnemonic2)
+account_2 = account.address_from_private_key(private_key=private_key_2)
+
+private_key_3 = mnemonic.to_private_key(mnemonic3)
+account_3 = account.address_from_private_key(private_key=private_key_3)
+
+
 for m in [mnemonic1, mnemonic2, mnemonic3]:
     accounts[counter] = {}
-    accounts[counter]['pk'] = mnemonic.to_public_key(m)
+    # private_key_1 = mnemonic.to_private_key(mnemonic1)
+    # account_1 = account.address_from_private_key(private_key=private_key_1)
+
+    accounts[counter]['pk'] = account.address_from_private_key(mnemonic.to_private_key(m))
     accounts[counter]['sk'] = mnemonic.to_private_key(m)
     counter += 1
 
@@ -32,13 +44,9 @@ for m in [mnemonic1, mnemonic2, mnemonic3]:
 # algod_address = ""  # ADD ADDRESS
 # algod_token = ""  # ADD TOKEN
 
-# algod_address = "http://localhost:4001"
-# algod_token = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+algod_address = "http://localhost:4001"
+algod_token = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 
-# algod_address = "http://localhost:8080"
-# algod_token = "8024065d94521d253181cff008c44fa4ae4bdf44f028834cd4b4769a26282de1"
-algod_address = "http://hackathon.algodev.network:9100"
-algod_token = "ef920e2e7e002953f4b29a8af720efe8e4ecc75ff102b165e0472834b25832c1"
 
 # 127.0.0.1:8080
 # 8024065d94521d253181cff008c44fa4ae4bdf44f028834cd4b4769a26282de1

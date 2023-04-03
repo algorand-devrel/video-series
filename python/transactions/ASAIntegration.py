@@ -1,18 +1,19 @@
 import json
 import base64
 import hashlib
-from algosdk import mnemonic
+from algosdk import account, mnemonic
 from algosdk.v2client import algod
-from algosdk.future.transaction import AssetConfigTxn, AssetTransferTxn, PaymentTxn, wait_for_confirmation
+# from algosdk.future.transaction import AssetConfigTxn, AssetTransferTxn, PaymentTxn, wait_for_confirmation
 from create_account import create_account
 from closeout_account import closeout_account
 from create_asset import create_asset
+from algosdk.transaction import *
 
-# Using Rand Labs Developer API
-# see https://github.com/algorand/py-algorand-sdk/issues/169
+
 # Change algod_token and algod_address to connect to a different client
-algod_token = "2f3203f21e738a1de6110eba6984f9d03e5a95d7a577b34616854064cf2c0e7b"
-algod_address = "https://academy-algod.dev.aws.algodev.network/"
+
+algod_address = "http://localhost:4001"
+algod_token = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 algod_client = algod.AlgodClient(algod_token, algod_address)
 
 def create_fund_accounts():
@@ -21,13 +22,13 @@ def create_fund_accounts():
   print("Creating Alice and Bob's accounts...")
   mnemonics = []
   mnemonics.append(create_account())
-  mnemonics.append(create_account(False))
+  mnemonics.append(create_account())
   
   accounts = {}
   counter = 0
   for m in mnemonics:
     accounts[counter] = {}
-    accounts[counter]['pk'] = mnemonic.to_public_key(m)
+    accounts[counter]['pk'] = account.address_from_private_key(mnemonic.to_private_key(m))
     accounts[counter]['sk'] = mnemonic.to_private_key(m)
     counter += 1
   

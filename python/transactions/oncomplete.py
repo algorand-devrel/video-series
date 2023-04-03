@@ -10,8 +10,8 @@ import json
 
 from algosdk import account, mnemonic
 from algosdk.v2client import algod
-from algosdk.future.transaction import *
 
+from algosdk.transaction import *
 # user declared account mnemonics
 # never use mnemonics in production code, for demo purposes only
 creator_mnemonic = "Your 25-word mnemonic goes here"

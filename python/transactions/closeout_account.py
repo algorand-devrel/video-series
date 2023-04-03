@@ -1,4 +1,4 @@
-from algosdk.future.transaction import PaymentTxn, wait_for_confirmation
+from algosdk.transaction import *
 
 def closeout_account(algod_client, account):
 # build transaction

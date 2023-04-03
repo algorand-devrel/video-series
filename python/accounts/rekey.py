@@ -9,6 +9,7 @@ from algosdk.transaction import *
 def getting_started_example():
     algod_address = "http://localhost:4001"
     algod_token = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+
     algod_client = algod.AlgodClient(algod_token, algod_address)
 
 # Part 1
@@ -22,12 +23,16 @@ def getting_started_example():
     account1_passphrase = "resource immune vintage come distance learn best merge defy roof inflict gift believe seek pull multiply unit credit mammal field essay useful problem abandon level"
     account2_passphrase = "joke click surge skate grocery treat juice consider thrive ship record fault cotton safe remind wasp bomb maid february couple fix dune route abandon tackle"
     account3_passphrase = "sphere million erupt curious around earth client name question loyal client tree dentist reform wheat tattoo patch bounce hockey spy because opinion nest abstract aware"
-    
     #  no need to fund account 1 and 2   
-    account1 = mnemonic.to_public_key(account1_passphrase)
-    account2 = mnemonic.to_public_key(account2_passphrase)    
+    private_key_1 = mnemonic.to_private_key(account1_passphrase)
+    account1 = account.address_from_private_key(private_key=private_key_1)
+
+    private_key_2 = mnemonic.to_private_key(account2_passphrase)
+    account2 = account.address_from_private_key(private_key=private_key_2)
     #  account 3 needs to be funded
-    account3 = mnemonic.to_public_key(account3_passphrase)
+    private_key_3 = mnemonic.to_private_key(account3_passphrase)
+    account3 = account.address_from_private_key(private_key=private_key_3)
+
     print("Starting account balances")
     print_accounts(algod_client, account1, account2, account3)
     # Part 1

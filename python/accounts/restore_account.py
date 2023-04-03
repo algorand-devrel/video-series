@@ -1,6 +1,5 @@
 from algosdk import mnemonic
 from algosdk import account
-# from algosdk.future.transaction import *
 
 #  never use mnemonics in code, for demo purposes only
 mymnemonic = "price clap dilemma swim genius fame lucky crack torch hunt maid palace ladder unlock symptom rubber scale load acoustic drop oval cabbage review abstract embark"

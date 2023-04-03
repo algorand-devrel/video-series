@@ -3,14 +3,14 @@ import hashlib
 import os
 from algosdk import mnemonic
 from algosdk.v2client import algod
-from algosdk.future.transaction import AssetConfigTxn, wait_for_confirmation
-
+# from algosdk.future.transaction import AssetConfigTxn, wait_for_confirmation
+from algosdk.transaction import *
 
 def create_asset(alice):
   # accounts = dictionary holding public key, secret key of accounts.
   # Change algod_token and algod_address to connect to a different client
-  algod_token = "2f3203f21e738a1de6110eba6984f9d03e5a95d7a577b34616854064cf2c0e7b"
-  algod_address = "https://academy-algod.dev.aws.algodev.network/"
+  algod_address = "http://localhost:4001"
+  algod_token = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
   algod_client = algod.AlgodClient(algod_token, algod_address)
 
   print("--------------------------------------------")

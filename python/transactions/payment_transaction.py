@@ -4,11 +4,11 @@ import base64
 from algosdk import account
 from algosdk import mnemonic
 from algosdk.v2client import algod
-from algosdk.future.transaction import *
-
+# from algosdk.future.transaction import *
+from algosdk.transaction import *
 
 def getting_started_example():
-    algod_address = "http://localhost:4001"
+    # algod_address = "http://localhost:4001"
     # algod_token = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     # algod_client = algod.AlgodClient(algod_token, algod_address)
     algod_address = "http://hackathon.algodev.network:9100"
@@ -25,7 +25,7 @@ def getting_started_example():
 
     # generate a public/private key pair
     secret_key = mnemonic.to_private_key(passphrase)
-    my_address = mnemonic.to_public_key(passphrase)
+    my_address = account.address_from_private_key(mnemonic.to_private_key(passphrase))
 
     print("My address: {}".format(my_address))
 

@@ -17,7 +17,6 @@ def create_account():
     # Change algod_token and algod_address to connect to a different client
     algod_address = "http://localhost:4001"
     algod_token = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-
     algod_client = algod.AlgodClient(algod_token, algod_address)
     sendingaddr, sendingsk = get_accounts()[0]
     # Generate new account for this transaction
