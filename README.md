@@ -24,7 +24,7 @@ https://www.youtube.com/@algodevs/playlists
     - [JavaScript](javascript/transactions)
     - [Python](javascript/transactions)
 
-- [Assets Explained](https://www.youtube.com/watch?v=TnpGO0P0BA0&list=PLwRyHoehE437YMCUb0oiPI-lIKKIND3xZ&ab_channel=AlgorandDevelopers)
+- [Assets Explained](TODO?)
 
     - [JavaScript](javascript/assets)
     - [Python](javascript/assets)

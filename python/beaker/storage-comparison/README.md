@@ -1,0 +1,3 @@
+This repository contains three different contracts that contain a simple voting functionality. [common.py](./common.py) contains the contract class that all of the examples inherit from along with the code for interacting with the applications. [global.py](./global.py), [local.py](local.py), and [box.py](./box.py) contain the implementations for global, local, and box storage repsectively. 
+
+A video going over this code can be seen here: https://www.youtube.com/watch?v=0hmkIqIGu4s
