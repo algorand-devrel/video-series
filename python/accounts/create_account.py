@@ -1,5 +1,5 @@
-import base64
-from algosdk.future import transaction
+
+from algosdk.transaction import *
 import json
 from algosdk import account
 from algosdk import mnemonic
@@ -37,7 +37,7 @@ def create_account():
     params = algod_client.suggested_params()
 
     amount = 100000
-    unsigned_txn = transaction.PaymentTxn(
+    unsigned_txn = PaymentTxn(
         sendingaddr, params, my_address, amount)
 
     # sign transaction
@@ -51,7 +51,7 @@ def create_account():
     # wait for confirmation
     try:
         print("Waiting for confirmation")
-        confirmed_txn = transaction.wait_for_confirmation(
+        confirmed_txn = wait_for_confirmation(
             algod_client, txid, 4)
     except Exception as err:
         print(err)
@@ -64,7 +64,6 @@ def create_account():
     print("Starting Account balance: {} microAlgos".format(
         account_info.get('amount')))
     print("Amount transfered: {} microAlgos".format(amount))
-
 
 
 create_account()
