@@ -6,6 +6,19 @@ Sample code used in the Algorand Developers video series
 https://www.youtube.com/@algodevs/playlists
 
 
+# Setup 
+
+TODO:
+
+for python, install xyz, run abc
+
+for js, install xyz, run abc
+
+see README in each language directory for more
+
+# Video Playlists
+
+
 - [Master PyTeal](https://www.youtube.com/watch?v=yEFUv760I8A&list=PLwRyHoehE435ttTjvFZA-DyqHYIYc26K_&ab_channel=AlgorandDevelopers)
 
     - [Code](python/pyteal) 
