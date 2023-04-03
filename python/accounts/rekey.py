@@ -3,7 +3,7 @@
 import json
 from algosdk import mnemonic
 from algosdk.v2client import algod
-from algosdk.future.transaction import *
+from algosdk.transaction import *
 
 
 def getting_started_example():

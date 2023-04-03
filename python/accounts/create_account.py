@@ -1,16 +1,12 @@
-# algod_address = "http://hackathon.algodev.network:9100"
-# algod_token = "ef920e2e7e002953f4b29a8af720efe8e4ecc75ff102b165e0472834b25832c1"
 import base64
-from algosdk.future import transaction
 import json
-from algosdk import account
-from algosdk import mnemonic
+
+from algosdk import account, mnemonic, transaction
 from algosdk.v2client import algod
 
 # # This is a complete code example that:
-# #   1. Create a new test account
+# #   1. Creates a new test account
 # #   2. Ask to fund your created account
-
 
 def create_account():
     # Change algod_token and algod_address to connect to a different client

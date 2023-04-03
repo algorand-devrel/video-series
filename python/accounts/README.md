@@ -1,9 +1,9 @@
 # accounts
 
-AccountGeneration - creates accounts
+`create_account.py` - Creates accounts
 
-KeyManagement - restores account
+`restore_account.py` - Restores account
 
-Rekey - rekeys account for another signer
+`rekey.py` - Rekeys account for another signer
 
-Multisig - Create and sign with multisig account
+`multisig.py` - Create and sign with Multisig account
