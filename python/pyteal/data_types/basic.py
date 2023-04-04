@@ -1,15 +1,14 @@
 from pyteal import *
 
 router = Router(
-    "datatype-example",
-    BareCallActions(
-        no_op=OnCompleteAction.create_only(Approve())
-    )
+    "datatype-example", BareCallActions(no_op=OnCompleteAction.create_only(Approve()))
 )
+
 
 @router.method
 def store_in_bytes(number: abi.Uint64):
     return App.globalPut(Bytes("num_in_bytes"), Itob(number.get()))
+
 
 @router.method
 def read_in_int(*, output: abi.Uint64):

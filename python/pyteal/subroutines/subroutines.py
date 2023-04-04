@@ -1,26 +1,29 @@
 from pyteal import *
 
 my_router = Router(
-    "subroutine example",
-    BareCallActions(
-        no_op=OnCompleteAction.create_only(Approve())
-    )
+    "subroutine example", BareCallActions(no_op=OnCompleteAction.create_only(Approve()))
 )
 
 ### Internal Subroutines ###
 
-@Subroutine(TealType.uint64)
-def add(a:abi.Uint64, b:abi.Uint64):
-    return a.get() + b.get()
 
 @Subroutine(TealType.uint64)
-def subtract(a:abi.Uint64, b:abi.Uint64):
+def add(a: abi.Uint64, b: abi.Uint64):
+    return a.get() + b.get()
+
+
+@Subroutine(TealType.uint64)
+def subtract(a: abi.Uint64, b: abi.Uint64):
     return a.get() - b.get()
+
 
 ### External Subroutine ###
 
+
 @my_router.method
-def call_internal(action: abi.String, a:abi.Uint64, b:abi.Uint64, *, output: abi.Uint64):
+def call_internal(
+    action: abi.String, a: abi.Uint64, b: abi.Uint64, *, output: abi.Uint64
+):
     return Seq(
         If(action.get() == Bytes("add"))
         .Then(output.set(add(a, b)))

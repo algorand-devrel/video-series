@@ -1,19 +1,11 @@
-
 from typing import Final
-from beaker import (
-    Application,
-    opt_in,
-    external,
-    sandbox,
-    client
-)
+from beaker import Application, opt_in, external, sandbox, client
 from pyteal import abi, Int
 
 from beaker.state import AccountStateBlob
 
 
 class AccountBlobState(Application):
-
     account_blob: Final[AccountStateBlob] = AccountStateBlob(keys=2)
 
     @opt_in

@@ -1,16 +1,9 @@
 from typing import Final
-from beaker import (
-    Application,
-    AccountStateValue,
-    opt_in,
-    external,
-    sandbox,
-    client
-)
+from beaker import Application, AccountStateValue, opt_in, external, sandbox, client
 from pyteal import abi, TealType, Int, Txn
 
-class AccountState(Application):
 
+class AccountState(Application):
     count: Final[AccountStateValue] = AccountStateValue(
         stack_type=TealType.uint64,
         default=Int(1),
@@ -31,13 +24,14 @@ class AccountState(Application):
 
 
 def demo():
-
     app = AccountState()
 
     account = sandbox.get_accounts().pop()
     algod_client = sandbox.get_algod_client()
 
-    app_client = client.ApplicationClient(client=algod_client, app=app,signer=account.signer)
+    app_client = client.ApplicationClient(
+        client=algod_client, app=app, signer=account.signer
+    )
 
     app_id, app_addr, txid = app_client.create()
     print("App ID: ", app_id)
@@ -47,7 +41,7 @@ def demo():
     result1 = app_client.call(app.get_account_state)
     print("1st Account State: ", result1.return_value)
 
-    app_client.call(app.incr_account_state, v = 2)
+    app_client.call(app.incr_account_state, v=2)
 
     result2 = app_client.call(app.get_account_state)
     print("2nd Account State: ", result2.return_value)

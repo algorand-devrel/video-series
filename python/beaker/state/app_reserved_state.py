@@ -10,7 +10,6 @@ from pyteal import abi, TealType
 
 
 class ReservedAppState(Application):
-
     names: Final[ReservedApplicationStateValue] = ReservedApplicationStateValue(
         stack_type=TealType.bytes,
         max_keys=32,

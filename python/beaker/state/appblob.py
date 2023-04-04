@@ -6,7 +6,6 @@ from beaker.state import ApplicationStateBlob
 
 
 class AppStateBlob(Application):
-
     application_blob: Final[ApplicationStateBlob] = ApplicationStateBlob(
         keys=2,
     )

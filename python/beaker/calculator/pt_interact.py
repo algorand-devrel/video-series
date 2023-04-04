@@ -9,6 +9,7 @@ from algosdk.account import *
 
 from pt_sandbox import get_accounts
 
+
 # Need to define helper function
 def create_app(
     client,
@@ -19,7 +20,6 @@ def create_app(
     global_schema,
     local_schema,
 ):
-
     # declare on_complete as NoOp
     on_complete = future.transaction.OnComplete.NoOpOC.real
 

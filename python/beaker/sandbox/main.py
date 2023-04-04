@@ -2,8 +2,8 @@ import json
 
 from beaker import *
 
-def demo():
 
+def demo():
     algod_client = sandbox.get_algod_client()
 
     sp = algod_client.suggested_params()
@@ -23,6 +23,7 @@ def demo():
     block_info = indexer_client.block_info(1)
     print("Block 1 information using the indexer client: \n")
     print(json.dumps(block_info, indent=2))
+
 
 if __name__ == "__main__":
     demo()

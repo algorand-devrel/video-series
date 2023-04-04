@@ -8,7 +8,7 @@ from pyteal import (
     TealType,
     TxnField,
     TxnType,
-    Expr
+    Expr,
 )
 from beaker import *
 from beaker.precompile import AppPrecompile
@@ -26,7 +26,7 @@ class Profile(Application):
     )
 
     @create
-    def create(self, name_arg:abi.String):
+    def create(self, name_arg: abi.String):
         return Seq(
             self.name.set(name_arg.get()),
             self.initialize_application_state(),
@@ -50,7 +50,7 @@ class Manager(Application):
         # config = self.profile.get_create_config()
         return Seq(
             InnerTxnBuilder.ExecuteMethodCall(
-                method_signature=get_method_signature(Profile().create), 
+                method_signature=get_method_signature(Profile().create),
                 args=[name],
             ),
             output.set(InnerTxn.created_application_id()),
@@ -58,7 +58,6 @@ class Manager(Application):
 
 
 def demo():
-
     algod_client = sandbox.get_algod_client()
 
     accounts = sandbox.get_accounts()
@@ -67,7 +66,9 @@ def demo():
 
     app = Manager()
 
-    manager_client = client.ApplicationClient(client=algod_client, app=app, signer=account1.signer)
+    manager_client = client.ApplicationClient(
+        client=algod_client, app=app, signer=account1.signer
+    )
 
     manager_client.create()
 
@@ -76,10 +77,10 @@ def demo():
     result = manager_client.call(app.create_profile, name="Chris")
 
     profile_client = client.ApplicationClient(
-        client=algod_client, 
-        app=Profile(), 
-        app_id=result.return_value, 
-        signer=account1.signer
+        client=algod_client,
+        app=Profile(),
+        app_id=result.return_value,
+        signer=account1.signer,
     )
 
     print(f"Number of likes: {profile_client.get_application_state()}")

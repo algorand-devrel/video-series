@@ -1,14 +1,8 @@
-from beaker import (
-    Application,
-    external,
-    sandbox,
-    client
-)
+from beaker import Application, external, sandbox, client
 from pyteal import abi
 
 
 class ExternalDemo(Application):
-
     @external
     def add(self, a: abi.Uint8, b: abi.Uint8, *, output: abi.Uint8):
         return output.set(a.get() + b.get())

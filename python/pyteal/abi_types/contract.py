@@ -11,29 +11,34 @@ router = Router(
     "abi-type-example",
     BareCallActions(
         no_op=OnCompleteAction.create_only(Approve()),
-    )
+    ),
 )
 
-PAYMENT_AMT = Int(1000000) # 1 million microAlgos = 1 Algo
+PAYMENT_AMT = Int(1000000)  # 1 million microAlgos = 1 Algo
+
 
 @router.method
 def pay(receiver: abi.Account, *, output: abi.Address):
     return Seq(
-        InnerTxnBuilder.Execute({
-            TxnField.type_enum: TxnType.Payment,
-            TxnField.amount: PAYMENT_AMT,
-            TxnField.receiver: receiver.address()
-        }),
-        output.set(receiver.address())
+        InnerTxnBuilder.Execute(
+            {
+                TxnField.type_enum: TxnType.Payment,
+                TxnField.amount: PAYMENT_AMT,
+                TxnField.receiver: receiver.address(),
+            }
+        ),
+        output.set(receiver.address()),
     )
+
 
 @router.method
 def fund(payment: abi.PaymentTransaction):
     return Seq(
         Assert(payment.get().receiver() == Global.current_application_address()),
-        Assert(payment.get().amount() >= (PAYMENT_AMT * Int(2))), # cover txn cost
+        Assert(payment.get().amount() >= (PAYMENT_AMT * Int(2))),  # cover txn cost
         App.globalPut(Bytes("funder"), payment.get().sender()),
     )
+
 
 @router.method
 def get_funder(*, output: abi.Address):

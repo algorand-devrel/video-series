@@ -31,40 +31,37 @@ def create_account():
     # Check your balance. It should be 0 microAlgos
 
     account_info = algod_client.account_info(my_address)
-    print("Account balance: {} microAlgos".format(
-        account_info.get('amount')) + "\n")
+    print("Account balance: {} microAlgos".format(account_info.get("amount")) + "\n")
 
     # build transaction
     print("Building transaction")
     params = algod_client.suggested_params()
 
     amount = 1000000
-    unsigned_txn = PaymentTxn(
-        sendingaddr, params, my_address, amount)
+    unsigned_txn = PaymentTxn(sendingaddr, params, my_address, amount)
 
     # sign transaction
     print("Signing transaction")
     signed_txn = unsigned_txn.sign(sendingsk)
     print("Sending transaction")
     txid = algod_client.send_transaction(signed_txn)
-    print('Transaction Info:')
+    print("Transaction Info:")
     print("Signed transaction with txID: {}".format(txid))
 
     # wait for confirmation
     try:
         print("Waiting for confirmation")
-        confirmed_txn = wait_for_confirmation(
-            algod_client, txid, 4)
+        confirmed_txn = wait_for_confirmation(algod_client, txid, 4)
     except Exception as err:
         print(err)
         return
-    print("txID: {}".format(txid), " confirmed in round: {}".format(
-        confirmed_txn.get("confirmed-round", 0)))
-    print("Transaction information: {}".format(
-        json.dumps(confirmed_txn, indent=4)))
+    print(
+        "txID: {}".format(txid),
+        " confirmed in round: {}".format(confirmed_txn.get("confirmed-round", 0)),
+    )
+    print("Transaction information: {}".format(json.dumps(confirmed_txn, indent=4)))
 
-    print("Starting Account balance: {} microAlgos".format(
-        account_info.get('amount')))
+    print("Starting Account balance: {} microAlgos".format(account_info.get("amount")))
     print("Amount transfered: {} microAlgos".format(amount))
     return mnemonic.from_private_key(my_secret_key)
 

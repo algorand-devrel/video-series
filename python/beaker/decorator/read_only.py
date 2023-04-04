@@ -1,20 +1,11 @@
 from typing import Final
-from beaker import (
-    Application,
-    ApplicationStateValue,
-    external,
-    sandbox,
-    client,
-    create
-)
+from beaker import Application, ApplicationStateValue, external, sandbox, client, create
 from pyteal import abi, TealType, Int, Seq
 
 
 class ReadOnlyDemo(Application):
-
     number: Final[ApplicationStateValue] = ApplicationStateValue(
-        stack_type=TealType.uint64,
-        default=Int(7)
+        stack_type=TealType.uint64, default=Int(7)
     )
 
     @create
@@ -23,10 +14,7 @@ class ReadOnlyDemo(Application):
 
     @external(read_only=True)
     def set_number(self, v: abi.Uint8, *, output: abi.Uint64):
-        return Seq(
-            self.number.set(v.get()),
-            output.set(self.number)
-        ) 
+        return Seq(self.number.set(v.get()), output.set(self.number))
 
     @external(read_only=True)
     def get_number(self, *, output: abi.Uint64):
@@ -48,9 +36,10 @@ def demo():
 
     result = app_client.call(app.set_number, v=1)
     print("The number value changed to: ", result.return_value)
-    
+
     result = app_client.call(app.get_number)
     print("The number recorded on the blockchain is still: ", result.return_value)
+
 
 if __name__ == "__main__":
     demo()

@@ -1,9 +1,6 @@
 from pyteal import *
 
-handle_creation = Seq(
-    App.globalPut(Bytes("Count"), Int(0)),
-    Approve()
-)
+handle_creation = Seq(App.globalPut(Bytes("Count"), Int(0)), Approve())
 
 router = Router(
     "Simple Counter",
@@ -12,17 +9,20 @@ router = Router(
     ),
 )
 
+
 @router.method
 def increment():
     scratchCount = ScratchVar(TealType.uint64)
     return Seq(
-        scratchCount.store(App.globalGet(Bytes("Count"))), 
+        scratchCount.store(App.globalGet(Bytes("Count"))),
         App.globalPut(Bytes("Count"), scratchCount.load() + Int(1)),
     )
 
+
 @router.method
-def read_count(*, output:abi.Uint64):
+def read_count(*, output: abi.Uint64):
     return output.set(App.globalGet(Bytes("Count")))
+
 
 if __name__ == "__main__":
     import os

@@ -7,26 +7,28 @@ router = Router(
     ),
 )
 
+
 @router.method
-def abi_multiple_pay(a:abi.PaymentTransaction, b:abi.PaymentTransaction):
+def abi_multiple_pay(a: abi.PaymentTransaction, b: abi.PaymentTransaction):
     return Seq(
         Assert(a.get().receiver() == Global.current_application_address()),
         Assert(b.get().receiver() == Global.current_application_address()),
         Assert(a.get().amount() == Int(100000)),
         Assert(b.get().amount() == Int(200000)),
-        Approve()
+        Approve(),
     )
 
+
 @router.method
-def multiple_pay(a:abi.PaymentTransaction, b:abi.PaymentTransaction):
+def multiple_pay(a: abi.PaymentTransaction, b: abi.PaymentTransaction):
     return Seq(
         Assert(Gtxn[0].receiver() == Global.current_application_address()),
         Assert(Gtxn[1].receiver() == Global.current_application_address()),
         Assert(Gtxn[0].amount() == Int(100000)),
         Assert(Gtxn[1].amount() == Int(200000)),
-        Approve()
+        Approve(),
     )
-            
+
 
 if __name__ == "__main__":
     import os

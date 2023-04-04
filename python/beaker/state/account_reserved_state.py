@@ -5,13 +5,12 @@ from beaker import (
     opt_in,
     external,
     sandbox,
-    client
+    client,
 )
 from pyteal import abi, TealType, Txn
 
 
 class ReservedAccountState(Application):
-
     favorite_food: Final[ReservedAccountStateValue] = ReservedAccountStateValue(
         stack_type=TealType.bytes,
         max_keys=8,

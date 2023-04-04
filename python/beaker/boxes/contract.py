@@ -5,6 +5,7 @@ from beaker import *
 from beaker.application import get_method_signature
 from beaker.lib.storage import Mapping, List
 
+
 # Use a box per member to denote membership parameters
 class MembershipRecord(abi.NamedTuple):
     role: abi.Field[abi.Uint8]
@@ -165,7 +166,6 @@ class MembershipClub(Application):
 
 
 class AppMember(Application):
-
     membership_token = ApplicationStateValue(TealType.uint64)
     club_app_id = ApplicationStateValue(TealType.uint64)
     last_affirmation = ApplicationStateValue(TealType.bytes)

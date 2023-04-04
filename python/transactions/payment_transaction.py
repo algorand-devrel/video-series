@@ -4,8 +4,10 @@ import base64
 from algosdk import account
 from algosdk import mnemonic
 from algosdk.v2client import algod
+
 # from algosdk.future.transaction import *
 from algosdk.transaction import *
+
 
 def getting_started_example():
     # algod_address = "http://localhost:4001"
@@ -35,7 +37,7 @@ def getting_started_example():
 
     print("My address: {}".format(my_address))
     account_info = algod_client.account_info(my_address)
-    print("Account balance: {} microAlgos".format(account_info.get('amount')))
+    print("Account balance: {} microAlgos".format(account_info.get("amount")))
 
     # build transaction
     params = algod_client.suggested_params()
@@ -51,23 +53,26 @@ def getting_started_example():
     signed_txn = unsigned_txn.sign(secret_key)
     # signed_txn = unsigned_txn.sign(mnemonic.to_private_key(passphrase))
 
-
-# wait for confirmation
+    # wait for confirmation
     try:
         txid = algod_client.send_transaction(signed_txn)
         print("Signed transaction with txID: {}".format(txid))
         confirmed_txn = wait_for_confirmation(algod_client, txid, 4)
-        print("txID: {}".format(txid), " confirmed in round: {}".format(
-            confirmed_txn.get("confirmed-round", 0)))
+        print(
+            "txID: {}".format(txid),
+            " confirmed in round: {}".format(confirmed_txn.get("confirmed-round", 0)),
+        )
 
     except Exception as err:
         print(err)
         return
 
-    print("Transaction information: {}".format(
-        json.dumps(confirmed_txn, indent=4)))
-    print("Decoded note: {}".format(base64.b64decode(
-        confirmed_txn["txn"]["txn"]["note"]).decode()))
+    print("Transaction information: {}".format(json.dumps(confirmed_txn, indent=4)))
+    print(
+        "Decoded note: {}".format(
+            base64.b64decode(confirmed_txn["txn"]["txn"]["note"]).decode()
+        )
+    )
 
 
 getting_started_example()

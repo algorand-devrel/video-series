@@ -1,7 +1,6 @@
 import json
 from algosdk.v2client import algod
-from algosdk import encoding, mnemonic, account
-from algosdk.transaction import *
+from algosdk import encoding, mnemonic, account, transaction
 
 # sandbox
 algod_address = "http://localhost:4001"
@@ -33,7 +32,7 @@ print("Account 3 Address: ", account_3)
 # create a multisig account
 version = 1  # multisig version
 threshold = 2  # how many signatures are necessary
-msig = Multisig(version, threshold, [account_1, account_2])
+msig = transaction.Multisig(version, threshold, [account_1, account_2])
 
 print("Multisig Address: ", msig.address())
 
@@ -45,26 +44,21 @@ sender = msig.address()
 recipient = account_3
 amount = 10000
 note = "Hello Multisig".encode()
-txn = PaymentTxn(sender, params, recipient, amount, None, note, None)
+txn = transaction.PaymentTxn(sender, params, recipient, amount, None, note, None)
 
 # create a SignedTransaction object
-mtx = MultisigTransaction(txn, msig)
+mtx = transaction.MultisigTransaction(txn, msig)
 
 # sign the transaction
 mtx.sign(private_key_1)
 mtx.sign(private_key_2)
 
 try:
-    txid = algod_client.send_raw_transaction(
-    encoding.msgpack_encode(mtx))    
-    print("TXID: ", txid)   
-    confirmed_txn = wait_for_confirmation(algod_client, txid, 6)  
-    print("Result confirmed in round: {}".format(confirmed_txn['confirmed-round']))
-    print("Transaction information: {}".format(
-        json.dumps(confirmed_txn, indent=4)))
+    txid = algod_client.send_raw_transaction(encoding.msgpack_encode(mtx))
+    print("TXID: ", txid)
+    confirmed_txn = transaction.wait_for_confirmation(algod_client, txid, 6)
+    print("Result confirmed in round: {}".format(confirmed_txn["confirmed-round"]))
+    print("Transaction information: {}".format(json.dumps(confirmed_txn, indent=4)))
 
 except Exception as err:
     print(err)
-
-
-

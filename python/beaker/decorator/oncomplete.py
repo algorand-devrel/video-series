@@ -14,7 +14,6 @@ from pyteal import Approve, Reject, Global
 
 
 class OncompleteDemo(Application):
-
     @create
     def create(self):
         return Approve()
@@ -32,12 +31,13 @@ class OncompleteDemo(Application):
         return Reject()
 
     @clear_state
-    def clear_state(self): 
+    def clear_state(self):
         return Approve()
-    
+
     @delete(authorize=Authorize.only(Global.creator_address()))
     def delete(self):
         return Approve()
+
 
 def demo():
     app = OncompleteDemo()
@@ -59,13 +59,12 @@ def demo():
         app_client.close_out()
     except Exception as e:
         print(e)
-    
+
     app_client.clear_state()
     print("forcefully opted out with clear state transaction.")
-    
+
     app_client.delete()
     print("The contract is deleted.")
-
 
 
 if __name__ == "__main__":
