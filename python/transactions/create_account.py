@@ -1,7 +1,5 @@
-from algosdk.transaction import *
 import json
-from algosdk import account
-from algosdk import mnemonic
+from algosdk import account, mnemonic, transaction
 from algosdk.v2client import algod
 
 from sandbox import get_accounts
@@ -16,12 +14,9 @@ def create_account():
     # Change algod_token and algod_address to connect to a different client
     algod_address = "http://localhost:4001"
     algod_token = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-    # algod_address = "http://localhost:8080"
-    # algod_token = "8024065d94521d253181cff008c44fa4ae4bdf44f028834cd4b4769a26282de1"
-    # algod_address = "http://hackathon.algodev.network:9100"
-    # algod_token = "ef920e2e7e002953f4b29a8af720efe8e4ecc75ff102b165e0472834b25832c1"
     algod_client = algod.AlgodClient(algod_token, algod_address)
-    sendingaddr, sendingsk = get_accounts()[0]
+
+    fund_addr, fund_sk = get_accounts().pop()
     # Generate new account for this transaction
     my_secret_key, my_address = account.generate_account()
 
@@ -38,11 +33,11 @@ def create_account():
     params = algod_client.suggested_params()
 
     amount = 1000000
-    unsigned_txn = PaymentTxn(sendingaddr, params, my_address, amount)
+    unsigned_txn = transaction.PaymentTxn(fund_addr, params, my_address, amount)
 
     # sign transaction
     print("Signing transaction")
-    signed_txn = unsigned_txn.sign(sendingsk)
+    signed_txn = unsigned_txn.sign(fund_sk)
     print("Sending transaction")
     txid = algod_client.send_transaction(signed_txn)
     print("Transaction Info:")
@@ -51,7 +46,7 @@ def create_account():
     # wait for confirmation
     try:
         print("Waiting for confirmation")
-        confirmed_txn = wait_for_confirmation(algod_client, txid, 4)
+        confirmed_txn = transaction.wait_for_confirmation(algod_client, txid, 4)
     except Exception as err:
         print(err)
         return

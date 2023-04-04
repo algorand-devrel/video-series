@@ -1,17 +1,11 @@
 import json
-import base64
-import hashlib
-from algosdk import account, mnemonic
+from algosdk import account, mnemonic, transaction
 from algosdk.v2client import algod
 
-# from algosdk.future.transaction import AssetConfigTxn, AssetTransferTxn, PaymentTxn, wait_for_confirmation
 from create_account import create_account
 from closeout_account import closeout_account
 from create_asset import create_asset
-from algosdk.transaction import *
 
-
-# Change algod_token and algod_address to connect to a different client
 
 algod_address = "http://localhost:4001"
 algod_token = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
@@ -26,16 +20,14 @@ def create_fund_accounts():
     mnemonics.append(create_account())
     mnemonics.append(create_account())
 
-    accounts = {}
-    counter = 0
+    accounts = []
     for m in mnemonics:
-        accounts[counter] = {}
-        accounts[counter]["pk"] = account.address_from_private_key(
-            mnemonic.to_private_key(m)
+        accounts.append(
+            {
+                "pk": account.address_from_private_key(mnemonic.to_private_key(m)),
+                "sk": mnemonic.to_private_key(m),
+            }
         )
-        accounts[counter]["sk"] = mnemonic.to_private_key(m)
-        counter += 1
-
     return accounts
 
 
@@ -47,14 +39,10 @@ def transferAlgosToBob(algod_client, bob, alice):
 
     # build transaction
     params = algod_client.suggested_params()
-    # comment out the next two (2) lines to use suggested fees
-    # params.flat_fee = True
-    # params.fee = 1000
-
     # minimum balance 100000, plus 100000 for asset optin,
     # plus 3000 for 3 tx (optin, transfer, algo closeout) = 203000 microalgos
     # amount = 203000;
-    unsigned_txn = PaymentTxn(alice["pk"], params, bob["pk"], 203000)
+    unsigned_txn = transaction.PaymentTxn(alice["pk"], params, bob["pk"], 203000)
 
     # sign transaction
     signed_txn = unsigned_txn.sign(alice["sk"])
@@ -65,7 +53,7 @@ def transferAlgosToBob(algod_client, bob, alice):
 
     # wait for confirmation
     try:
-        confirmed_txn = wait_for_confirmation(algod_client, txid, 4)
+        confirmed_txn = transaction.wait_for_confirmation(algod_client, txid, 4)
         print("TXID: ", txid)
         print("Result confirmed in round: {}".format(confirmed_txn["confirmed-round"]))
 
@@ -85,10 +73,6 @@ def optIn(algod_client, bob, asset_id):
     # Check if asset_id is in Bob's asset holdings prior
     # to opt-in
     params = algod_client.suggested_params()
-    # comment these two lines if you want to use suggested params
-    # params.fee = 1000
-    # params.flat_fee = True
-
     account_info = algod_client.account_info(bob["pk"])
     holding = None
     idx = 0
@@ -101,14 +85,14 @@ def optIn(algod_client, bob, asset_id):
 
     if not holding:
         # Use the AssetTransferTxn class to transfer assets and opt-in
-        txn = AssetTransferTxn(
+        txn = transaction.AssetTransferTxn(
             sender=bob["pk"], sp=params, receiver=bob["pk"], amt=0, index=asset_id
         )
         stxn = txn.sign(bob["sk"])
         txid = algod_client.send_transaction(stxn)
         print(txid)
         # Wait for the transaction to be confirmed
-        confirmed_txn = wait_for_confirmation(algod_client, txid, 4)
+        confirmed_txn = transaction.wait_for_confirmation(algod_client, txid, 4)
         print("TXID: ", txid)
         print("Result confirmed in round: {}".format(confirmed_txn["confirmed-round"]))
         # Now check the asset holding for that account.
@@ -120,17 +104,14 @@ def transferAssets(algod_client, alice, bob, asset_id):
     print("--------------------------------------------")
     print("Transfering Alice's token to Bob......")
     params = algod_client.suggested_params()
-    # comment these two lines if you want to use suggested params
-    # params.fee = 1000
-    # params.flat_fee = True
-    txn = AssetTransferTxn(
+    txn = transaction.AssetTransferTxn(
         sender=alice["pk"], sp=params, receiver=bob["pk"], amt=100, index=asset_id
     )
     stxn = txn.sign(alice["sk"])
     txid = algod_client.send_transaction(stxn)
     print(txid)
     # Wait for the transaction to be confirmed
-    confirmed_txn = wait_for_confirmation(algod_client, txid, 4)
+    confirmed_txn = transaction.wait_for_confirmation(algod_client, txid, 4)
     print("TXID: ", txid)
     print("Result confirmed in round: {}".format(confirmed_txn["confirmed-round"]))
     # The balance should now be 10.
@@ -141,10 +122,7 @@ def transferAssetsBack(algod_client, bob, alice, asset_id):
     print("--------------------------------------------")
     print("Transfering Alice's token back to Alice......")
     params = algod_client.suggested_params()
-    # comment these two lines if you want to use suggested params
-    # params.fee = 1000
-    # params.flat_fee = True
-    txn = AssetTransferTxn(
+    txn = transaction.AssetTransferTxn(
         sender=bob["pk"],
         sp=params,
         receiver=alice["pk"],
@@ -156,7 +134,7 @@ def transferAssetsBack(algod_client, bob, alice, asset_id):
     txid = algod_client.send_transaction(stxn)
     print(txid)
     # Wait for the transaction to be confirmed
-    confirmed_txn = wait_for_confirmation(algod_client, txid, 4)
+    confirmed_txn = transaction.wait_for_confirmation(algod_client, txid, 4)
     print("TXID: ", txid)
     print("Result confirmed in round: {}".format(confirmed_txn["confirmed-round"]))
     # The balance should now be 10.
@@ -167,12 +145,8 @@ def destroyAsset(algod_client, alice, asset_id):
     print("--------------------------------------------")
     print("Destroying Alice's token......")
     params = algod_client.suggested_params()
-    # comment these two lines if you want to use suggested params
-    # params.fee = 1000
-    # params.flat_fee = True
-
     # Asset destroy transaction
-    txn = AssetConfigTxn(
+    txn = transaction.AssetConfigTxn(
         sender=alice["pk"], sp=params, index=asset_id, strict_empty_address_check=False
     )
 
@@ -182,7 +156,7 @@ def destroyAsset(algod_client, alice, asset_id):
     txid = algod_client.send_transaction(stxn)
     print(txid)
     # Wait for the transaction to be confirmed
-    confirmed_txn = wait_for_confirmation(algod_client, txid, 4)
+    confirmed_txn = transaction.wait_for_confirmation(algod_client, txid, 4)
     print("TXID: ", txid)
     print("Result confirmed in round: {}".format(confirmed_txn["confirmed-round"]))
     print("Alice's Token is destroyed.")
