@@ -1,6 +1,7 @@
 import json
 from algosdk import mnemonic, transaction, account
 from algosdk.v2client import algod
+from sandbox import get_accounts
 
 
 def getting_started_example():
@@ -15,20 +16,30 @@ def getting_started_example():
     # Part 2
     # send from account 3 to account 2 and sign from Account 1
     # to run: change all three account passphrases - no need to fund account 1 and 2
-    # never use mnemonics in production code, replace for demo purposes only
 
+    # never use mnemonics in production code, replace for demo purposes only
     account1_passphrase = "resource immune vintage come distance learn best merge defy roof inflict gift believe seek pull multiply unit credit mammal field essay useful problem abandon level"
     account2_passphrase = "joke click surge skate grocery treat juice consider thrive ship record fault cotton safe remind wasp bomb maid february couple fix dune route abandon tackle"
     account3_passphrase = "sphere million erupt curious around earth client name question loyal client tree dentist reform wheat tattoo patch bounce hockey spy because opinion nest abstract aware"
+
     #  no need to fund account 1 and 2
     private_key_1 = mnemonic.to_private_key(account1_passphrase)
     account1 = account.address_from_private_key(private_key=private_key_1)
 
     private_key_2 = mnemonic.to_private_key(account2_passphrase)
     account2 = account.address_from_private_key(private_key=private_key_2)
+
     #  account 3 needs to be funded
     private_key_3 = mnemonic.to_private_key(account3_passphrase)
     account3 = account.address_from_private_key(private_key=private_key_3)
+
+    #  fund account 3
+    fund_addr, fund_sk = get_accounts().pop()
+    ptxn = transaction.PaymentTxn(
+        fund_addr, algod_client.suggested_params(), account3, int(1e8)
+    )
+    txid = algod_client.send_transaction(ptxn.sign(fund_sk))
+    transaction.wait_for_confirmation(algod_client, txid, 4)
 
     print("Starting account balances")
     print_accounts(algod_client, account1, account2, account3)
