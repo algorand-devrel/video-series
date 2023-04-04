@@ -1,39 +1,15 @@
 const algosdk = require('algosdk');
-// Retrieve the token, server and port values for your installation in the 
-// algod.net and algod.token files within the data directory
-
-// UPDATE THESE VALUES
-// const token = "TOKEN";
-// const server = "SERVER";
-// const port = PORT;
-
-// Install the JavaScript SDK...
-// # initialize project
-// npm init
-// # install Algorand sdk
-// npm install algosdk
-// # list the version
-// npm list algosdk
-
-const token = "ef920e2e7e002953f4b29a8af720efe8e4ecc75ff102b165e0472834b25832c1";
-const server = "http://hackathon.algodev.network";
-const port = 9100;
-
-// sandbox
-// const token = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-// const server = "http://localhost";
-// const port = 4001;
-
+const {getAccounts} = require("../sandbox");
 
 
 // Function used to print created asset for account and assetid
-const printCreatedAsset = async function (algodclient, account, assetid) {
+const printCreatedAsset = async function (algodClient, account, assetid) {
     // note: if you have an indexer instance available it is easier to just use this
     //     let accountInfo = await indexerClient.searchAccounts()
     //    .assetID(assetIndex).do();
     // and in the loop below use this to extract the asset for a particular account
     // accountInfo['accounts'][idx][account]);
-    let accountInfo = await algodclient.accountInformation(account).do();
+    let accountInfo = await algodClient.accountInformation(account).do();
     for (idx = 0; idx < accountInfo['created-assets'].length; idx++) {
         let scrutinizedAsset = accountInfo['created-assets'][idx];
         if (scrutinizedAsset['index'] == assetid) {
@@ -45,13 +21,13 @@ const printCreatedAsset = async function (algodclient, account, assetid) {
     }
 };
 // Function used to print asset holding for account and assetid
-const printAssetHolding = async function (algodclient, account, assetid) {
+const printAssetHolding = async function (algodClient, account, assetid) {
     // note: if you have an indexer instance available it is easier to just use this
     //     let accountInfo = await indexerClient.searchAccounts()
     //    .assetID(assetIndex).do();
     // and in the loop below use this to extract the asset for a particular account
     // accountInfo['accounts'][idx][account]);
-    let accountInfo = await algodclient.accountInformation(account).do();
+    let accountInfo = await algodClient.accountInformation(account).do();
     for (idx = 0; idx < accountInfo['assets'].length; idx++) {
         let scrutinizedAsset = accountInfo['assets'][idx];
         if (scrutinizedAsset['asset-id'] == assetid) {
@@ -62,38 +38,20 @@ const printAssetHolding = async function (algodclient, account, assetid) {
     }
 };
 
-
-// Recover accounts
-// paste in mnemonic phrases here for each account
-// Shown for demonstration purposes. NEVER reveal secret mnemonics in practice.
-
-// var account1_mnemonic = "PASTE your phrase for account 1";
-// var account2_mnemonic = "PASTE your phrase for account 2";
-// var account3_mnemonic = "PASTE your phrase for account 3"
-
-
-var account1_mnemonic = "earn demise stamp couch reward ramp potato hard bargain clog genius awkward prosper setup eager ensure coast fine bicycle theory ginger plastic quantum abandon jazz";
-var account2_mnemonic = "beauty nurse season autumn curve slice cry strategy frozen spy panic hobby strong goose employ review love fee pride enlist friend enroll clip ability runway";
-var account3_mnemonic = "picnic bright know ticket purity pluck stumble destroy ugly tuna luggage quote frame loan wealth edge carpet drift cinnamon resemble shrimp grain dynamic absorb edge";
-
-var recoveredAccount1 = algosdk.mnemonicToSecretKey(account1_mnemonic);
-var recoveredAccount2 = algosdk.mnemonicToSecretKey(account2_mnemonic);
-var recoveredAccount3 = algosdk.mnemonicToSecretKey(account3_mnemonic);
-console.log(recoveredAccount1.addr);
-console.log(recoveredAccount2.addr);
-console.log(recoveredAccount3.addr);
-
-// Instantiate the algod wrapper
-
-    let algodclient = new algosdk.Algodv2(token, server, port);
-
-// Debug Console should look similar to this
-
-// ATTR6RUEHHBHXKUHT4GUOYWNBVDV2GJ5FHUWCSFZLHD55EVKZWOWSM7ABQ
-// AK6Q33PDO4RJZQPHEMODC6PUE5AR2UD4FBU6TNEJOU4UR4KC6XL5PWW5K4
-// IWR4CLLCN2TIVX2QPVVKVR5ER5OZGMWAV5QB2UIPYMPKBPLJZX4C37C4AA
-
 (async () => {
+    const token = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+    const server = "http://localhost";
+    const port = 4001;
+
+    const algodClient = new algosdk.Algodv2(token, server, port);
+
+
+    const accts = await getAccounts();
+    const recoveredAccount1 = accts[0];
+    const recoveredAccount2 = accts[1];
+    const recoveredAccount3 = accts[2];
+
+
     // Asset Creation:
     // The first transaciton is to create a new asset
     // Get last round and suggested tx fee
@@ -102,7 +60,7 @@ console.log(recoveredAccount3.addr);
     // Transaction
     // We will account for changing transaction parameters
     // before every transaction in this example
-    let params = await algodclient.getTransactionParams().do();
+    let params = await algodClient.getTransactionParams().do();
     console.log(params);
     let note = undefined; // arbitrary data to be stored in the transaction; here, none is stored
     // Asset creation specific parameters
@@ -155,47 +113,19 @@ console.log(recoveredAccount3.addr);
         assetMetadataHash, 
         params);
 
-    let rawSignedTxn = txn.signTxn(recoveredAccount1.sk)
-    let tx = (await algodclient.sendRawTransaction(rawSignedTxn).do());
+    let rawSignedTxn = txn.signTxn(recoveredAccount1.privateKey)
+    let tx = (await algodClient.sendRawTransaction(rawSignedTxn).do());
 
     let assetID = null;
     // wait for transaction to be confirmed
-    const ptx = await algosdk.waitForConfirmation(algodclient, tx.txId, 4);
+    const ptx = await algosdk.waitForConfirmation(algodClient, tx.txId, 4);
     // Get the new asset's information from the creator account
     assetID = ptx["asset-index"];
     //Get the completed Transaction
     console.log("Transaction " + tx.txId + " confirmed in round " + ptx["confirmed-round"]);
     
-   // console.log("AssetID = " + assetID);
-    
-    await printCreatedAsset(algodclient, recoveredAccount1.addr, assetID);
-    await printAssetHolding(algodclient, recoveredAccount1.addr, assetID);
-    // your terminal output should ber similar to this
-
-    // Transaction: BQMRGV6VZLXXPI4OEEJB6OGFRVJQEKWFJULNPMGVF25H7WE6EUQA
-    // Transaction BQMRGV6VZLXXPI4OEEJB6OGFRVJQEKWFJULNPMGVF25H7WE6EUQA confirmed in round 3961853
-    // AssetID = 2653785
-    // parms = {
-    //     "clawback": "AK6Q33PDO4RJZQPHEMODC6PUE5AR2UD4FBU6TNEJOU4UR4KC6XL5PWW5K4",
-    //     "creator": "ATTR6RUEHHBHXKUHT4GUOYWNBVDV2GJ5FHUWCSFZLHD55EVKZWOWSM7ABQ",
-    //     "decimals": 0,
-    //     "default-frozen": false,
-    //     "freeze": "AK6Q33PDO4RJZQPHEMODC6PUE5AR2UD4FBU6TNEJOU4UR4KC6XL5PWW5K4",
-    //     "manager": "AK6Q33PDO4RJZQPHEMODC6PUE5AR2UD4FBU6TNEJOU4UR4KC6XL5PWW5K4",
-    //     "metadata-hash": "MTZlZmFhMzkyNGE2ZmQ5ZDNhNDgyNDc5OWE0YWM2NWQ=",
-    //     "name": "latinum",
-    //     "reserve": "AK6Q33PDO4RJZQPHEMODC6PUE5AR2UD4FBU6TNEJOU4UR4KC6XL5PWW5K4",
-    //     "total": 1000,
-    //     "unit-name": "LATINUM",
-    //     "url": "http://someurl"
-    // }
-    // AssetExample.js: 69
-    // assetholdinginfo = {
-    //     "amount": 1000,
-    //     "asset-id": 2653785,
-    //     "creator": "ATTR6RUEHHBHXKUHT4GUOYWNBVDV2GJ5FHUWCSFZLHD55EVKZWOWSM7ABQ",
-    //     "is-frozen": false
-    // }
+    await printCreatedAsset(algodClient, recoveredAccount1.addr, assetID);
+    await printAssetHolding(algodClient, recoveredAccount1.addr, assetID);
     
     // Change Asset Configuration:
     // Change the manager using an asset configuration transaction
@@ -203,7 +133,7 @@ console.log(recoveredAccount3.addr);
     // We will account for changing transaction parameters
     // before every transaction in this example
     
-    params = await algodclient.getTransactionParams().do();
+    params = await algodClient.getTransactionParams().do();
     // Asset configuration specific parameters
     // All other values are the same so we leave them set.
     // Specified address can change reserve, freeze, clawback, and manager
@@ -221,56 +151,38 @@ console.log(recoveredAccount3.addr);
         params);
 
     // This transaction must be signed by the current manager
-    rawSignedTxn = ctxn.signTxn(recoveredAccount2.sk)
-    let ctx = (await algodclient.sendRawTransaction(rawSignedTxn).do());
+    rawSignedTxn = ctxn.signTxn(recoveredAccount2.privateKey)
+    let ctx = (await algodClient.sendRawTransaction(rawSignedTxn).do());
     // Wait for confirmation
-    let confirmedTxn = await algosdk.waitForConfirmation(algodclient, ctx.txId, 4);
+    let confirmedTxn = await algosdk.waitForConfirmation(algodClient, ctx.txId, 4);
     //Get the completed Transaction
     console.log("Transaction " + ctx.txId + " confirmed in round " + confirmedTxn["confirmed-round"]);
     
     // Get the asset information for the newly changed asset
     // use indexer or utiltiy function for Account info
     // The manager should now be the same as the creator
-    await printCreatedAsset(algodclient, recoveredAccount1.addr, assetID); 
-
-    // Transaction: BXDODE2RUC77WVJL6HOQBACVAS6QPXOBSE55ZZTLJUTNLBXZNENA
-    // Transaction BXDODE2RUC77WVJL6HOQBACVAS6QPXOBSE55ZZTLJUTNLBXZNENA confirmed in round 3961855
-    // AssetID = 2653785
-    // parms = {
-    //     "clawback": "AK6Q33PDO4RJZQPHEMODC6PUE5AR2UD4FBU6TNEJOU4UR4KC6XL5PWW5K4",
-    //     "creator": "ATTR6RUEHHBHXKUHT4GUOYWNBVDV2GJ5FHUWCSFZLHD55EVKZWOWSM7ABQ",
-    //     "decimals": 0,
-    //     "default-frozen": false,
-    //     "freeze": "AK6Q33PDO4RJZQPHEMODC6PUE5AR2UD4FBU6TNEJOU4UR4KC6XL5PWW5K4",
-    //     "manager": "ATTR6RUEHHBHXKUHT4GUOYWNBVDV2GJ5FHUWCSFZLHD55EVKZWOWSM7ABQ",
-    //     "metadata-hash": "MTZlZmFhMzkyNGE2ZmQ5ZDNhNDgyNDc5OWE0YWM2NWQ=",
-    //     "name": "latinum",
-    //     "reserve": "AK6Q33PDO4RJZQPHEMODC6PUE5AR2UD4FBU6TNEJOU4UR4KC6XL5PWW5K4",
-    //     "total": 1000,
-    //     "unit-name": "LATINUM",
-    //     "url": "http://someurl"
-    // }
+    await printCreatedAsset(algodClient, recoveredAccount1.addr, assetID); 
 
 
     // Opting in to an Asset:
     // Opting in to transact with the new asset
-    // Allow accounts that want recieve the new asset
+    // Allow accounts that want receive the new asset
     // Have to opt in. To do this they send an asset transfer
-    // of the new asset to themseleves 
+    // of the new asset to themselves 
     // In this example we are setting up the 3rd recovered account to 
     // receive the new asset
 
     // First update changing transaction parameters
     // We will account for changing transaction parameters
     // before every transaction in this example
-    params = await algodclient.getTransactionParams().do();
+    params = await algodClient.getTransactionParams().do();
 
     let sender = recoveredAccount3.addr;
     let recipient = sender;
     // We set revocationTarget to undefined as 
     // This is not a clawback operation
     let revocationTarget = undefined;
-    // CloseReaminerTo is set to undefined as
+    // CloseRemainderTo is set to undefined as
     // we are not closing out an asset
     let closeRemainderTo = undefined;
     // We are sending 0 assets
@@ -289,26 +201,16 @@ console.log(recoveredAccount3.addr);
         params);
 
     // Must be signed by the account wishing to opt in to the asset    
-    rawSignedTxn = opttxn.signTxn(recoveredAccount3.sk);
-    let opttx = (await algodclient.sendRawTransaction(rawSignedTxn).do());
+    rawSignedTxn = opttxn.signTxn(recoveredAccount3.privateKey);
+    let opttx = (await algodClient.sendRawTransaction(rawSignedTxn).do());
     // Wait for confirmation
-    confirmedTxn = await algosdk.waitForConfirmation(algodclient, opttx.txId, 4);
+    confirmedTxn = await algosdk.waitForConfirmation(algodClient, opttx.txId, 4);
     //Get the completed Transaction
     console.log("Transaction " + opttx.txId + " confirmed in round " + confirmedTxn["confirmed-round"]);
 
     //You should now see the new asset listed in the account information
     console.log("Account 3 = " + recoveredAccount3.addr);
-    await printAssetHolding(algodclient, recoveredAccount3.addr, assetID);
-
-    // Transaction: U7D44D6JJJZLNN2X7BACDMACHPPSUWROTCOYAJZEBMPHPSKWY36Q
-    // Transaction U7D44D6JJJZLNN2X7BACDMACHPPSUWROTCOYAJZEBMPHPSKWY36Q confirmed in round 3961857
-    // Account 3 = IWR4CLLCN2TIVX2QPVVKVR5ER5OZGMWAV5QB2UIPYMPKBPLJZX4C37C4AA
-    // assetholdinginfo = {
-    //     "amount": 0,
-    //     "asset-id": 2653785,
-    //     "creator": "ATTR6RUEHHBHXKUHT4GUOYWNBVDV2GJ5FHUWCSFZLHD55EVKZWOWSM7ABQ",
-    //     "is-frozen": false
-    // }
+    await printAssetHolding(algodClient, recoveredAccount3.addr, assetID);
 
     // Transfer New Asset:
     // Now that account3 can recieve the new tokens 
@@ -318,7 +220,7 @@ console.log(recoveredAccount3.addr);
     // We will account for changing transaction parameters
     // before every transaction in this example
 
-    params = await algodclient.getTransactionParams().do();
+    params = await algodClient.getTransactionParams().do();
     //comment out the next two lines to use suggested fee
     // params.fee = 1000;
     // params.flatFee = true;
@@ -341,33 +243,17 @@ console.log(recoveredAccount3.addr);
         assetID, 
         params);
     // Must be signed by the account sending the asset  
-    rawSignedTxn = xtxn.signTxn(recoveredAccount1.sk)
-    let xtx = (await algodclient.sendRawTransaction(rawSignedTxn).do());
+    rawSignedTxn = xtxn.signTxn(recoveredAccount1.privateKey)
+    let xtx = (await algodClient.sendRawTransaction(rawSignedTxn).do());
 
     // Wait for confirmation
-    confirmedTxn = await algosdk.waitForConfirmation(algodclient, xtx.txId, 4);
+    confirmedTxn = await algosdk.waitForConfirmation(algodClient, xtx.txId, 4);
     //Get the completed Transaction
     console.log("Transaction " + xtx.txId + " confirmed in round " + confirmedTxn["confirmed-round"]);
 
     // You should now see the 10 assets listed in the account information
     console.log("Account 3 = " + recoveredAccount3.addr);
-    await printAssetHolding(algodclient, recoveredAccount3.addr, assetID);
-
-    // your console/terminal out put should look similar to this:
-    // Transaction: BMQQXKLOYE5663UZOIMLBVFRXE73XH2UXPBPPGJR7XOMM5E3UO7A
-    // Transaction BMQQXKLOYE5663UZOIMLBVFRXE73XH2UXPBPPGJR7XOMM5E3UO7A confirmed in round 3961861
-    // Account 3 = IWR4CLLCN2TIVX2QPVVKVR5ER5OZGMWAV5QB2UIPYMPKBPLJZX4C37C4AA
-    // AssetExample.js: 343
-    // assetholdinginfo = {
-    //     "amount": 10,
-    //     "asset-id": 2653785,
-    //     "creator": "ATTR6RUEHHBHXKUHT4GUOYWNBVDV2GJ5FHUWCSFZLHD55EVKZWOWSM7ABQ",
-    //     "is-frozen": false
-    // }
-    //    Transaction: LM2QOJP6FKLX2XIKCDLTM37IEE2IGQ5IMVOEYOCFHKOAUMU5G6ZQ
-    //    Transaction LM2QOJP6FKLX2XIKCDLTM37IEE2IGQ5IMVOEYOCFHKOAUMU5G6ZQ confirmed in round 4273946
-    //    Account Information for: { "creator": "THQHGD4HEESOPSJJYYF34MWKOI57HXBX4XR63EPBKCWPOJG5KUPDJ7QJCM", "amount": 10, "frozen": false }
-
+    await printAssetHolding(algodClient, recoveredAccount3.addr, assetID);
 
     // freeze asset
     // The asset was created and configured to allow freezing an account
@@ -380,8 +266,8 @@ console.log(recoveredAccount3.addr);
     // First update changing transaction parameters
     // We will account for changing transaction parameters
     // before every transaction in this example
-   // await getChangingParms(algodclient);
-    params = await algodclient.getTransactionParams().do();
+   // await getChangingParms(algodClient);
+    params = await algodClient.getTransactionParams().do();
 
     from = recoveredAccount2.addr;
     freezeTarget = recoveredAccount3.addr;
@@ -397,31 +283,17 @@ console.log(recoveredAccount3.addr);
         params)
 
     // Must be signed by the freeze account   
-    rawSignedTxn = ftxn.signTxn(recoveredAccount2.sk)
-    let ftx = (await algodclient.sendRawTransaction(rawSignedTxn).do());
+    rawSignedTxn = ftxn.signTxn(recoveredAccount2.privateKey)
+    let ftx = (await algodClient.sendRawTransaction(rawSignedTxn).do());
 
     // Wait for confirmation
-    confirmedTxn = await algosdk.waitForConfirmation(algodclient, ftx.txId, 4);
+    confirmedTxn = await algosdk.waitForConfirmation(algodClient, ftx.txId, 4);
     //Get the completed Transaction
     console.log("Transaction " + ftx.txId + " confirmed in round " + confirmedTxn["confirmed-round"]);
 
     // You should now see the asset is frozen listed in the account information
     console.log("Account 3 = " + recoveredAccount3.addr);
-    await printAssetHolding(algodclient, recoveredAccount3.addr, assetID);
-
-
-    //you should see console/terminal output similar to this witht he frozen vales set to true
-
-    // Transaction: VI33O4TAM2JZ4AMNJFYBDH4NATHPGBVAFTALLUKRI2WZ772EKA4A
-    // Transaction VI33O4TAM2JZ4AMNJFYBDH4NATHPGBVAFTALLUKRI2WZ772EKA4A confirmed in round 3961865
-    // Account 3 = IWR4CLLCN2TIVX2QPVVKVR5ER5OZGMWAV5QB2UIPYMPKBPLJZX4C37C4AA
-    // AssetExample.js: 385
-    // assetholdinginfo = {
-    //     "amount": 10,
-    //     "asset-id": 2653785,
-    //     "creator": "ATTR6RUEHHBHXKUHT4GUOYWNBVDV2GJ5FHUWCSFZLHD55EVKZWOWSM7ABQ",
-    //     "is-frozen": true
-    // }
+    await printAssetHolding(algodClient, recoveredAccount3.addr, assetID);
 
 
     // Revoke an Asset:
@@ -436,7 +308,7 @@ console.log(recoveredAccount3.addr);
     // First update changing transaction parameters
     // We will account for changing transaction parameters
     // before every transaction in this example
-    params = await algodclient.getTransactionParams().do();  
+    params = await algodClient.getTransactionParams().do();  
     
     sender = recoveredAccount2.addr;
     recipient = recoveredAccount1.addr;
@@ -456,31 +328,18 @@ console.log(recoveredAccount3.addr);
         assetID, 
         params);
     // Must be signed by the account that is the clawback address    
-    rawSignedTxn = rtxn.signTxn(recoveredAccount2.sk)
-    let rtx = (await algodclient.sendRawTransaction(rawSignedTxn).do());
+    rawSignedTxn = rtxn.signTxn(recoveredAccount2.privateKey)
+    let rtx = (await algodClient.sendRawTransaction(rawSignedTxn).do());
     // Wait for confirmation
-    confirmedTxn = await algosdk.waitForConfirmation(algodclient, rtx.txId, 4);
+    confirmedTxn = await algosdk.waitForConfirmation(algodClient, rtx.txId, 4);
     // Get the completed Transaction
     console.log("Transaction " + rtx.txId + " confirmed in round " + confirmedTxn["confirmed-round"]);
 
     // You should now see 0 assets listed in the account information
     // for the third account
     console.log("Account 3 = " + recoveredAccount3.addr);
-    await printAssetHolding(algodclient, recoveredAccount3.addr, assetID);
+    await printAssetHolding(algodClient, recoveredAccount3.addr, assetID);
 
-
-    //you should see console/terminal output similar to below for account 3
-    // Transaction: I6U5NCHZ6DLHLBXECPSSRLAN3JYYUXOZLN4HCE4BPLRG7G7LGRMA
-    // Transaction I6U5NCHZ6DLHLBXECPSSRLAN3JYYUXOZLN4HCE4BPLRG7G7LGRMA confirmed in round 3961873
-    // Account 3 = IWR4CLLCN2TIVX2QPVVKVR5ER5OZGMWAV5QB2UIPYMPKBPLJZX4C37C4AA
-    // AssetExample.js: 433
-    // assetholdinginfo = {
-    //     "amount": 0,
-    //     "asset-id": 2653785,
-    //     "creator": "ATTR6RUEHHBHXKUHT4GUOYWNBVDV2GJ5FHUWCSFZLHD55EVKZWOWSM7ABQ",
-    //     "is-frozen": true
-    // }
- 
 
     // Destroy an Asset:
     // All of the created assets should now be back in the creators
@@ -491,7 +350,7 @@ console.log(recoveredAccount3.addr);
     // We will account for changing transaction parameters
     // before every transaction in this example
 
-    params = await algodclient.getTransactionParams().do();
+    params = await algodClient.getTransactionParams().do();
     //comment out the next two lines to use suggested fee
     // params.fee = 1000;
     // params.flatFee = true;
@@ -509,21 +368,21 @@ console.log(recoveredAccount3.addr);
         params);
     // The transaction must be signed by the manager which 
     // is currently set to account1
-    rawSignedTxn = dtxn.signTxn(recoveredAccount1.sk)
-    let dtx = (await algodclient.sendRawTransaction(rawSignedTxn).do());
+    rawSignedTxn = dtxn.signTxn(recoveredAccount1.privateKey)
+    let dtx = (await algodClient.sendRawTransaction(rawSignedTxn).do());
 
     // Wait for confirmation
-    confirmedTxn = await algosdk.waitForConfirmation(algodclient, dtx.txId, 4);
+    confirmedTxn = await algosdk.waitForConfirmation(algodClient, dtx.txId, 4);
     //Get the completed Transaction
     console.log("Transaction " + dtx.txId + " confirmed in round " + confirmedTxn["confirmed-round"]);
 
     // The account3 and account1 should no longer contain the asset as it has been destroyed
     console.log("Asset ID: " + assetID);
     console.log("Account 1 = " + recoveredAccount1.addr);
-    await printCreatedAsset(algodclient, recoveredAccount1.addr, assetID);
-    await printAssetHolding(algodclient, recoveredAccount1.addr, assetID);
+    await printCreatedAsset(algodClient, recoveredAccount1.addr, assetID);
+    await printAssetHolding(algodClient, recoveredAccount1.addr, assetID);
     console.log("Account 3 = " + recoveredAccount3.addr);
-    await printAssetHolding(algodclient, recoveredAccount3.addr, assetID);  
+    await printAssetHolding(algodClient, recoveredAccount3.addr, assetID);  
 
     
     // Notice that although the asset was destroyed, the asset id and associated 
@@ -533,20 +392,6 @@ console.log(recoveredAccount3.addr);
     // However, holdings are not deleted automatically -- users still need to close out of the deleted asset.
     // This is necessary for technical reasons because we currently can't have a single transaction touch potentially 
     // thousands of accounts (all the holdings that would need to be deleted).
-
-    // your console/terminal output should look similar to this: 
-    // Transaction: KMSVPDQMVGIASU2ZLKRBSWOQVXR3EOJ4Z4WKS5GTB7MKE4D57L6Q
-    // Transaction KMSVPDQMVGIASU2ZLKRBSWOQVXR3EOJ4Z4WKS5GTB7MKE4D57L6Q confirmed in round 3961877
-    // Asset ID: 2653785
-    // Account 1 = ATTR6RUEHHBHXKUHT4GUOYWNBVDV2GJ5FHUWCSFZLHD55EVKZWOWSM7ABQ
-    // Account 3 = IWR4CLLCN2TIVX2QPVVKVR5ER5OZGMWAV5QB2UIPYMPKBPLJZX4C37C4AA
-    // AssetExample.js: 480
-    // assetholdinginfo = {
-    //     "amount": 0,
-    //     "asset-id": 2653785,
-    //     "creator": "",
-    //     "is-frozen": true
-    // }
 
 })().catch(e => {
     console.log(e);
