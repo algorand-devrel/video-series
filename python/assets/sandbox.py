@@ -1,4 +1,4 @@
-from algosdk.kmd import KMDClient
+from algosdk.kmd import KMDClient 
 
 KMD_ADDRESS = "http://localhost:4002"
 KMD_TOKEN = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
