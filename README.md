@@ -8,13 +8,37 @@ https://www.youtube.com/@algodevs/playlists
 
 # Setup 
 
-TODO:
+Make sure you've installed [algokit](https://github.com/algorandfoundation/algokit-cli) and have the local network running.
 
-for python, install xyz, run abc
+## Python:
 
-for js, install xyz, run abc
+```sh
+cd python
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
 
-see README in each language directory for more
+Then run the scripts like: 
+
+```sh
+python accounts/create_account.py
+```
+
+## JS
+
+```sh
+cd javascript
+npm install
+```
+
+Then run the scripts like:
+
+```sh
+npm run create-account
+```
+
+
 
 # Video Playlists
 
