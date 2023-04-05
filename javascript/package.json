@@ -1,0 +1,19 @@
+{
+  "name": "video-series",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "atomic": "node src/transactions/atomicTransactionComposer.js",
+    "asset": "node src/assets/assetExample.js",
+    "create-account": "node src/accounts/createAccount.js",
+    "restore-account": "node src/accounts/recoverAccount.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "algosdk": "^2.2.0",
+    "buffer": "^6.0.3"
+  }
+}
