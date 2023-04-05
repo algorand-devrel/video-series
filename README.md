@@ -10,7 +10,7 @@ https://www.youtube.com/@algodevs/playlists
 
 Make sure you've installed [algokit](https://github.com/algorandfoundation/algokit-cli) and have the local network running.
 
-## Python:
+## Python
 
 ```sh
 cd python
