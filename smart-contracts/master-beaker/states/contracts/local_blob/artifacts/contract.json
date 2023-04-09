@@ -1,0 +1,25 @@
+{
+    "name": "Local Blob App",
+    "methods": [
+        {
+            "name": "write_local_blob",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "v"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            }
+        },
+        {
+            "name": "read_local_blob",
+            "args": [],
+            "returns": {
+                "type": "string"
+            }
+        }
+    ],
+    "networks": {}
+}

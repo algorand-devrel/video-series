@@ -1,0 +1,25 @@
+{
+    "name": "Local State App",
+    "methods": [
+        {
+            "name": "incr_local_state",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "v"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            }
+        },
+        {
+            "name": "get_local_state",
+            "args": [],
+            "returns": {
+                "type": "uint64"
+            }
+        }
+    ],
+    "networks": {}
+}
