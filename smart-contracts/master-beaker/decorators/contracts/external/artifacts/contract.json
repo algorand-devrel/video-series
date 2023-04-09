@@ -1,0 +1,22 @@
+{
+    "name": "External Example App",
+    "methods": [
+        {
+            "name": "add",
+            "args": [
+                {
+                    "type": "uint8",
+                    "name": "a"
+                },
+                {
+                    "type": "uint8",
+                    "name": "b"
+                }
+            ],
+            "returns": {
+                "type": "uint8"
+            }
+        }
+    ],
+    "networks": {}
+}

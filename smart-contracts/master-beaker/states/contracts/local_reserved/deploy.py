@@ -1,4 +1,4 @@
-from local_reserved import (
+from local_reserved_contract import (
     app,
     set_reserved_local_state_val,
     get_reserved_local_state_val,

@@ -1,4 +1,4 @@
-from local_blob import app, write_local_blob, read_local_blob
+from local_blob_contract import app, write_local_blob, read_local_blob
 from beaker import sandbox, client
 
 app.build().export(

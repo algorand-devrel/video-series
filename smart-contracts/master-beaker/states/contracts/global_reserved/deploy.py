@@ -1,4 +1,4 @@
-from global_reserved_state import (
+from global_reserved_contract import (
     app,
     set_reserved_app_state_val,
     get_reserved_app_state_val,

@@ -1,4 +1,4 @@
-from global_blob import app, write_app_blob, read_app_blob
+from global_blob_contract import app, write_app_blob, read_app_blob
 from beaker import sandbox, client
 
 app.build().export(

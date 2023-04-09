@@ -1,4 +1,4 @@
-from local_state import app, incr_local_state, get_local_state
+from local_state_contract import app, incr_local_state, get_local_state
 from beaker import sandbox, client
 
 app.build().export(

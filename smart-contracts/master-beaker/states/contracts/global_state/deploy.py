@@ -1,4 +1,4 @@
-from global_state import app, set_app_state_val, get_app_state_val
+from global_state_contract import app, set_app_state_val, get_app_state_val
 from beaker import sandbox, client
 
 app.build().export(
