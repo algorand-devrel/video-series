@@ -1,0 +1,91 @@
+{
+    "hints": {
+        "opt_in()void": {
+            "call_config": {
+                "opt_in": "CALL"
+            }
+        },
+        "opt_in(string)void": {
+            "call_config": {
+                "opt_in": "CALL"
+            }
+        },
+        "increment()void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDgKaW50Y2Jsb2NrIDEgMApieXRlY2Jsb2NrIDB4NjM2Zjc1NmU3NCAweDc1NzM2NTcyCnR4biBOdW1BcHBBcmdzCmludGNfMSAvLyAwCj09CmJueiBtYWluX2w4CnR4bmEgQXBwbGljYXRpb25BcmdzIDAKcHVzaGJ5dGVzIDB4MzBjNmQ1OGEgLy8gIm9wdF9pbigpdm9pZCIKPT0KYm56IG1haW5fbDcKdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMApwdXNoYnl0ZXMgMHg5OTI0MDgyYiAvLyAib3B0X2luKHN0cmluZyl2b2lkIgo9PQpibnogbWFpbl9sNgp0eG5hIEFwcGxpY2F0aW9uQXJncyAwCnB1c2hieXRlcyAweDJmYTQ3MzI4IC8vICJpbmNyZW1lbnQoKXZvaWQiCj09CmJueiBtYWluX2w1CmVycgptYWluX2w1Ogp0eG4gT25Db21wbGV0aW9uCmludGNfMSAvLyBOb09wCj09CnR4biBBcHBsaWNhdGlvbklECmludGNfMSAvLyAwCiE9CiYmCmFzc2VydApjYWxsc3ViIGluY3JlbWVudF8yCmludGNfMCAvLyAxCnJldHVybgptYWluX2w2Ogp0eG4gT25Db21wbGV0aW9uCmludGNfMCAvLyBPcHRJbgo9PQp0eG4gQXBwbGljYXRpb25JRAppbnRjXzEgLy8gMAohPQomJgphc3NlcnQKdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQpjYWxsc3ViIG9wdGluXzEKaW50Y18wIC8vIDEKcmV0dXJuCm1haW5fbDc6CnR4biBPbkNvbXBsZXRpb24KaW50Y18wIC8vIE9wdEluCj09CnR4biBBcHBsaWNhdGlvbklECmludGNfMSAvLyAwCiE9CiYmCmFzc2VydApjYWxsc3ViIG9wdGluXzAKaW50Y18wIC8vIDEKcmV0dXJuCm1haW5fbDg6CnR4biBPbkNvbXBsZXRpb24KaW50Y18xIC8vIE5vT3AKPT0KYm56IG1haW5fbDE0CnR4biBPbkNvbXBsZXRpb24KcHVzaGludCAyIC8vIENsb3NlT3V0Cj09CmJueiBtYWluX2wxMwp0eG4gT25Db21wbGV0aW9uCnB1c2hpbnQgNSAvLyBEZWxldGVBcHBsaWNhdGlvbgo9PQpibnogbWFpbl9sMTIKZXJyCm1haW5fbDEyOgp0eG4gQXBwbGljYXRpb25JRAppbnRjXzEgLy8gMAohPQphc3NlcnQKY2FsbHN1YiBkZWxldGVfNAppbnRjXzAgLy8gMQpyZXR1cm4KbWFpbl9sMTM6CnR4biBBcHBsaWNhdGlvbklECmludGNfMSAvLyAwCiE9CmFzc2VydApjYWxsc3ViIGNsb3Nlb3V0XzMKaW50Y18wIC8vIDEKcmV0dXJuCm1haW5fbDE0Ogp0eG4gQXBwbGljYXRpb25JRAppbnRjXzEgLy8gMAo9PQphc3NlcnQKaW50Y18wIC8vIDEKcmV0dXJuCgovLyBvcHRfaW4Kb3B0aW5fMDoKcHJvdG8gMCAwCnR4biBTZW5kZXIKYnl0ZWNfMCAvLyAiY291bnQiCmludGNfMSAvLyAwCmFwcF9sb2NhbF9wdXQKdHhuIFNlbmRlcgpieXRlY18xIC8vICJ1c2VyIgpwdXNoYnl0ZXMgMHggLy8gIiIKYXBwX2xvY2FsX3B1dApyZXRzdWIKCi8vIG9wdF9pbgpvcHRpbl8xOgpwcm90byAxIDAKdHhuIFNlbmRlcgpieXRlY18xIC8vICJ1c2VyIgpmcmFtZV9kaWcgLTEKZXh0cmFjdCAyIDAKYXBwX2xvY2FsX3B1dApyZXRzdWIKCi8vIGluY3JlbWVudAppbmNyZW1lbnRfMjoKcHJvdG8gMCAwCnR4biBTZW5kZXIKZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbklECmFwcF9vcHRlZF9pbgovLyB1bmF1dGhvcml6ZWQKYXNzZXJ0CnR4biBTZW5kZXIKYnl0ZWNfMCAvLyAiY291bnQiCnR4biBTZW5kZXIKYnl0ZWNfMCAvLyAiY291bnQiCmFwcF9sb2NhbF9nZXQKaW50Y18wIC8vIDEKKwphcHBfbG9jYWxfcHV0CnJldHN1YgoKLy8gY2xvc2Vfb3V0CmNsb3Nlb3V0XzM6CnByb3RvIDAgMAppbnRjXzAgLy8gMQpyZXR1cm4KCi8vIGRlbGV0ZQpkZWxldGVfNDoKcHJvdG8gMCAwCnR4biBTZW5kZXIKZ2xvYmFsIENyZWF0b3JBZGRyZXNzCj09Ci8vIHVuYXV0aG9yaXplZAphc3NlcnQKaW50Y18wIC8vIDEKcmV0dXJu",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDgKcHVzaGludCAwIC8vIDAKcmV0dXJu"
+    },
+    "state": {
+        "global": {
+            "num_byte_slices": 0,
+            "num_uints": 0
+        },
+        "local": {
+            "num_byte_slices": 1,
+            "num_uints": 1
+        }
+    },
+    "schema": {
+        "global": {
+            "declared": {},
+            "reserved": {}
+        },
+        "local": {
+            "declared": {
+                "count": {
+                    "type": "uint64",
+                    "key": "count",
+                    "descr": "number of counts"
+                },
+                "user": {
+                    "type": "bytes",
+                    "key": "user",
+                    "descr": "Username"
+                }
+            },
+            "reserved": {}
+        }
+    },
+    "contract": {
+        "name": "User Counter Example App",
+        "methods": [
+            {
+                "name": "opt_in",
+                "args": [],
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "opt_in",
+                "args": [
+                    {
+                        "type": "string",
+                        "name": "username"
+                    }
+                ],
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "increment",
+                "args": [],
+                "returns": {
+                    "type": "void"
+                }
+            }
+        ],
+        "networks": {}
+    },
+    "bare_call_config": {
+        "close_out": "CALL",
+        "delete_application": "CALL",
+        "no_op": "CREATE"
+    }
+}

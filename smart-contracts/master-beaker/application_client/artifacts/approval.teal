@@ -1,0 +1,152 @@
+#pragma version 8
+intcblock 1 0
+bytecblock 0x636f756e74 0x75736572
+txn NumAppArgs
+intc_1 // 0
+==
+bnz main_l8
+txna ApplicationArgs 0
+pushbytes 0x30c6d58a // "opt_in()void"
+==
+bnz main_l7
+txna ApplicationArgs 0
+pushbytes 0x9924082b // "opt_in(string)void"
+==
+bnz main_l6
+txna ApplicationArgs 0
+pushbytes 0x2fa47328 // "increment()void"
+==
+bnz main_l5
+err
+main_l5:
+txn OnCompletion
+intc_1 // NoOp
+==
+txn ApplicationID
+intc_1 // 0
+!=
+&&
+assert
+callsub increment_2
+intc_0 // 1
+return
+main_l6:
+txn OnCompletion
+intc_0 // OptIn
+==
+txn ApplicationID
+intc_1 // 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+callsub optin_1
+intc_0 // 1
+return
+main_l7:
+txn OnCompletion
+intc_0 // OptIn
+==
+txn ApplicationID
+intc_1 // 0
+!=
+&&
+assert
+callsub optin_0
+intc_0 // 1
+return
+main_l8:
+txn OnCompletion
+intc_1 // NoOp
+==
+bnz main_l14
+txn OnCompletion
+pushint 2 // CloseOut
+==
+bnz main_l13
+txn OnCompletion
+pushint 5 // DeleteApplication
+==
+bnz main_l12
+err
+main_l12:
+txn ApplicationID
+intc_1 // 0
+!=
+assert
+callsub delete_4
+intc_0 // 1
+return
+main_l13:
+txn ApplicationID
+intc_1 // 0
+!=
+assert
+callsub closeout_3
+intc_0 // 1
+return
+main_l14:
+txn ApplicationID
+intc_1 // 0
+==
+assert
+intc_0 // 1
+return
+
+// opt_in
+optin_0:
+proto 0 0
+txn Sender
+bytec_0 // "count"
+intc_1 // 0
+app_local_put
+txn Sender
+bytec_1 // "user"
+pushbytes 0x // ""
+app_local_put
+retsub
+
+// opt_in
+optin_1:
+proto 1 0
+txn Sender
+bytec_1 // "user"
+frame_dig -1
+extract 2 0
+app_local_put
+retsub
+
+// increment
+increment_2:
+proto 0 0
+txn Sender
+global CurrentApplicationID
+app_opted_in
+// unauthorized
+assert
+txn Sender
+bytec_0 // "count"
+txn Sender
+bytec_0 // "count"
+app_local_get
+intc_0 // 1
++
+app_local_put
+retsub
+
+// close_out
+closeout_3:
+proto 0 0
+intc_0 // 1
+return
+
+// delete
+delete_4:
+proto 0 0
+txn Sender
+global CreatorAddress
+==
+// unauthorized
+assert
+intc_0 // 1
+return
