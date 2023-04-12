@@ -21,6 +21,5 @@ print(
     """
 )
 
-
 return_value = app_client.call(add, a=10, b=5).return_value
 print(return_value)
