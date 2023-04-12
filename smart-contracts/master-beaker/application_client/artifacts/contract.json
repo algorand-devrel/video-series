@@ -3,13 +3,6 @@
     "methods": [
         {
             "name": "opt_in",
-            "args": [],
-            "returns": {
-                "type": "void"
-            }
-        },
-        {
-            "name": "opt_in",
             "args": [
                 {
                     "type": "string",

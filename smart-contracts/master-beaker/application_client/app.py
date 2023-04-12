@@ -2,9 +2,8 @@ from beaker import (
     Application,
     Authorize,
     LocalStateValue,
-    unconditional_opt_in_approval,
 )
-from pyteal import Approve, Expr, Global, Int, TealType, abi
+from pyteal import Approve, Expr, Global, Int, Seq, TealType, abi
 
 
 class UserCounter:
@@ -20,14 +19,12 @@ class UserCounter:
     )
 
 
-app = Application("User Counter Example App", state=UserCounter).apply(
-    unconditional_opt_in_approval, initialize_local_state=True, bare=False
-)
+app = Application("User Counter Example App", state=UserCounter)
 
 
 @app.opt_in
 def opt_in(username: abi.String) -> Expr:
-    return app.state.user.set(username.get())
+    return Seq(app.initialize_local_state(), app.state.user.set(username.get()))
 
 
 @app.external(authorize=Authorize.opted_in())

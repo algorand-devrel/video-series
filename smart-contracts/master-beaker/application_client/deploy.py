@@ -22,7 +22,7 @@ print(f"app state: {app_client1.get_application_account_info()} \n")
 app_client1.fund(1 * consts.algo)
 print(f"app account state: {app_client1.get_application_account_info()} \n")
 
-app_client1.opt_in()
+app_client1.opt_in(username="Chris")
 # app_client1.opt_in(username="Chris")
 print("Chris opted in \n")
 
