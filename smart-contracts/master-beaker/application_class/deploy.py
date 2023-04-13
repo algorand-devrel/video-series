@@ -1,4 +1,4 @@
-from app import app, read_state
+from contract import app, read_state
 from beaker import sandbox, client
 
 app.build().export("./artifacts")

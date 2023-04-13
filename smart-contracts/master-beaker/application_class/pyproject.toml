@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "application-class"
+name = "application_class"
 version = "0.1.0"
 description = "Algorand smart contracts"
 authors = ["Chris Kim <chris.kim@algorand.foundation>"]
