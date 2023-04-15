@@ -1,5 +1,5 @@
-from global_state_contract import app, set_app_state_val, get_app_state_val
-from beaker import sandbox, client
+from beaker import client, sandbox
+from global_state_deploy import app, get_app_state_val, set_app_state_val
 
 app.build().export(
     "./smart-contracts/master-beaker/states/contracts/global_state/artifacts"

@@ -1,5 +1,5 @@
 from beaker import Application, LocalStateValue, unconditional_opt_in_approval
-from pyteal import abi, TealType, Int, Txn
+from pyteal import Int, TealType, Txn, abi
 
 
 class LocalState:
