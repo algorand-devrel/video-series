@@ -6,7 +6,7 @@ Sample code used in the Algorand Developers video series
 https://www.youtube.com/@algodevs/playlists
 
 
-# Setup 
+## Setup 
 
 1. Install [algokit](https://github.com/algorandfoundation/algokit-cli) 
 2. Run Docker
@@ -46,7 +46,13 @@ npm run create-account
 
 ### Master Beaker
 
-Open project folders individually.
+Open project folders individually
+
+```sh
+cd smart-contracts/master-beaker/what-is-beaker
+```
+
+Then setup your development environment with:
 
 ```sh
 algokit bootstrap all
@@ -55,12 +61,11 @@ algokit bootstrap all
 Then run deploy scripts like:
 
 ```sh
-python3 deploy.py
+cd beaker-calc
+python3 bkr_deploy.py
 ```
 
 ### Master PyTeal
-
-Open vscode at `master-pyteal` folder level.
 
 ```sh
 cd smart-contracts/master-pyteal
