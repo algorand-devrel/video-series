@@ -1,0 +1,34 @@
+{
+    "name": "OnComplete App",
+    "methods": [
+        {
+            "name": "opt_in",
+            "args": [],
+            "returns": {
+                "type": "void"
+            }
+        },
+        {
+            "name": "close_out",
+            "args": [],
+            "returns": {
+                "type": "void"
+            }
+        },
+        {
+            "name": "update",
+            "args": [],
+            "returns": {
+                "type": "void"
+            }
+        },
+        {
+            "name": "delete",
+            "args": [],
+            "returns": {
+                "type": "void"
+            }
+        }
+    ],
+    "networks": {}
+}

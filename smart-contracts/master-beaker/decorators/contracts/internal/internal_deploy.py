@@ -1,8 +1,8 @@
-from external_contract import app, add
+from internal_contract import app, add, internal_add
 from beaker import sandbox, client
 
 app.build().export(
-    "./smart-contracts/master-beaker/decorators/contracts/external/artifacts"
+    "./artifacts"
 )
 
 accounts = sandbox.kmd.get_accounts()
@@ -17,6 +17,11 @@ app_client = client.ApplicationClient(
 
 app_id, app_addr, txid = app_client.create()
 print("App ID: ", app_id)
+
+try:
+    app_client.call(internal_add, a=1, b=2)
+except:
+    print("You cannot call internal Subroutine methods!")
 
 result = app_client.call(add, a=1, b=2)
 
