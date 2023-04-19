@@ -56,6 +56,7 @@ Then setup your development environment with:
 
 ```sh
 algokit bootstrap all
+source .venv/bin/activate
 ```
 
 Then run deploy scripts like:
