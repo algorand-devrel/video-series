@@ -1,13 +1,5 @@
 {
     "name": "SimpleApp",
-    "methods": [
-        {
-            "name": "read_state",
-            "args": [],
-            "returns": {
-                "type": "uint64"
-            }
-        }
-    ],
+    "methods": [],
     "networks": {}
 }
