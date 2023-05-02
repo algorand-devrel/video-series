@@ -1,5 +1,5 @@
 from beaker import Application, LocalStateValue, unconditional_opt_in_approval
-from pyteal import Int, TealType, Txn, abi
+from pyteal import Expr, Int, TealType, Txn, abi
 
 
 class LocalState:
@@ -16,10 +16,10 @@ app = Application("Local State App", state=LocalState()).apply(
 
 
 @app.external
-def incr_local_state(v: abi.Uint64):
-    return app.state.count.increment(v.get())
+def incr_local_state(v: abi.Uint64) -> Expr:
+    return app.state.count[Txn.sender()].increment(v.get())
 
 
 @app.external(read_only=True)
-def get_local_state(*, output: abi.Uint64):
+def get_local_state(*, output: abi.Uint64) -> Expr:
     return output.set(app.state.count[Txn.sender()])

@@ -1,5 +1,5 @@
 from beaker import Application, ReservedGlobalStateValue
-from pyteal import abi, TealType
+from pyteal import Expr, TealType, abi
 
 
 class ReservedGlobalState:
@@ -14,10 +14,10 @@ app = Application("ReservedGlobalStateApp", state=ReservedGlobalState())
 
 
 @app.external
-def set_reserved_app_state_val(k: abi.Uint64, v: abi.String):
+def set_reserved_app_state_val(k: abi.Uint64, v: abi.String) -> Expr:
     return app.state.names[k].set(v.get())
 
 
 @app.external(read_only=True)
-def get_reserved_app_state_val(k: abi.Uint64, *, output: abi.String):
+def get_reserved_app_state_val(k: abi.Uint64, *, output: abi.String) -> Expr:
     return output.set(app.state.names[k])

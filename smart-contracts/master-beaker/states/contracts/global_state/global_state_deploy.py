@@ -1,9 +1,7 @@
 from beaker import client, sandbox
-from global_state_deploy import app, get_app_state_val, set_app_state_val
+from global_state_contract import app, get_app_state_val, set_app_state_val
 
-app.build().export(
-    "./smart-contracts/master-beaker/states/contracts/global_state/artifacts"
-)
+app.build().export("./artifacts")
 
 accounts = sandbox.kmd.get_accounts()
 sender = accounts[0]

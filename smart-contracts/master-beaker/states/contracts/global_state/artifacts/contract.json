@@ -1,0 +1,25 @@
+{
+    "name": "GlobalStateValue",
+    "methods": [
+        {
+            "name": "set_app_state_val",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "v"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            }
+        },
+        {
+            "name": "get_app_state_val",
+            "args": [],
+            "returns": {
+                "type": "string"
+            }
+        }
+    ],
+    "networks": {}
+}

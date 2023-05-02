@@ -1,5 +1,5 @@
 from beaker import Application, ReservedLocalStateValue, unconditional_opt_in_approval
-from pyteal import abi, TealType, Txn
+from pyteal import Expr, TealType, Txn, abi
 
 
 class ReservedLocalState:
@@ -16,10 +16,10 @@ app = Application("Reserved Local App", state=ReservedLocalState()).apply(
 
 
 @app.external
-def set_reserved_local_state_val(k: abi.Uint8, v: abi.String):
+def set_reserved_local_state_val(k: abi.Uint8, v: abi.String) -> Expr:
     return app.state.favorite_food[k][Txn.sender()].set(v.get())
 
 
 @app.external(read_only=True)
-def get_reserved_local_state_val(k: abi.Uint8, *, output: abi.String):
+def get_reserved_local_state_val(k: abi.Uint8, *, output: abi.String) -> Expr:
     return output.set(app.state.favorite_food[k][Txn.sender()])
