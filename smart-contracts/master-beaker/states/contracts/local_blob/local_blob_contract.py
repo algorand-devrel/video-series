@@ -1,5 +1,5 @@
 from beaker import Application, LocalStateBlob, unconditional_opt_in_approval
-from pyteal import abi, Int
+from pyteal import Expr, Int, abi
 
 
 class LocalBlob:
@@ -12,12 +12,12 @@ app = Application("Local Blob App", state=LocalBlob()).apply(
 
 
 @app.external
-def write_local_blob(v: abi.String):
+def write_local_blob(v: abi.String) -> Expr:
     return app.state.local_blob.write(Int(0), v.get())
 
 
 @app.external
-def read_local_blob(*, output: abi.String):
+def read_local_blob(*, output: abi.String) -> Expr:
     return output.set(
         app.state.local_blob.read(Int(0), app.state.local_blob.blob.max_bytes - Int(1))
     )
