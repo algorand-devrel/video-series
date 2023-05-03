@@ -1,9 +1,7 @@
-from local_state_contract import app, incr_local_state, get_local_state
-from beaker import sandbox, client
+from beaker import client, sandbox
+from local_state_contract import app, get_local_state, incr_local_state
 
-app.build().export(
-    "./smart-contracts/master-beaker/states/contracts/local_state/artifacts"
-)
+app.build().export("./artifacts")
 
 accounts = sandbox.kmd.get_accounts()
 sender = accounts[0]
