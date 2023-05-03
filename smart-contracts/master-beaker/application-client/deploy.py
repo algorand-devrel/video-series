@@ -1,6 +1,6 @@
 from beaker import client, consts, sandbox
 
-from app import app, increment
+from contract import app, increment
 
 app.build().export("./artifacts")
 

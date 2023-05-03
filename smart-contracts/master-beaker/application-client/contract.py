@@ -19,7 +19,7 @@ class UserCounter:
     )
 
 
-app = Application("User Counter Example App", state=UserCounter)
+app = Application("User Counter Example App", state=UserCounter())
 
 
 @app.opt_in
