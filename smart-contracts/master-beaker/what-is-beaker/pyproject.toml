@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "what-is-beaker"
+version = "0.1.0"
+description = "Algorand smart contracts"
+authors = ["Chris Kim <chris.kim@algorand.foundation>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+beaker-pyteal = "^1.0.0"
+
+[tool.poetry.group.dev.dependencies]
+pip-audit = "*"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+
+
+
+

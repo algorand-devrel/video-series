@@ -1,0 +1,73 @@
+{
+    "hints": {
+        "set_app_state_val(string)void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "get_app_state_val()string": {
+            "read_only": true,
+            "call_config": {
+                "no_op": "CALL"
+            }
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDgKaW50Y2Jsb2NrIDAgMQpieXRlY2Jsb2NrIDB4NmQ3OTVmNjQ2NTczNjM3MjY5NzA3NDY5NmY2ZQp0eG4gTnVtQXBwQXJncwppbnRjXzAgLy8gMAo9PQpibnogbWFpbl9sNgp0eG5hIEFwcGxpY2F0aW9uQXJncyAwCnB1c2hieXRlcyAweDI5ZDk0NzBmIC8vICJzZXRfYXBwX3N0YXRlX3ZhbChzdHJpbmcpdm9pZCIKPT0KYm56IG1haW5fbDUKdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMApwdXNoYnl0ZXMgMHhmNGMyMjU2NiAvLyAiZ2V0X2FwcF9zdGF0ZV92YWwoKXN0cmluZyIKPT0KYm56IG1haW5fbDQKZXJyCm1haW5fbDQ6CnR4biBPbkNvbXBsZXRpb24KaW50Y18wIC8vIE5vT3AKPT0KdHhuIEFwcGxpY2F0aW9uSUQKaW50Y18wIC8vIDAKIT0KJiYKYXNzZXJ0CmNhbGxzdWIgZ2V0YXBwc3RhdGV2YWxfMgpzdG9yZSAwCnB1c2hieXRlcyAweDE1MWY3Yzc1IC8vIDB4MTUxZjdjNzUKbG9hZCAwCmNvbmNhdApsb2cKaW50Y18xIC8vIDEKcmV0dXJuCm1haW5fbDU6CnR4biBPbkNvbXBsZXRpb24KaW50Y18wIC8vIE5vT3AKPT0KdHhuIEFwcGxpY2F0aW9uSUQKaW50Y18wIC8vIDAKIT0KJiYKYXNzZXJ0CnR4bmEgQXBwbGljYXRpb25BcmdzIDEKY2FsbHN1YiBzZXRhcHBzdGF0ZXZhbF8xCmludGNfMSAvLyAxCnJldHVybgptYWluX2w2Ogp0eG4gT25Db21wbGV0aW9uCmludGNfMCAvLyBOb09wCj09CmJueiBtYWluX2w4CmVycgptYWluX2w4Ogp0eG4gQXBwbGljYXRpb25JRAppbnRjXzAgLy8gMAo9PQphc3NlcnQKY2FsbHN1YiBjcmVhdGVfMAppbnRjXzEgLy8gMQpyZXR1cm4KCi8vIGNyZWF0ZQpjcmVhdGVfMDoKcHJvdG8gMCAwCmludGNfMCAvLyAwCmJ5dGVjXzAgLy8gIm15X2Rlc2NyaXB0aW9uIgphcHBfZ2xvYmFsX2dldF9leApzdG9yZSAyCnN0b3JlIDEKbG9hZCAyCiEKYXNzZXJ0CmJ5dGVjXzAgLy8gIm15X2Rlc2NyaXB0aW9uIgpwdXNoYnl0ZXMgMHg0MzY4NzI2OTczMjA2OTczMjA3NDY4NjUyMDYyNjU3Mzc0MjEgLy8gIkNocmlzIGlzIHRoZSBiZXN0ISIKYXBwX2dsb2JhbF9wdXQKcmV0c3ViCgovLyBzZXRfYXBwX3N0YXRlX3ZhbApzZXRhcHBzdGF0ZXZhbF8xOgpwcm90byAxIDAKaW50Y18wIC8vIDAKYnl0ZWNfMCAvLyAibXlfZGVzY3JpcHRpb24iCmFwcF9nbG9iYWxfZ2V0X2V4CnN0b3JlIDQKc3RvcmUgMwpsb2FkIDQKIQphc3NlcnQKYnl0ZWNfMCAvLyAibXlfZGVzY3JpcHRpb24iCmZyYW1lX2RpZyAtMQpleHRyYWN0IDIgMAphcHBfZ2xvYmFsX3B1dApyZXRzdWIKCi8vIGdldF9hcHBfc3RhdGVfdmFsCmdldGFwcHN0YXRldmFsXzI6CnByb3RvIDAgMQpwdXNoYnl0ZXMgMHggLy8gIiIKYnl0ZWNfMCAvLyAibXlfZGVzY3JpcHRpb24iCmFwcF9nbG9iYWxfZ2V0CmZyYW1lX2J1cnkgMApmcmFtZV9kaWcgMApsZW4KaXRvYgpleHRyYWN0IDYgMApmcmFtZV9kaWcgMApjb25jYXQKZnJhbWVfYnVyeSAwCnJldHN1Yg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDgKcHVzaGludCAwIC8vIDAKcmV0dXJu"
+    },
+    "state": {
+        "global": {
+            "num_byte_slices": 1,
+            "num_uints": 0
+        },
+        "local": {
+            "num_byte_slices": 0,
+            "num_uints": 0
+        }
+    },
+    "schema": {
+        "global": {
+            "declared": {
+                "my_description": {
+                    "type": "bytes",
+                    "key": "my_description",
+                    "descr": ""
+                }
+            },
+            "reserved": {}
+        },
+        "local": {
+            "declared": {},
+            "reserved": {}
+        }
+    },
+    "contract": {
+        "name": "GlobalStateValue",
+        "methods": [
+            {
+                "name": "set_app_state_val",
+                "args": [
+                    {
+                        "type": "string",
+                        "name": "v"
+                    }
+                ],
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "get_app_state_val",
+                "args": [],
+                "returns": {
+                    "type": "string"
+                }
+            }
+        ],
+        "networks": {}
+    },
+    "bare_call_config": {
+        "no_op": "CREATE"
+    }
+}

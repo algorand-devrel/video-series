@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    
+    "bungcip.better-toml",
+    "editorconfig.editorconfig",
+    "matangover.mypy",
+    "runarsf.platform-settings"
+  ]
+}

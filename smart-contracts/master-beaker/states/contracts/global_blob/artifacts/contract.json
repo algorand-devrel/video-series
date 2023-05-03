@@ -1,0 +1,29 @@
+{
+    "name": "Global Blob App",
+    "methods": [
+        {
+            "name": "write_app_blob",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "start"
+                },
+                {
+                    "type": "string",
+                    "name": "v"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            }
+        },
+        {
+            "name": "read_app_blob",
+            "args": [],
+            "returns": {
+                "type": "string"
+            }
+        }
+    ],
+    "networks": {}
+}

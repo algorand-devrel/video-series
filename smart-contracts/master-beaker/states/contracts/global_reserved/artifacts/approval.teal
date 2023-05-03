@@ -1,0 +1,103 @@
+#pragma version 8
+intcblock 0 1
+txn NumAppArgs
+intc_0 // 0
+==
+bnz main_l6
+txna ApplicationArgs 0
+pushbytes 0xc93716a7 // "set_reserved_app_state_val(uint64,string)void"
+==
+bnz main_l5
+txna ApplicationArgs 0
+pushbytes 0xf1c014df // "get_reserved_app_state_val(uint64)string"
+==
+bnz main_l4
+err
+main_l4:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+btoi
+callsub getreservedappstateval_2
+store 2
+pushbytes 0x151f7c75 // 0x151f7c75
+load 2
+concat
+log
+intc_1 // 1
+return
+main_l5:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+btoi
+store 0
+txna ApplicationArgs 2
+store 1
+load 0
+load 1
+callsub setreservedappstateval_1
+intc_1 // 1
+return
+main_l6:
+txn OnCompletion
+intc_0 // NoOp
+==
+bnz main_l8
+err
+main_l8:
+txn ApplicationID
+intc_0 // 0
+==
+assert
+intc_1 // 1
+return
+
+// prefix_key_gen
+prefixkeygen_0:
+proto 1 1
+pushbytes 0x6e616d6573 // "names"
+frame_dig -1
+concat
+retsub
+
+// set_reserved_app_state_val
+setreservedappstateval_1:
+proto 2 0
+frame_dig -2
+itob
+callsub prefixkeygen_0
+frame_dig -1
+extract 2 0
+app_global_put
+retsub
+
+// get_reserved_app_state_val
+getreservedappstateval_2:
+proto 1 1
+pushbytes 0x // ""
+frame_dig -1
+itob
+callsub prefixkeygen_0
+app_global_get
+frame_bury 0
+frame_dig 0
+len
+itob
+extract 6 0
+frame_dig 0
+concat
+frame_bury 0
+retsub

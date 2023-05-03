@@ -6,9 +6,13 @@ Sample code used in the Algorand Developers video series
 https://www.youtube.com/@algodevs/playlists
 
 
-# Setup 
+## Setup 
 
-Make sure you've installed [algokit](https://github.com/algorandfoundation/algokit-cli) and have the local network running.
+1. Install [algokit](https://github.com/algorandfoundation/algokit-cli) 
+2. Run Docker
+3. Launch Algorand localnet with `algokit localnet start`
+
+For a detailed setup guide, watch [Development Environment Setup video](https://youtube.com/playlist?list=PLwRyHoehE434xvOtN6iwwGDHcZuyad0SN)
 
 ## Python
 
@@ -38,7 +42,43 @@ Then run the scripts like:
 npm run create-account
 ```
 
+## Smart Contracts
 
+### Master Beaker
+
+Open project folders individually
+
+```sh
+cd smart-contracts/master-beaker/what-is-beaker
+```
+
+Then setup your development environment with:
+
+```sh
+algokit bootstrap all
+source .venv/bin/activate
+```
+
+Then run deploy scripts like:
+
+```sh
+cd beaker-calc
+python3 bkr_deploy.py
+```
+
+### Master PyTeal
+
+```sh
+cd smart-contracts/master-pyteal
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Then run the scripts like: 
+```sh
+python3 what_is_pyteal/counter.py
+```
 
 # Video Playlists
 

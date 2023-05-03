@@ -1,0 +1,34 @@
+{
+    "name": "Reserved Local App",
+    "methods": [
+        {
+            "name": "set_reserved_local_state_val",
+            "args": [
+                {
+                    "type": "uint8",
+                    "name": "k"
+                },
+                {
+                    "type": "string",
+                    "name": "v"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            }
+        },
+        {
+            "name": "get_reserved_local_state_val",
+            "args": [
+                {
+                    "type": "uint8",
+                    "name": "k"
+                }
+            ],
+            "returns": {
+                "type": "string"
+            }
+        }
+    ],
+    "networks": {}
+}

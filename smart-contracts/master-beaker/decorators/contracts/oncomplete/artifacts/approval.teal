@@ -1,0 +1,113 @@
+#pragma version 8
+intcblock 1 0
+txn NumAppArgs
+intc_1 // 0
+==
+bnz main_l10
+txna ApplicationArgs 0
+pushbytes 0x30c6d58a // "opt_in()void"
+==
+bnz main_l9
+txna ApplicationArgs 0
+pushbytes 0x1658aa2f // "close_out()void"
+==
+bnz main_l8
+txna ApplicationArgs 0
+pushbytes 0xa0e81872 // "update()void"
+==
+bnz main_l7
+txna ApplicationArgs 0
+pushbytes 0x24378d3c // "delete()void"
+==
+bnz main_l6
+err
+main_l6:
+txn OnCompletion
+pushint 5 // DeleteApplication
+==
+txn ApplicationID
+intc_1 // 0
+!=
+&&
+assert
+callsub delete_3
+intc_0 // 1
+return
+main_l7:
+txn OnCompletion
+pushint 4 // UpdateApplication
+==
+txn ApplicationID
+intc_1 // 0
+!=
+&&
+assert
+callsub update_2
+intc_0 // 1
+return
+main_l8:
+txn OnCompletion
+pushint 2 // CloseOut
+==
+txn ApplicationID
+intc_1 // 0
+!=
+&&
+assert
+callsub closeout_1
+intc_0 // 1
+return
+main_l9:
+txn OnCompletion
+intc_0 // OptIn
+==
+txn ApplicationID
+intc_1 // 0
+!=
+&&
+assert
+callsub optin_0
+intc_0 // 1
+return
+main_l10:
+txn OnCompletion
+intc_1 // NoOp
+==
+bnz main_l12
+err
+main_l12:
+txn ApplicationID
+intc_1 // 0
+==
+assert
+intc_0 // 1
+return
+
+// opt_in
+optin_0:
+proto 0 0
+intc_0 // 1
+return
+
+// close_out
+closeout_1:
+proto 0 0
+intc_1 // 0
+return
+
+// update
+update_2:
+proto 0 0
+intc_0 // 1
+return
+
+// delete
+delete_3:
+proto 0 0
+txn Sender
+global CreatorAddress
+==
+// unauthorized
+assert
+intc_0 // 1
+return

@@ -1,0 +1,77 @@
+#pragma version 8
+txn NumAppArgs
+int 0
+==
+bnz main_l4
+txna ApplicationArgs 0
+method "add(uint64,uint64)uint64"
+==
+bnz main_l3
+err
+main_l3:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+btoi
+store 0
+txna ApplicationArgs 2
+btoi
+store 1
+load 0
+load 1
+callsub add_0
+store 2
+byte 0x151f7c75
+load 2
+itob
+concat
+log
+int 1
+return
+main_l4:
+txn OnCompletion
+int NoOp
+==
+bnz main_l10
+txn OnCompletion
+int UpdateApplication
+==
+bnz main_l9
+txn OnCompletion
+int DeleteApplication
+==
+bnz main_l8
+err
+main_l8:
+txn Sender
+global CreatorAddress
+==
+return
+main_l9:
+txn Sender
+global CreatorAddress
+==
+return
+main_l10:
+txn ApplicationID
+int 0
+==
+assert
+int 1
+return
+
+// add
+add_0:
+proto 2 1
+int 0
+frame_dig -2
+frame_dig -1
++
+frame_bury 0
+retsub

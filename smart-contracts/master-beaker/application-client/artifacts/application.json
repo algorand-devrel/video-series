@@ -1,0 +1,79 @@
+{
+    "hints": {
+        "opt_in(string)void": {
+            "call_config": {
+                "opt_in": "CALL"
+            }
+        },
+        "increment()void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDgKaW50Y2Jsb2NrIDAgMQpieXRlY2Jsb2NrIDB4NjM2Zjc1NmU3NCAweDc1NzM2NTcyCnR4biBOdW1BcHBBcmdzCmludGNfMCAvLyAwCj09CmJueiBtYWluX2w2CnR4bmEgQXBwbGljYXRpb25BcmdzIDAKcHVzaGJ5dGVzIDB4OTkyNDA4MmIgLy8gIm9wdF9pbihzdHJpbmcpdm9pZCIKPT0KYm56IG1haW5fbDUKdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMApwdXNoYnl0ZXMgMHgyZmE0NzMyOCAvLyAiaW5jcmVtZW50KCl2b2lkIgo9PQpibnogbWFpbl9sNAplcnIKbWFpbl9sNDoKdHhuIE9uQ29tcGxldGlvbgppbnRjXzAgLy8gTm9PcAo9PQp0eG4gQXBwbGljYXRpb25JRAppbnRjXzAgLy8gMAohPQomJgphc3NlcnQKY2FsbHN1YiBpbmNyZW1lbnRfMQppbnRjXzEgLy8gMQpyZXR1cm4KbWFpbl9sNToKdHhuIE9uQ29tcGxldGlvbgppbnRjXzEgLy8gT3B0SW4KPT0KdHhuIEFwcGxpY2F0aW9uSUQKaW50Y18wIC8vIDAKIT0KJiYKYXNzZXJ0CnR4bmEgQXBwbGljYXRpb25BcmdzIDEKY2FsbHN1YiBvcHRpbl8wCmludGNfMSAvLyAxCnJldHVybgptYWluX2w2Ogp0eG4gT25Db21wbGV0aW9uCmludGNfMCAvLyBOb09wCj09CmJueiBtYWluX2wxMgp0eG4gT25Db21wbGV0aW9uCnB1c2hpbnQgMiAvLyBDbG9zZU91dAo9PQpibnogbWFpbl9sMTEKdHhuIE9uQ29tcGxldGlvbgpwdXNoaW50IDUgLy8gRGVsZXRlQXBwbGljYXRpb24KPT0KYm56IG1haW5fbDEwCmVycgptYWluX2wxMDoKdHhuIEFwcGxpY2F0aW9uSUQKaW50Y18wIC8vIDAKIT0KYXNzZXJ0CmNhbGxzdWIgZGVsZXRlXzMKaW50Y18xIC8vIDEKcmV0dXJuCm1haW5fbDExOgp0eG4gQXBwbGljYXRpb25JRAppbnRjXzAgLy8gMAohPQphc3NlcnQKY2FsbHN1YiBjbG9zZW91dF8yCmludGNfMSAvLyAxCnJldHVybgptYWluX2wxMjoKdHhuIEFwcGxpY2F0aW9uSUQKaW50Y18wIC8vIDAKPT0KYXNzZXJ0CmludGNfMSAvLyAxCnJldHVybgoKLy8gb3B0X2luCm9wdGluXzA6CnByb3RvIDEgMAp0eG4gU2VuZGVyCmJ5dGVjXzAgLy8gImNvdW50IgppbnRjXzAgLy8gMAphcHBfbG9jYWxfcHV0CnR4biBTZW5kZXIKYnl0ZWNfMSAvLyAidXNlciIKcHVzaGJ5dGVzIDB4IC8vICIiCmFwcF9sb2NhbF9wdXQKdHhuIFNlbmRlcgpieXRlY18xIC8vICJ1c2VyIgpmcmFtZV9kaWcgLTEKZXh0cmFjdCAyIDAKYXBwX2xvY2FsX3B1dApyZXRzdWIKCi8vIGluY3JlbWVudAppbmNyZW1lbnRfMToKcHJvdG8gMCAwCnR4biBTZW5kZXIKZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbklECmFwcF9vcHRlZF9pbgovLyB1bmF1dGhvcml6ZWQKYXNzZXJ0CnR4biBTZW5kZXIKYnl0ZWNfMCAvLyAiY291bnQiCnR4biBTZW5kZXIKYnl0ZWNfMCAvLyAiY291bnQiCmFwcF9sb2NhbF9nZXQKaW50Y18xIC8vIDEKKwphcHBfbG9jYWxfcHV0CnJldHN1YgoKLy8gY2xvc2Vfb3V0CmNsb3Nlb3V0XzI6CnByb3RvIDAgMAppbnRjXzEgLy8gMQpyZXR1cm4KCi8vIGRlbGV0ZQpkZWxldGVfMzoKcHJvdG8gMCAwCnR4biBTZW5kZXIKZ2xvYmFsIENyZWF0b3JBZGRyZXNzCj09Ci8vIHVuYXV0aG9yaXplZAphc3NlcnQKaW50Y18xIC8vIDEKcmV0dXJu",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDgKcHVzaGludCAwIC8vIDAKcmV0dXJu"
+    },
+    "state": {
+        "global": {
+            "num_byte_slices": 0,
+            "num_uints": 0
+        },
+        "local": {
+            "num_byte_slices": 1,
+            "num_uints": 1
+        }
+    },
+    "schema": {
+        "global": {
+            "declared": {},
+            "reserved": {}
+        },
+        "local": {
+            "declared": {
+                "count": {
+                    "type": "uint64",
+                    "key": "count",
+                    "descr": "number of counts"
+                },
+                "user": {
+                    "type": "bytes",
+                    "key": "user",
+                    "descr": "Username"
+                }
+            },
+            "reserved": {}
+        }
+    },
+    "contract": {
+        "name": "User Counter Example App",
+        "methods": [
+            {
+                "name": "opt_in",
+                "args": [
+                    {
+                        "type": "string",
+                        "name": "username"
+                    }
+                ],
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "increment",
+                "args": [],
+                "returns": {
+                    "type": "void"
+                }
+            }
+        ],
+        "networks": {}
+    },
+    "bare_call_config": {
+        "close_out": "CALL",
+        "delete_application": "CALL",
+        "no_op": "CREATE"
+    }
+}
