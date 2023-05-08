@@ -1,9 +1,7 @@
-from external_contract import app, add
-from beaker import sandbox, client
+from beaker import client, sandbox
+from external_contract import add, app
 
-app.build().export(
-    "./artifacts"
-)
+app.build().export("./artifacts")
 
 accounts = sandbox.kmd.get_accounts()
 sender = accounts[0]
