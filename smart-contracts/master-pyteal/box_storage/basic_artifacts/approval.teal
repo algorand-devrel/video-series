@@ -1,0 +1,164 @@
+#pragma version 8
+txn NumAppArgs
+int 0
+==
+bnz main_l10
+txna ApplicationArgs 0
+method "addGrocery(string,(string,bool))void"
+==
+bnz main_l9
+txna ApplicationArgs 0
+method "getBox(string)string"
+==
+bnz main_l8
+txna ApplicationArgs 0
+method "deleteBox(string)void"
+==
+bnz main_l7
+txna ApplicationArgs 0
+method "getBoxSize(string)uint64"
+==
+bnz main_l6
+err
+main_l6:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+store 5
+load 5
+callsub getBoxSize_3
+store 6
+byte 0x151f7c75
+load 6
+itob
+concat
+log
+int 1
+return
+main_l7:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+store 4
+load 4
+callsub deleteBox_2
+int 1
+return
+main_l8:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+store 2
+load 2
+callsub getBox_1
+store 3
+byte 0x151f7c75
+load 3
+concat
+log
+int 1
+return
+main_l9:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+store 0
+txna ApplicationArgs 2
+store 1
+load 0
+load 1
+callsub addGrocery_0
+int 1
+return
+main_l10:
+txn OnCompletion
+int NoOp
+==
+bnz main_l12
+err
+main_l12:
+txn ApplicationID
+int 0
+==
+assert
+int 1
+return
+
+// addGrocery
+addGrocery_0:
+proto 2 0
+frame_dig -2
+extract 2 0
+frame_dig -1
+box_put
+retsub
+
+// getBox
+getBox_1:
+proto 1 1
+byte ""
+frame_dig -1
+extract 2 0
+box_get
+store 8
+store 7
+load 8
+assert
+load 7
+frame_bury 0
+frame_dig 0
+len
+itob
+extract 6 0
+frame_dig 0
+concat
+frame_bury 0
+retsub
+
+// deleteBox
+deleteBox_2:
+proto 1 0
+frame_dig -1
+extract 2 0
+box_del
+assert
+retsub
+
+// getBoxSize
+getBoxSize_3:
+proto 1 1
+int 0
+frame_dig -1
+extract 2 0
+box_len
+store 10
+store 9
+load 10
+assert
+load 9
+frame_bury 0
+retsub

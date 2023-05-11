@@ -1,0 +1,82 @@
+{
+  "name": "Grocery List App",
+  "methods": [
+    {
+      "name": "addGrocery",
+      "args": [
+        {
+          "type": "string",
+          "name": "item_name"
+        },
+        {
+          "type": "(string,uint8,bool)",
+          "name": "grocery_item"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "getBoxItem",
+      "args": [
+        {
+          "type": "string",
+          "name": "item_name"
+        }
+      ],
+      "returns": {
+        "type": "string"
+      }
+    },
+    {
+      "name": "getAmount",
+      "args": [
+        {
+          "type": "string",
+          "name": "item_name"
+        }
+      ],
+      "returns": {
+        "type": "uint8"
+      }
+    },
+    {
+      "name": "getPurchased",
+      "args": [
+        {
+          "type": "string",
+          "name": "item_name"
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "deleteBox",
+      "args": [
+        {
+          "type": "string",
+          "name": "box_name"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "getBoxSize",
+      "args": [
+        {
+          "type": "string",
+          "name": "item_name"
+        }
+      ],
+      "returns": {
+        "type": "uint64"
+      }
+    }
+  ],
+  "networks": {}
+}
