@@ -7,7 +7,6 @@ from algosdk.mnemonic import *
 from algosdk.account import *
 from algosdk.transaction import *
 from algosdk.logic import get_application_address
-from beaker.consts import Algos
 
 from sandbox import get_accounts
 
@@ -125,12 +124,46 @@ ptxn_signer = TransactionWithSigner(ptxn, signer)
 comp.add_transaction(ptxn_signer)
 
 grocery_item = {"item": "apple", "amount": 10, "purchased": False}
+# comp.add_method_call(
+#     app_id, c.get_method_by_name("addGrocery"), addr, sp, signer, method_args=["apple", list(grocery_item.values())], boxes=[(app_id, b"apple")]
+# )
+
 comp.add_method_call(
-    app_id, c.get_method_by_name("addGrocery"), addr, sp, signer, method_args=["apple", grocery_item], boxes=[(app_id, b"apple")]
+    app_id, c.get_method_by_name("addGrocery"), addr, sp, signer, method_args=["apple", 10], boxes=[(app_id, b"apple")]
+)
+
+# comp.add_method_call(
+#     app_id, c.get_method_by_name("getAmount"), addr, sp, signer, method_args=["apple"], boxes=[(app_id, b"apple")]
+# )
+
+# grocery_desc = "I need to buy 2 apples."
+# comp.add_method_call(
+#     app_id, c.get_method_by_name("addGrocery"), addr, sp, signer, method_args=["apple", 10], boxes=[(app_id, b"apple")]
+# )
+
+
+comp.add_method_call(
+    app_id, c.get_method_by_name("readAll"), addr, sp, signer, method_args=["apple"], boxes=[(app_id, b"apple")]
 )
 
 comp.add_method_call(
-    app_id, c.get_method_by_name("getAmount"), addr, sp, signer, method_args=["apple"], boxes=[(app_id, b"apple")]
+    app_id, c.get_method_by_name("readItem"), addr, sp, signer, method_args=["apple"], boxes=[(app_id, b"apple")]
+)
+
+comp.add_method_call(
+    app_id, c.get_method_by_name("readAmount"), addr, sp, signer, method_args=["apple"], boxes=[(app_id, b"apple")]
+)
+
+comp.add_method_call(
+    app_id, c.get_method_by_name("readPurchased"), addr, sp, signer, method_args=["apple"], boxes=[(app_id, b"apple")]
+)
+
+comp.add_method_call(
+    app_id, c.get_method_by_name("updateAmount"), addr, sp, signer, method_args=["apple", 20], boxes=[(app_id, b"apple")]
+)
+
+comp.add_method_call(
+    app_id, c.get_method_by_name("updatePurchased"), addr, sp, signer, method_args=["apple"], boxes=[(app_id, b"apple")]
 )
 
 resp = comp.execute(client, 2)

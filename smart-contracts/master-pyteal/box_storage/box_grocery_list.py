@@ -13,48 +13,87 @@ router = Router(
     ),
 )
 
-### Create ###
+### Add Grocery with Boxes ###
 
 @router.method
-def addGrocery(item_name: abi.String, grocery_item: GroceryItem):
-    return App.box_put(item_name.get(), grocery_item.encode())
+def addGrocery(item_name: abi.String, amount: abi.Uint8):
+    return Seq(
+            (purchased := abi.Bool()).set(Int(0)),
+            (grocery_tuple := GroceryItem()).set(item_name, amount, purchased),
+            App.box_put(item_name.get(), grocery_tuple.encode())
+        )
 
-### Write ###
+### Update Grocery Item ###
 
-# @router.method
-# def replaceBox(box_name: abi.String, new_name: abi.String):
-#     return App.box_replace(box_name.get(), Int(0), new_name.get())
-
-# @router.method
-# def writeBox(box_name: abi.String, new_name: abi.String):
-#     return App.box_put(box_name.get(), new_name.get())
-
-### Read ###
 @router.method
-def getBoxItem(item_name: abi.String, *, output: abi.String):
+def updateAmount(item_name: abi.String, new_amount:abi.Uint8, *, output: GroceryItem) -> Expr:
     return Seq(
             contents := App.box_get(item_name.get()), # box_get returns a maybeValue with Boolean and box Content.
             Assert(contents.hasValue()),
-            (grocery_tuple := GroceryItem()).decode(contents.value()),
-            output.set(grocery_tuple.item),
-        )  
+            (new_grocery := GroceryItem()).decode(contents.value()),
+            (amount := abi.Uint8()).set(new_amount.get()),
+            (item := abi.String()).set(new_grocery.item),
+            (purchased := abi.Bool()).set(new_grocery.purchased),
+            # We've gotta set all of the fields at the same time, but we can
+            # borrow the item we already know about
+            new_grocery.set(item, amount, purchased),
+            Assert(App.box_delete(item_name.get())),
+            App.box_put(item_name.get(), new_grocery.encode()),
+            output.decode(new_grocery.encode())
+        )
 
 @router.method
-def getAmount(item_name: abi.String, *, output: abi.Uint8):
+def updatePurchased(item_name: abi.String, *, output: GroceryItem) -> Expr:
     return Seq(
             contents := App.box_get(item_name.get()), # box_get returns a maybeValue with Boolean and box Content.
             Assert(contents.hasValue()),
-            (grocery_tuple := GroceryItem()).decode(contents.value()),
-            output.set(grocery_tuple.amount),
+            (new_grocery := GroceryItem()).decode(contents.value()),
+            (item := abi.String()).set(new_grocery.item),
+            (amount := abi.Uint8()).set(new_grocery.amount),
+            (purchased := abi.Bool()).set(Int(1)),
+            # We've gotta set all of the fields at the same time, but we can
+            # borrow the item we already know about
+            new_grocery.set(item, amount, purchased),
+            Assert(App.box_delete(item_name.get())),
+            App.box_put(item_name.get(), new_grocery.encode()),
+            output.decode(new_grocery.encode())
+        )
+
+### Read Groceries ###
+
+@router.method
+def readAll(item_name: abi.String, *, output: GroceryItem):
+    return Seq(
+            contents := App.box_get(item_name.get()), # box_get returns a maybeValue with Boolean and box Content.
+            Assert(contents.hasValue()),
+            output.decode(contents.value()), ### TODO
         ) 
 
 @router.method
-def getPurchased(item_name: abi.String, *, output: abi.Bool):
+def readItem(item_name: abi.String, *, output: abi.String):
     return Seq(
             contents := App.box_get(item_name.get()), # box_get returns a maybeValue with Boolean and box Content.
             Assert(contents.hasValue()),
-            (grocery_tuple := GroceryItem()).decode(contents.value()),
-            output.set(grocery_tuple.purchased),
+            (val := GroceryItem()).decode(contents.value()),
+            output.set(val.item),
+        )  
+
+@router.method
+def readPurchased(item_name: abi.String, *, output: abi.Bool):
+    return Seq(
+            contents := App.box_get(item_name.get()), # box_get returns a maybeValue with Boolean and box Content.
+            Assert(contents.hasValue()),
+            (val := GroceryItem()).decode(contents.value()),
+            output.set(val.purchased),
+        )  
+
+@router.method
+def readAmount(item_name: abi.String, *, output: abi.Uint8):
+    return Seq(
+            contents := App.box_get(item_name.get()), # box_get returns a maybeValue with Boolean and box Content.
+            Assert(contents.hasValue()),
+            (val := GroceryItem()).decode(contents.value()),
+            output.set(val.amount),
         )  
 
 ### delete ###
@@ -62,16 +101,6 @@ def getPurchased(item_name: abi.String, *, output: abi.Bool):
 @router.method
 def deleteBox(box_name: abi.String):
     return Assert(App.box_delete(box_name.get()))
-
-### box size ###
-
-@router.method
-def getBoxSize(item_name: abi.String, *, output:abi.Uint64):
-    return Seq(
-            length := App.box_length(item_name.get()), # box_length returns a maybeValue with Boolean and box length.
-            Assert(length.hasValue()),
-            output.set(length.value())
-        )
 
 
 if __name__ == "__main__":

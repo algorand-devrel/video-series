@@ -9,8 +9,8 @@
           "name": "item_name"
         },
         {
-          "type": "(string,uint8,bool)",
-          "name": "grocery_item"
+          "type": "uint8",
+          "name": "amount"
         }
       ],
       "returns": {
@@ -18,7 +18,63 @@
       }
     },
     {
-      "name": "getBoxItem",
+      "name": "updateAmount",
+      "args": [
+        {
+          "type": "string",
+          "name": "item_name"
+        },
+        {
+          "type": "uint8",
+          "name": "new_amount"
+        }
+      ],
+      "returns": {
+        "type": "(string,uint8,bool)"
+      }
+    },
+    {
+      "name": "updatePurchased",
+      "args": [
+        {
+          "type": "string",
+          "name": "item_name"
+        }
+      ],
+      "returns": {
+        "type": "(string,uint8,bool)"
+      }
+    },
+    {
+      "name": "markPurchased",
+      "args": [
+        {
+          "type": "string",
+          "name": "box_name"
+        },
+        {
+          "type": "string",
+          "name": "new_name"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "readAll",
+      "args": [
+        {
+          "type": "string",
+          "name": "item_name"
+        }
+      ],
+      "returns": {
+        "type": "(string,uint8,bool)"
+      }
+    },
+    {
+      "name": "readItem",
       "args": [
         {
           "type": "string",
@@ -30,19 +86,7 @@
       }
     },
     {
-      "name": "getAmount",
-      "args": [
-        {
-          "type": "string",
-          "name": "item_name"
-        }
-      ],
-      "returns": {
-        "type": "uint8"
-      }
-    },
-    {
-      "name": "getPurchased",
+      "name": "readPurchased",
       "args": [
         {
           "type": "string",
@@ -51,6 +95,18 @@
       ],
       "returns": {
         "type": "bool"
+      }
+    },
+    {
+      "name": "readAmount",
+      "args": [
+        {
+          "type": "string",
+          "name": "item_name"
+        }
+      ],
+      "returns": {
+        "type": "uint8"
       }
     },
     {
