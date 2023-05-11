@@ -123,24 +123,9 @@ ptxn = PaymentTxn(addr, sp, app_addr, 10000000)
 ptxn_signer = TransactionWithSigner(ptxn, signer)
 comp.add_transaction(ptxn_signer)
 
-grocery_item = {"item": "apple", "amount": 10, "purchased": False}
-# comp.add_method_call(
-#     app_id, c.get_method_by_name("addGrocery"), addr, sp, signer, method_args=["apple", list(grocery_item.values())], boxes=[(app_id, b"apple")]
-# )
-
 comp.add_method_call(
     app_id, c.get_method_by_name("addGrocery"), addr, sp, signer, method_args=["apple", 10], boxes=[(app_id, b"apple")]
 )
-
-# comp.add_method_call(
-#     app_id, c.get_method_by_name("getAmount"), addr, sp, signer, method_args=["apple"], boxes=[(app_id, b"apple")]
-# )
-
-# grocery_desc = "I need to buy 2 apples."
-# comp.add_method_call(
-#     app_id, c.get_method_by_name("addGrocery"), addr, sp, signer, method_args=["apple", 10], boxes=[(app_id, b"apple")]
-# )
-
 
 comp.add_method_call(
     app_id, c.get_method_by_name("readAll"), addr, sp, signer, method_args=["apple"], boxes=[(app_id, b"apple")]

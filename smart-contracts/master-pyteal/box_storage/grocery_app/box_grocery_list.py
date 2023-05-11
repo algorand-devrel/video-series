@@ -111,14 +111,14 @@ if __name__ == "__main__":
     approval, clear, contract = router.compile_program(version=8)
 
     # Dump out the contract as json that can be read in by any of the SDKs
-    with open(os.path.join(path, "grocery_artifacts/contract.json"), "w") as f:
+    with open(os.path.join(path, "artifacts/contract.json"), "w") as f:
         f.write(json.dumps(contract.dictify(), indent=2))
 
     # Write out the approval and clear programs
-    with open(os.path.join(path, "grocery_artifacts/approval.teal"), "w") as f:
+    with open(os.path.join(path, "artifacts/approval.teal"), "w") as f:
         f.write(approval)
 
-    with open(os.path.join(path, "grocery_artifacts/clear.teal"), "w") as f:
+    with open(os.path.join(path, "artifacts/clear.teal"), "w") as f:
         f.write(clear)
 
 

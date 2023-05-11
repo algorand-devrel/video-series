@@ -46,22 +46,6 @@
       }
     },
     {
-      "name": "markPurchased",
-      "args": [
-        {
-          "type": "string",
-          "name": "box_name"
-        },
-        {
-          "type": "string",
-          "name": "new_name"
-        }
-      ],
-      "returns": {
-        "type": "void"
-      }
-    },
-    {
       "name": "readAll",
       "args": [
         {
@@ -119,18 +103,6 @@
       ],
       "returns": {
         "type": "void"
-      }
-    },
-    {
-      "name": "getBoxSize",
-      "args": [
-        {
-          "type": "string",
-          "name": "item_name"
-        }
-      ],
-      "returns": {
-        "type": "uint64"
       }
     }
   ],
