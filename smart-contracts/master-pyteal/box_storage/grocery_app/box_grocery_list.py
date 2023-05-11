@@ -99,8 +99,8 @@ def readAmount(item_name: abi.String, *, output: abi.Uint8) -> Expr:
 ### delete ###
 
 @router.method
-def deleteBox(box_name: abi.String) -> Expr:
-    return Assert(App.box_delete(box_name.get()))
+def deleteGrocery(item_name: abi.String) -> Expr:
+    return Assert(App.box_delete(item_name.get()))
 
 
 if __name__ == "__main__":

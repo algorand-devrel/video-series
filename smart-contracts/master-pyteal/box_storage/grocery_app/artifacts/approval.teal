@@ -32,7 +32,7 @@ method "readAmount(string)uint8"
 ==
 bnz main_l11
 txna ApplicationArgs 0
-method "deleteBox(string)void"
+method "deleteGrocery(string)void"
 ==
 bnz main_l10
 err
@@ -48,7 +48,7 @@ assert
 txna ApplicationArgs 1
 store 15
 load 15
-callsub deleteBox_7
+callsub deleteGrocery_7
 int 1
 return
 main_l11:
@@ -476,8 +476,8 @@ getbyte
 frame_bury 0
 retsub
 
-// deleteBox
-deleteBox_7:
+// deleteGrocery
+deleteGrocery_7:
 proto 1 0
 frame_dig -1
 extract 2 0

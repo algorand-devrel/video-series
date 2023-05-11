@@ -94,11 +94,11 @@
       }
     },
     {
-      "name": "deleteBox",
+      "name": "deleteGrocery",
       "args": [
         {
           "type": "string",
-          "name": "box_name"
+          "name": "item_name"
         }
       ],
       "returns": {

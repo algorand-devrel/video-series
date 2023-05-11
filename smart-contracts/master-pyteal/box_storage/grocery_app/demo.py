@@ -75,10 +75,10 @@ addr, sk = get_accounts()[0]
 path = os.path.dirname(os.path.abspath(__file__))
 
 # Read in approval and clear TEAL programs
-with open(os.path.join(path, "grocery_artifacts/approval.teal")) as f:
+with open(os.path.join(path, "artifacts/approval.teal")) as f:
     approval_source = f.read()
 
-with open(os.path.join(path, "grocery_artifacts/clear.teal")) as f:
+with open(os.path.join(path, "artifacts/clear.teal")) as f:
     clear_source = f.read()
 
 # Compile approval and clear TEAL programs
@@ -107,7 +107,7 @@ app_id = create_app(
 )
 
 # read json and create ABI Contract description
-with open(os.path.join(path, "grocery_artifacts/contract.json")) as f:
+with open(os.path.join(path, "artifacts/contract.json")) as f:
     js = f.read()
 c = Contract.from_json(js)
 
@@ -149,6 +149,10 @@ comp.add_method_call(
 
 comp.add_method_call(
     app_id, c.get_method_by_name("updatePurchased"), addr, sp, signer, method_args=["apple"], boxes=[(app_id, b"apple")]
+)
+
+comp.add_method_call(
+    app_id, c.get_method_by_name("deleteGrocery"), addr, sp, signer, method_args=["apple"], boxes=[(app_id, b"apple")]
 )
 
 resp = comp.execute(client, 2)
