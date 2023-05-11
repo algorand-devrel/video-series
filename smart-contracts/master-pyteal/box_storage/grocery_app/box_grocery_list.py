@@ -16,7 +16,7 @@ router = Router(
 ### Add Grocery with Boxes ###
 
 @router.method
-def addGrocery(item_name: abi.String, amount: abi.Uint8):
+def addGrocery(item_name: abi.String, amount: abi.Uint8) -> Expr:
     return Seq(
             (purchased := abi.Bool()).set(Int(0)),
             (grocery_tuple := GroceryItem()).set(item_name, amount, purchased),
@@ -62,7 +62,7 @@ def updatePurchased(item_name: abi.String, *, output: GroceryItem) -> Expr:
 ### Read Groceries ###
 
 @router.method
-def readAll(item_name: abi.String, *, output: GroceryItem):
+def readAll(item_name: abi.String, *, output: GroceryItem) -> Expr:
     return Seq(
             contents := App.box_get(item_name.get()), # box_get returns a maybeValue with Boolean and box Content.
             Assert(contents.hasValue()),
@@ -70,7 +70,7 @@ def readAll(item_name: abi.String, *, output: GroceryItem):
         ) 
 
 @router.method
-def readItem(item_name: abi.String, *, output: abi.String):
+def readItem(item_name: abi.String, *, output: abi.String) -> Expr:
     return Seq(
             contents := App.box_get(item_name.get()), # box_get returns a maybeValue with Boolean and box Content.
             Assert(contents.hasValue()),
@@ -79,7 +79,7 @@ def readItem(item_name: abi.String, *, output: abi.String):
         )  
 
 @router.method
-def readPurchased(item_name: abi.String, *, output: abi.Bool):
+def readPurchased(item_name: abi.String, *, output: abi.Bool) -> Expr:
     return Seq(
             contents := App.box_get(item_name.get()), # box_get returns a maybeValue with Boolean and box Content.
             Assert(contents.hasValue()),
@@ -88,7 +88,7 @@ def readPurchased(item_name: abi.String, *, output: abi.Bool):
         )  
 
 @router.method
-def readAmount(item_name: abi.String, *, output: abi.Uint8):
+def readAmount(item_name: abi.String, *, output: abi.Uint8) -> Expr:
     return Seq(
             contents := App.box_get(item_name.get()), # box_get returns a maybeValue with Boolean and box Content.
             Assert(contents.hasValue()),
@@ -99,7 +99,7 @@ def readAmount(item_name: abi.String, *, output: abi.Uint8):
 ### delete ###
 
 @router.method
-def deleteBox(box_name: abi.String):
+def deleteBox(box_name: abi.String) -> Expr:
     return Assert(App.box_delete(box_name.get()))
 
 
