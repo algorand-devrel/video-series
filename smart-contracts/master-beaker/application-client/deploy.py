@@ -1,29 +1,35 @@
-from beaker import client, consts, sandbox
+from beaker import client, consts, localnet
 
 from contract import app, increment
 
 app.build().export("./artifacts")
 
-accounts = sandbox.kmd.get_accounts()
-sender = accounts[0]
+accounts = localnet.get_accounts()
+acct1 = accounts[0]
 acct2 = accounts[1]
 
+algod_client = localnet.get_algod_client()
+
 app_client1 = client.ApplicationClient(
-    client=sandbox.get_algod_client(),
+    client=algod_client,
     app=app,
-    sender=sender.address,
-    signer=sender.signer,
+    sender=acct1.address,
+    signer=acct1.signer,
 )
 
 app_id, address, txid = app_client1.create()
-print("App ID: ", app_id)
+print(
+    f"""Deployed app in txid {txid}
+    App ID: {app_id} 
+    Address: {address} 
+"""
+)
 print(f"app state: {app_client1.get_application_account_info()} \n")
 
 app_client1.fund(1 * consts.algo)
-print(f"app account state: {app_client1.get_application_account_info()} \n")
+print(f"app account balance: {app_client1.get_application_account_info()['amount']} \n")
 
 app_client1.opt_in(username="Chris")
-# app_client1.opt_in(username="Chris")
 print("Chris opted in \n")
 
 app_client2 = app_client1.prepare(signer=acct2.signer)

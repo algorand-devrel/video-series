@@ -1,6 +1,6 @@
 #pragma version 8
 intcblock 0 1
-bytecblock 0x636f756e74 0x75736572
+bytecblock 0x636f756e74 0x75736572 0x
 txn NumAppArgs
 intc_0 // 0
 ==
@@ -23,7 +23,7 @@ intc_0 // 0
 !=
 &&
 assert
-callsub increment_1
+callsub incrementcaster_5
 intc_1 // 1
 return
 main_l5:
@@ -35,8 +35,7 @@ intc_0 // 0
 !=
 &&
 assert
-txna ApplicationArgs 1
-callsub optin_0
+callsub optincaster_4
 intc_1 // 1
 return
 main_l6:
@@ -86,7 +85,7 @@ intc_0 // 0
 app_local_put
 txn Sender
 bytec_1 // "user"
-pushbytes 0x // ""
+bytec_2 // ""
 app_local_put
 txn Sender
 bytec_1 // "user"
@@ -129,3 +128,19 @@ global CreatorAddress
 assert
 intc_1 // 1
 return
+
+// opt_in_caster
+optincaster_4:
+proto 0 0
+bytec_2 // ""
+txna ApplicationArgs 1
+frame_bury 0
+frame_dig 0
+callsub optin_0
+retsub
+
+// increment_caster
+incrementcaster_5:
+proto 0 0
+callsub increment_1
+retsub
