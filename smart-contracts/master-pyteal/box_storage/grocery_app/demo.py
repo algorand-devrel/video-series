@@ -8,66 +8,9 @@ from algosdk.account import *
 from algosdk.transaction import *
 from algosdk.logic import get_application_address
 
+from utils import create_app, compile_program
 from sandbox import get_accounts
 
-# Need to define helper function
-def create_app(
-    client,
-    sender,
-    private_key,
-    approval_program,
-    clear_program,
-    global_schema,
-    local_schema,
-):
-
-    # declare on_complete as NoOp
-    on_complete = transaction.OnComplete.NoOpOC.real
-
-    # get node suggested parameters
-    params = client.suggested_params()
-    # comment out the next two (2) lines to use suggested fees
-    # params.flat_fee = True
-    # params.fee = 1000
-
-    # create unsigned transaction
-    txn = transaction.ApplicationCreateTxn(
-        sender,
-        params,
-        on_complete,
-        approval_program,
-        clear_program,
-        global_schema,
-        local_schema,
-    )
-
-    # sign transaction
-    signed_txn = txn.sign(private_key)
-    tx_id = signed_txn.transaction.get_txid()
-
-    # send transaction
-    client.send_transactions([signed_txn])
-
-    # await confirmation
-
-    confirmed_txn = transaction.wait_for_confirmation(client, tx_id, 4)
-    print("TXID: ", tx_id)
-    print("Result confirmed in round: {}".format(confirmed_txn["confirmed-round"]))
-
-    # display results
-    transaction_response = client.pending_transaction_info(tx_id)
-    app_id = transaction_response["application-index"]
-    print("Created new app-id: ", app_id)
-
-    return app_id
-
-
-def compile_program(client, source_code):
-    compile_response = client.compile(source_code)
-    return base64.b64decode(compile_response["result"])
-
-
-# Manually setup Algod Client
 client = AlgodClient("a" * 64, "http://localhost:4001")
 
 addr, sk = get_accounts()[0]
