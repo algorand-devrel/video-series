@@ -2,10 +2,10 @@ import json
 
 from beaker import localnet
 
-sandbox_accounts = localnet.get_accounts()
-print(*sandbox_accounts, sep="\n\n")
+localnet_accounts = localnet.get_accounts()
+print(*localnet_accounts, sep="\n\n")
 
-account1 = sandbox_accounts.pop()
+account1 = localnet_accounts.pop()
 print("\naccount1 info \n")
 print("account1 address: ", account1.address, "\n")
 print("account1 private key: ", account1.private_key, "\n")
