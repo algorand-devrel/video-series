@@ -1,4 +1,4 @@
-# sandbox
+# Localnet
 
 This project has been generated using AlgoKit. See below for default getting started instructions.
 
@@ -7,7 +7,7 @@ This project has been generated using AlgoKit. See below for default getting sta
 Open project folders individually
 
 ```sh
-cd smart-contracts/master-beaker/sandbox
+cd smart-contracts/master-beaker/localnet
 ```
 
 Then setup your development environment with:
@@ -21,7 +21,7 @@ Then run deploy scripts like:
 
 ```sh
 cd beaker-calc
-python3 sandbox.py
+python3 localnet.py
 ```
 
 ### Subsequently
