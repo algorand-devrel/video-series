@@ -1,0 +1,122 @@
+{
+  "name": "Basic Box Manipulations",
+  "methods": [
+    {
+      "name": "createBox",
+      "args": [
+        {
+          "type": "string",
+          "name": "box_name"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "createBoxWithPut",
+      "args": [
+        {
+          "type": "string",
+          "name": "box_name"
+        },
+        {
+          "type": "string",
+          "name": "box_value"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "replaceBox",
+      "args": [
+        {
+          "type": "string",
+          "name": "box_name"
+        },
+        {
+          "type": "string",
+          "name": "new_name"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "writeBox",
+      "args": [
+        {
+          "type": "string",
+          "name": "box_name"
+        },
+        {
+          "type": "string",
+          "name": "new_name"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "extractBox",
+      "args": [
+        {
+          "type": "string",
+          "name": "box_name"
+        },
+        {
+          "type": "uint8",
+          "name": "start"
+        },
+        {
+          "type": "uint8",
+          "name": "end"
+        }
+      ],
+      "returns": {
+        "type": "string"
+      }
+    },
+    {
+      "name": "getBox",
+      "args": [
+        {
+          "type": "string",
+          "name": "box_name"
+        }
+      ],
+      "returns": {
+        "type": "string"
+      }
+    },
+    {
+      "name": "deleteBox",
+      "args": [
+        {
+          "type": "string",
+          "name": "box_name"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "getBoxSize",
+      "args": [
+        {
+          "type": "string",
+          "name": "box_name"
+        }
+      ],
+      "returns": {
+        "type": "uint64"
+      }
+    }
+  ],
+  "networks": {}
+}

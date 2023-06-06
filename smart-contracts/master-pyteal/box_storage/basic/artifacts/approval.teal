@@ -1,0 +1,312 @@
+#pragma version 8
+txn NumAppArgs
+int 0
+==
+bnz main_l18
+txna ApplicationArgs 0
+method "createBox(string)void"
+==
+bnz main_l17
+txna ApplicationArgs 0
+method "createBoxWithPut(string,string)void"
+==
+bnz main_l16
+txna ApplicationArgs 0
+method "replaceBox(string,string)void"
+==
+bnz main_l15
+txna ApplicationArgs 0
+method "writeBox(string,string)void"
+==
+bnz main_l14
+txna ApplicationArgs 0
+method "extractBox(string,uint8,uint8)string"
+==
+bnz main_l13
+txna ApplicationArgs 0
+method "getBox(string)string"
+==
+bnz main_l12
+txna ApplicationArgs 0
+method "deleteBox(string)void"
+==
+bnz main_l11
+txna ApplicationArgs 0
+method "getBoxSize(string)uint64"
+==
+bnz main_l10
+err
+main_l10:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+store 14
+load 14
+callsub getBoxSize_7
+store 15
+byte 0x151f7c75
+load 15
+itob
+concat
+log
+int 1
+return
+main_l11:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+store 13
+load 13
+callsub deleteBox_6
+int 1
+return
+main_l12:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+store 11
+load 11
+callsub getBox_5
+store 12
+byte 0x151f7c75
+load 12
+concat
+log
+int 1
+return
+main_l13:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+store 7
+txna ApplicationArgs 2
+int 0
+getbyte
+store 8
+txna ApplicationArgs 3
+int 0
+getbyte
+store 9
+load 7
+load 8
+load 9
+callsub extractBox_4
+store 10
+byte 0x151f7c75
+load 10
+concat
+log
+int 1
+return
+main_l14:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+store 5
+txna ApplicationArgs 2
+store 6
+load 5
+load 6
+callsub writeBox_3
+int 1
+return
+main_l15:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+store 3
+txna ApplicationArgs 2
+store 4
+load 3
+load 4
+callsub replaceBox_2
+int 1
+return
+main_l16:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+store 1
+txna ApplicationArgs 2
+store 2
+load 1
+load 2
+callsub createBoxWithPut_1
+int 1
+return
+main_l17:
+txn OnCompletion
+int NoOp
+==
+txn ApplicationID
+int 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+store 0
+load 0
+callsub createBox_0
+int 1
+return
+main_l18:
+txn OnCompletion
+int NoOp
+==
+bnz main_l20
+err
+main_l20:
+txn ApplicationID
+int 0
+==
+assert
+int 1
+return
+
+// createBox
+createBox_0:
+proto 1 0
+frame_dig -1
+extract 2 0
+int 9
+box_create
+assert
+retsub
+
+// createBoxWithPut
+createBoxWithPut_1:
+proto 2 0
+frame_dig -2
+extract 2 0
+frame_dig -1
+extract 2 0
+box_put
+retsub
+
+// replaceBox
+replaceBox_2:
+proto 2 0
+frame_dig -2
+extract 2 0
+int 0
+frame_dig -1
+extract 2 0
+box_replace
+retsub
+
+// writeBox
+writeBox_3:
+proto 2 0
+frame_dig -2
+extract 2 0
+frame_dig -1
+extract 2 0
+box_put
+retsub
+
+// extractBox
+extractBox_4:
+proto 3 1
+byte ""
+frame_dig -3
+extract 2 0
+frame_dig -2
+frame_dig -1
+box_extract
+frame_bury 0
+frame_dig 0
+len
+itob
+extract 6 0
+frame_dig 0
+concat
+frame_bury 0
+retsub
+
+// getBox
+getBox_5:
+proto 1 1
+byte ""
+frame_dig -1
+extract 2 0
+box_get
+store 17
+store 16
+load 17
+assert
+load 16
+frame_bury 0
+frame_dig 0
+len
+itob
+extract 6 0
+frame_dig 0
+concat
+frame_bury 0
+retsub
+
+// deleteBox
+deleteBox_6:
+proto 1 0
+frame_dig -1
+extract 2 0
+box_del
+assert
+retsub
+
+// getBoxSize
+getBoxSize_7:
+proto 1 1
+int 0
+frame_dig -1
+extract 2 0
+box_len
+store 19
+store 18
+load 19
+assert
+load 18
+frame_bury 0
+retsub
