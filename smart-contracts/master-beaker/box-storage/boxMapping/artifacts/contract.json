@@ -1,0 +1,54 @@
+{
+    "name": "Grocery CheckList with Beaker",
+    "methods": [
+        {
+            "name": "addGrocery",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "item_name"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            }
+        },
+        {
+            "name": "updatePurchased",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "item_name"
+                }
+            ],
+            "returns": {
+                "type": "(string,bool)"
+            }
+        },
+        {
+            "name": "readItem",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "item_name"
+                }
+            ],
+            "returns": {
+                "type": "(string,bool)"
+            }
+        },
+        {
+            "name": "deleteGrocery",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "item_name"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            }
+        }
+    ],
+    "networks": {}
+}

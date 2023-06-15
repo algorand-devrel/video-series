@@ -1,0 +1,101 @@
+{
+    "hints": {
+        "bootstrap()void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "subscribe(address)void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "readSubscriber(uint32)address": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "deleteBox()void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDgKaW50Y2Jsb2NrIDAgMSAzMgpieXRlY2Jsb2NrIDB4NjE2NDY0NzI1ZjZjNjk3Mzc0IDB4Njk2NDc4IDB4CnR4biBOdW1BcHBBcmdzCmludGNfMCAvLyAwCj09CmJueiBtYWluX2wxMAp0eG5hIEFwcGxpY2F0aW9uQXJncyAwCnB1c2hieXRlcyAweGJlYzc2ZDg3IC8vICJib290c3RyYXAoKXZvaWQiCj09CmJueiBtYWluX2w5CnR4bmEgQXBwbGljYXRpb25BcmdzIDAKcHVzaGJ5dGVzIDB4ZDQ4MzBhZmYgLy8gInN1YnNjcmliZShhZGRyZXNzKXZvaWQiCj09CmJueiBtYWluX2w4CnR4bmEgQXBwbGljYXRpb25BcmdzIDAKcHVzaGJ5dGVzIDB4Y2Y0NjMzZWQgLy8gInJlYWRTdWJzY3JpYmVyKHVpbnQzMilhZGRyZXNzIgo9PQpibnogbWFpbl9sNwp0eG5hIEFwcGxpY2F0aW9uQXJncyAwCnB1c2hieXRlcyAweDkxMDFhN2RlIC8vICJkZWxldGVCb3goKXZvaWQiCj09CmJueiBtYWluX2w2CmVycgptYWluX2w2Ogp0eG4gT25Db21wbGV0aW9uCmludGNfMCAvLyBOb09wCj09CnR4biBBcHBsaWNhdGlvbklECmludGNfMCAvLyAwCiE9CiYmCmFzc2VydApjYWxsc3ViIGRlbGV0ZUJveGNhc3Rlcl83CmludGNfMSAvLyAxCnJldHVybgptYWluX2w3Ogp0eG4gT25Db21wbGV0aW9uCmludGNfMCAvLyBOb09wCj09CnR4biBBcHBsaWNhdGlvbklECmludGNfMCAvLyAwCiE9CiYmCmFzc2VydApjYWxsc3ViIHJlYWRTdWJzY3JpYmVyY2FzdGVyXzYKaW50Y18xIC8vIDEKcmV0dXJuCm1haW5fbDg6CnR4biBPbkNvbXBsZXRpb24KaW50Y18wIC8vIE5vT3AKPT0KdHhuIEFwcGxpY2F0aW9uSUQKaW50Y18wIC8vIDAKIT0KJiYKYXNzZXJ0CmNhbGxzdWIgc3Vic2NyaWJlY2FzdGVyXzUKaW50Y18xIC8vIDEKcmV0dXJuCm1haW5fbDk6CnR4biBPbkNvbXBsZXRpb24KaW50Y18wIC8vIE5vT3AKPT0KdHhuIEFwcGxpY2F0aW9uSUQKaW50Y18wIC8vIDAKIT0KJiYKYXNzZXJ0CmNhbGxzdWIgYm9vdHN0cmFwY2FzdGVyXzQKaW50Y18xIC8vIDEKcmV0dXJuCm1haW5fbDEwOgp0eG4gT25Db21wbGV0aW9uCmludGNfMCAvLyBOb09wCj09CmJueiBtYWluX2wxMgplcnIKbWFpbl9sMTI6CnR4biBBcHBsaWNhdGlvbklECmludGNfMCAvLyAwCj09CmFzc2VydAppbnRjXzEgLy8gMQpyZXR1cm4KCi8vIGJvb3RzdHJhcApib290c3RyYXBfMDoKcHJvdG8gMCAwCmJ5dGVjXzAgLy8gImFkZHJfbGlzdCIKcHVzaGludCAzMjAgLy8gMzIwCmJveF9jcmVhdGUKcG9wCmJ5dGVjXzEgLy8gImlkeCIKaW50Y18wIC8vIDAKYXBwX2dsb2JhbF9wdXQKcmV0c3ViCgovLyBzdWJzY3JpYmUKc3Vic2NyaWJlXzE6CnByb3RvIDEgMApieXRlY18wIC8vICJhZGRyX2xpc3QiCmludGNfMiAvLyAzMgpieXRlY18xIC8vICJpZHgiCmFwcF9nbG9iYWxfZ2V0CioKZnJhbWVfZGlnIC0xCmJveF9yZXBsYWNlCmJ5dGVjXzEgLy8gImlkeCIKYnl0ZWNfMSAvLyAiaWR4IgphcHBfZ2xvYmFsX2dldAppbnRjXzEgLy8gMQorCmFwcF9nbG9iYWxfcHV0CnJldHN1YgoKLy8gcmVhZFN1YnNjcmliZXIKcmVhZFN1YnNjcmliZXJfMjoKcHJvdG8gMSAxCmJ5dGVjXzIgLy8gIiIKYnl0ZWNfMCAvLyAiYWRkcl9saXN0IgppbnRjXzIgLy8gMzIKZnJhbWVfZGlnIC0xCioKaW50Y18yIC8vIDMyCmJveF9leHRyYWN0CmZyYW1lX2J1cnkgMApyZXRzdWIKCi8vIGRlbGV0ZUJveApkZWxldGVCb3hfMzoKcHJvdG8gMCAwCnR4biBTZW5kZXIKZ2xvYmFsIENyZWF0b3JBZGRyZXNzCj09Ci8vIHVuYXV0aG9yaXplZAphc3NlcnQKYnl0ZWNfMCAvLyAiYWRkcl9saXN0Igpib3hfZGVsCmFzc2VydApyZXRzdWIKCi8vIGJvb3RzdHJhcF9jYXN0ZXIKYm9vdHN0cmFwY2FzdGVyXzQ6CnByb3RvIDAgMApjYWxsc3ViIGJvb3RzdHJhcF8wCnJldHN1YgoKLy8gc3Vic2NyaWJlX2Nhc3RlcgpzdWJzY3JpYmVjYXN0ZXJfNToKcHJvdG8gMCAwCmJ5dGVjXzIgLy8gIiIKdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQpmcmFtZV9idXJ5IDAKZnJhbWVfZGlnIDAKY2FsbHN1YiBzdWJzY3JpYmVfMQpyZXRzdWIKCi8vIHJlYWRTdWJzY3JpYmVyX2Nhc3RlcgpyZWFkU3Vic2NyaWJlcmNhc3Rlcl82Ogpwcm90byAwIDAKYnl0ZWNfMiAvLyAiIgppbnRjXzAgLy8gMAp0eG5hIEFwcGxpY2F0aW9uQXJncyAxCmludGNfMCAvLyAwCmV4dHJhY3RfdWludDMyCmZyYW1lX2J1cnkgMQpmcmFtZV9kaWcgMQpjYWxsc3ViIHJlYWRTdWJzY3JpYmVyXzIKZnJhbWVfYnVyeSAwCnB1c2hieXRlcyAweDE1MWY3Yzc1IC8vIDB4MTUxZjdjNzUKZnJhbWVfZGlnIDAKY29uY2F0CmxvZwpyZXRzdWIKCi8vIGRlbGV0ZUJveF9jYXN0ZXIKZGVsZXRlQm94Y2FzdGVyXzc6CnByb3RvIDAgMApjYWxsc3ViIGRlbGV0ZUJveF8zCnJldHN1Yg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDgKcHVzaGludCAwIC8vIDAKcmV0dXJu"
+    },
+    "state": {
+        "global": {
+            "num_byte_slices": 0,
+            "num_uints": 1
+        },
+        "local": {
+            "num_byte_slices": 0,
+            "num_uints": 0
+        }
+    },
+    "schema": {
+        "global": {
+            "declared": {
+                "idx": {
+                    "type": "uint64",
+                    "key": "idx",
+                    "descr": "number of subscribers"
+                }
+            },
+            "reserved": {}
+        },
+        "local": {
+            "declared": {},
+            "reserved": {}
+        }
+    },
+    "contract": {
+        "name": "Subscriber Count App",
+        "methods": [
+            {
+                "name": "bootstrap",
+                "args": [],
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "subscribe",
+                "args": [
+                    {
+                        "type": "address",
+                        "name": "addr"
+                    }
+                ],
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "readSubscriber",
+                "args": [
+                    {
+                        "type": "uint32",
+                        "name": "idx"
+                    }
+                ],
+                "returns": {
+                    "type": "address"
+                }
+            },
+            {
+                "name": "deleteBox",
+                "args": [],
+                "returns": {
+                    "type": "void"
+                }
+            }
+        ],
+        "networks": {}
+    },
+    "bare_call_config": {
+        "no_op": "CREATE"
+    }
+}
