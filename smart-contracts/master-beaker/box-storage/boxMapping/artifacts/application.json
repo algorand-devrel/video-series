@@ -1,0 +1,135 @@
+{
+    "hints": {
+        "addGrocery(string)void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "updatePurchased(string)(string,bool)": {
+            "structs": {
+                "output": {
+                    "name": "GroceryItem",
+                    "elements": [
+                        [
+                            "item",
+                            "string"
+                        ],
+                        [
+                            "purchased",
+                            "bool"
+                        ]
+                    ]
+                }
+            },
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "readItem(string)(string,bool)": {
+            "structs": {
+                "output": {
+                    "name": "GroceryItem",
+                    "elements": [
+                        [
+                            "item",
+                            "string"
+                        ],
+                        [
+                            "purchased",
+                            "bool"
+                        ]
+                    ]
+                }
+            },
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "deleteGrocery(string)void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDgKaW50Y2Jsb2NrIDAgMSAzCmJ5dGVjYmxvY2sgMHggMHgwMCAweDE1MWY3Yzc1CnR4biBOdW1BcHBBcmdzCmludGNfMCAvLyAwCj09CmJueiBtYWluX2wxMAp0eG5hIEFwcGxpY2F0aW9uQXJncyAwCnB1c2hieXRlcyAweDcyNTU0YmM1IC8vICJhZGRHcm9jZXJ5KHN0cmluZyl2b2lkIgo9PQpibnogbWFpbl9sOQp0eG5hIEFwcGxpY2F0aW9uQXJncyAwCnB1c2hieXRlcyAweDhkYWM2OTBlIC8vICJ1cGRhdGVQdXJjaGFzZWQoc3RyaW5nKShzdHJpbmcsYm9vbCkiCj09CmJueiBtYWluX2w4CnR4bmEgQXBwbGljYXRpb25BcmdzIDAKcHVzaGJ5dGVzIDB4YjM1MDE3ZmQgLy8gInJlYWRJdGVtKHN0cmluZykoc3RyaW5nLGJvb2wpIgo9PQpibnogbWFpbl9sNwp0eG5hIEFwcGxpY2F0aW9uQXJncyAwCnB1c2hieXRlcyAweGFkMGZjZTRiIC8vICJkZWxldGVHcm9jZXJ5KHN0cmluZyl2b2lkIgo9PQpibnogbWFpbl9sNgplcnIKbWFpbl9sNjoKdHhuIE9uQ29tcGxldGlvbgppbnRjXzAgLy8gTm9PcAo9PQp0eG4gQXBwbGljYXRpb25JRAppbnRjXzAgLy8gMAohPQomJgphc3NlcnQKY2FsbHN1YiBkZWxldGVHcm9jZXJ5Y2FzdGVyXzcKaW50Y18xIC8vIDEKcmV0dXJuCm1haW5fbDc6CnR4biBPbkNvbXBsZXRpb24KaW50Y18wIC8vIE5vT3AKPT0KdHhuIEFwcGxpY2F0aW9uSUQKaW50Y18wIC8vIDAKIT0KJiYKYXNzZXJ0CmNhbGxzdWIgcmVhZEl0ZW1jYXN0ZXJfNgppbnRjXzEgLy8gMQpyZXR1cm4KbWFpbl9sODoKdHhuIE9uQ29tcGxldGlvbgppbnRjXzAgLy8gTm9PcAo9PQp0eG4gQXBwbGljYXRpb25JRAppbnRjXzAgLy8gMAohPQomJgphc3NlcnQKY2FsbHN1YiB1cGRhdGVQdXJjaGFzZWRjYXN0ZXJfNQppbnRjXzEgLy8gMQpyZXR1cm4KbWFpbl9sOToKdHhuIE9uQ29tcGxldGlvbgppbnRjXzAgLy8gTm9PcAo9PQp0eG4gQXBwbGljYXRpb25JRAppbnRjXzAgLy8gMAohPQomJgphc3NlcnQKY2FsbHN1YiBhZGRHcm9jZXJ5Y2FzdGVyXzQKaW50Y18xIC8vIDEKcmV0dXJuCm1haW5fbDEwOgp0eG4gT25Db21wbGV0aW9uCmludGNfMCAvLyBOb09wCj09CmJueiBtYWluX2wxMgplcnIKbWFpbl9sMTI6CnR4biBBcHBsaWNhdGlvbklECmludGNfMCAvLyAwCj09CmFzc2VydAppbnRjXzEgLy8gMQpyZXR1cm4KCi8vIGFkZEdyb2NlcnkKYWRkR3JvY2VyeV8wOgpwcm90byAxIDAKaW50Y18wIC8vIDAKYnl0ZWNfMCAvLyAiIgppbnRjXzAgLy8gMApkdXAKYnl0ZWNfMCAvLyAiIgpkdXAKaW50Y18wIC8vIDAKIQohCmZyYW1lX2J1cnkgMApmcmFtZV9kaWcgLTEKZnJhbWVfYnVyeSA1CmZyYW1lX2RpZyA1CmZyYW1lX2J1cnkgNAppbnRjXzIgLy8gMwpmcmFtZV9idXJ5IDIKZnJhbWVfZGlnIDIKaXRvYgpleHRyYWN0IDYgMApieXRlY18xIC8vIDB4MDAKaW50Y18wIC8vIDAKZnJhbWVfZGlnIDAKc2V0Yml0CmNvbmNhdApmcmFtZV9kaWcgNApjb25jYXQKZnJhbWVfYnVyeSAxCmZyYW1lX2RpZyAtMQpleHRyYWN0IDIgMApib3hfZGVsCnBvcApmcmFtZV9kaWcgLTEKZXh0cmFjdCAyIDAKZnJhbWVfZGlnIDEKYm94X3B1dApyZXRzdWIKCi8vIHVwZGF0ZVB1cmNoYXNlZAp1cGRhdGVQdXJjaGFzZWRfMToKcHJvdG8gMSAxCmJ5dGVjXzAgLy8gIiIKZHVwCmludGNfMCAvLyAwCmR1cG4gMgpieXRlY18wIC8vICIiCmR1cApmcmFtZV9kaWcgLTEKZXh0cmFjdCAyIDAKYm94X2dldApzdG9yZSAxCnN0b3JlIDAKbG9hZCAxCmFzc2VydApsb2FkIDAKZnJhbWVfYnVyeSAxCmludGNfMSAvLyAxCiEKIQpmcmFtZV9idXJ5IDIKZnJhbWVfZGlnIC0xCmZyYW1lX2J1cnkgNgpmcmFtZV9kaWcgNgpmcmFtZV9idXJ5IDUKaW50Y18yIC8vIDMKZnJhbWVfYnVyeSAzCmZyYW1lX2RpZyAzCml0b2IKZXh0cmFjdCA2IDAKYnl0ZWNfMSAvLyAweDAwCmludGNfMCAvLyAwCmZyYW1lX2RpZyAyCnNldGJpdApjb25jYXQKZnJhbWVfZGlnIDUKY29uY2F0CmZyYW1lX2J1cnkgMQpmcmFtZV9kaWcgLTEKZXh0cmFjdCAyIDAKYm94X2RlbApwb3AKZnJhbWVfZGlnIC0xCmV4dHJhY3QgMiAwCmZyYW1lX2RpZyAxCmJveF9wdXQKZnJhbWVfZGlnIC0xCmV4dHJhY3QgMiAwCmJveF9nZXQKc3RvcmUgMwpzdG9yZSAyCmxvYWQgMwphc3NlcnQKbG9hZCAyCmZyYW1lX2J1cnkgMApyZXRzdWIKCi8vIHJlYWRJdGVtCnJlYWRJdGVtXzI6CnByb3RvIDEgMQpieXRlY18wIC8vICIiCmZyYW1lX2RpZyAtMQpleHRyYWN0IDIgMApib3hfZ2V0CnN0b3JlIDUKc3RvcmUgNApsb2FkIDUKYXNzZXJ0CmxvYWQgNApmcmFtZV9idXJ5IDAKcmV0c3ViCgovLyBkZWxldGVHcm9jZXJ5CmRlbGV0ZUdyb2NlcnlfMzoKcHJvdG8gMSAwCmZyYW1lX2RpZyAtMQpleHRyYWN0IDIgMApib3hfZGVsCnBvcApyZXRzdWIKCi8vIGFkZEdyb2NlcnlfY2FzdGVyCmFkZEdyb2NlcnljYXN0ZXJfNDoKcHJvdG8gMCAwCmJ5dGVjXzAgLy8gIiIKdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQpmcmFtZV9idXJ5IDAKZnJhbWVfZGlnIDAKY2FsbHN1YiBhZGRHcm9jZXJ5XzAKcmV0c3ViCgovLyB1cGRhdGVQdXJjaGFzZWRfY2FzdGVyCnVwZGF0ZVB1cmNoYXNlZGNhc3Rlcl81Ogpwcm90byAwIDAKYnl0ZWNfMCAvLyAiIgpkdXAKdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQpmcmFtZV9idXJ5IDEKZnJhbWVfZGlnIDEKY2FsbHN1YiB1cGRhdGVQdXJjaGFzZWRfMQpmcmFtZV9idXJ5IDAKYnl0ZWNfMiAvLyAweDE1MWY3Yzc1CmZyYW1lX2RpZyAwCmNvbmNhdApsb2cKcmV0c3ViCgovLyByZWFkSXRlbV9jYXN0ZXIKcmVhZEl0ZW1jYXN0ZXJfNjoKcHJvdG8gMCAwCmJ5dGVjXzAgLy8gIiIKZHVwCnR4bmEgQXBwbGljYXRpb25BcmdzIDEKZnJhbWVfYnVyeSAxCmZyYW1lX2RpZyAxCmNhbGxzdWIgcmVhZEl0ZW1fMgpmcmFtZV9idXJ5IDAKYnl0ZWNfMiAvLyAweDE1MWY3Yzc1CmZyYW1lX2RpZyAwCmNvbmNhdApsb2cKcmV0c3ViCgovLyBkZWxldGVHcm9jZXJ5X2Nhc3RlcgpkZWxldGVHcm9jZXJ5Y2FzdGVyXzc6CnByb3RvIDAgMApieXRlY18wIC8vICIiCnR4bmEgQXBwbGljYXRpb25BcmdzIDEKZnJhbWVfYnVyeSAwCmZyYW1lX2RpZyAwCmNhbGxzdWIgZGVsZXRlR3JvY2VyeV8zCnJldHN1Yg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDgKcHVzaGludCAwIC8vIDAKcmV0dXJu"
+    },
+    "state": {
+        "global": {
+            "num_byte_slices": 0,
+            "num_uints": 0
+        },
+        "local": {
+            "num_byte_slices": 0,
+            "num_uints": 0
+        }
+    },
+    "schema": {
+        "global": {
+            "declared": {},
+            "reserved": {}
+        },
+        "local": {
+            "declared": {},
+            "reserved": {}
+        }
+    },
+    "contract": {
+        "name": "Grocery CheckList with Beaker",
+        "methods": [
+            {
+                "name": "addGrocery",
+                "args": [
+                    {
+                        "type": "string",
+                        "name": "item_name"
+                    }
+                ],
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "updatePurchased",
+                "args": [
+                    {
+                        "type": "string",
+                        "name": "item_name"
+                    }
+                ],
+                "returns": {
+                    "type": "(string,bool)"
+                }
+            },
+            {
+                "name": "readItem",
+                "args": [
+                    {
+                        "type": "string",
+                        "name": "item_name"
+                    }
+                ],
+                "returns": {
+                    "type": "(string,bool)"
+                }
+            },
+            {
+                "name": "deleteGrocery",
+                "args": [
+                    {
+                        "type": "string",
+                        "name": "item_name"
+                    }
+                ],
+                "returns": {
+                    "type": "void"
+                }
+            }
+        ],
+        "networks": {}
+    },
+    "bare_call_config": {
+        "no_op": "CREATE"
+    }
+}

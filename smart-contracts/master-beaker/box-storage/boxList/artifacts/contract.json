@@ -1,0 +1,44 @@
+{
+    "name": "Subscriber Count App",
+    "methods": [
+        {
+            "name": "bootstrap",
+            "args": [],
+            "returns": {
+                "type": "void"
+            }
+        },
+        {
+            "name": "subscribe",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "addr"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            }
+        },
+        {
+            "name": "readSubscriber",
+            "args": [
+                {
+                    "type": "uint32",
+                    "name": "idx"
+                }
+            ],
+            "returns": {
+                "type": "address"
+            }
+        },
+        {
+            "name": "deleteBox",
+            "args": [],
+            "returns": {
+                "type": "void"
+            }
+        }
+    ],
+    "networks": {}
+}
