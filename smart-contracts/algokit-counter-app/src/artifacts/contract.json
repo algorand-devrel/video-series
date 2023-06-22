@@ -1,0 +1,13 @@
+{
+    "name": "Counter",
+    "methods": [
+        {
+            "name": "increment",
+            "args": [],
+            "returns": {
+                "type": "uint64"
+            }
+        }
+    ],
+    "networks": {}
+}
